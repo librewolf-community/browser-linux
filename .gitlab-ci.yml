@@ -10,8 +10,8 @@ stages:
 Build LibreWolf:
     stage: Build
     script:
-        - cd librewolf_browser
+        - cd browser
         - ./build.sh
     artifacts:
         paths:
-            - "librewolf_browser/librewolf*.tar.bz2"
+            - "browser/librewolf*.tar.bz2"
