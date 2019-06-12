@@ -14,7 +14,7 @@ https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/boots
 . $HOME/.cargo/env;
 
 # Downloads further dependencies
-sudo apt install inkscape;
+sudo apt install inkscape -y;
 
 # BUILD ###########################################################################################
 # Creates and enters the folder where compiling will take place
