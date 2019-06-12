@@ -2,7 +2,7 @@ image: ubuntu:18.04
 
 before_script:
   - apt update
-  - apt install python python3 wget -y
+  - apt install python python3 wget sudo -y
 
 stages:
   - Build
