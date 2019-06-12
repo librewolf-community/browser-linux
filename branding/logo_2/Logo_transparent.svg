@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="292.36459mm"
+   height="67.733337mm"
+   viewBox="0 0 292.36459 67.733336"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   sodipodi:docname="Logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="261.1233"
+     inkscape:cy="69.658245"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="711"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="false"
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true">
+    <sodipodi:guide
+       position="5.605989,150.21715"
+       orientation="1,0"
+       id="guide869"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="309.18215,150.21715"
+       orientation="1,0"
+       id="guide871"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="73.339049,116.35049"
+       orientation="1,0"
+       id="guide823"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="278.22089,116.35049"
+       orientation="1,0"
+       id="guide825"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="309.18227,116.35049"
+       orientation="0,1"
+       id="guide827"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-141.21625,-244.81668)">
+    <path
+       style="fill:#00acff;fill-opacity:1;stroke:none;stroke-width:2.0237751;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 128 0 A 127.9995 128.00001 0 0 0 0 128 A 127.9995 128.00001 0 0 0 128 256 A 127.9995 128.00001 0 0 0 255.99805 128 A 127.9995 128.00001 0 0 0 128 0 z M 128.32617 25.785156 C 155.40989 25.785156 179.45052 35.489074 198.93164 54.285156 C 208.31647 63.339922 214.60908 71.928334 219.99805 83.035156 C 227.28755 98.059156 230.24023 111.12899 230.24023 128.37305 C 230.24023 151.07357 223.68396 170.86888 210.06836 189.28516 C 206.0223 194.75776 198.11801 203.07158 192.87305 207.37109 C 178.48605 219.16473 160.14782 227.14392 141.95117 229.5293 C 135.66381 230.3535 120.81045 230.45774 115.03711 229.7168 C 97.10669 227.41601 79.95705 220.26851 64.990234 208.85938 C 60.10871 205.13828 50.949496 195.91933 46.951172 190.70312 C 35.754624 176.09621 28.79096 159.51918 26.494141 141.99805 C 25.510821 134.49708 25.516681 120.70522 26.505859 113.84961 C 31.449746 79.578063 53.018783 50.182722 83.990234 35.503906 C 98.395941 28.676303 111.58124 25.785156 128.32617 25.785156 z M 127.99023 41.267578 C 112.25198 41.25246 98.451161 44.860062 84.792969 52.560547 C 72.359192 59.570663 59.504592 72.438272 52.464844 84.923828 C 47.280126 94.119381 43.486565 105.032 42.005859 115.00391 C 41.03505 121.54211 41.014998 134.5249 41.966797 140.78516 C 43.871943 153.31387 48.624198 165.69619 55.513672 176.08203 C 59.275851 181.75351 59.15776 181.6918 62.476562 179.79297 C 68.413331 176.39631 69.963162 174.75205 73.197266 168.41602 C 76.979174 161.00678 81.022301 154.53208 84.675781 150.03516 C 88.893054 144.84409 89.472262 143.92071 91.587891 139.01953 C 92.652432 136.55343 94.562261 132.93111 95.832031 130.9707 L 98.140625 127.40625 L 95.154297 124.4707 C 91.187154 120.57144 87.88645 116.15082 87.265625 113.90234 C 86.631571 111.60598 87.381019 110.32498 90.361328 108.60352 C 93.374972 106.86278 95.529551 106.36103 103.58398 105.5332 C 107.50574 105.13012 111.7625 104.39237 113.10352 103.88281 C 114.4378 103.37583 118.42461 101.20558 121.96289 99.060547 C 132.1788 92.8673 133.04324 92.546913 139.16797 92.679688 C 144.34093 92.791938 144.35069 92.789519 147.41797 90.935547 C 153.8457 87.050117 163.07725 80.039865 175.22461 69.818359 C 177.55401 67.858296 179.79776 66.320832 180.21094 66.400391 C 181.92919 66.731477 185.08506 74.473386 185.56445 79.535156 C 185.8551 82.60504 185.26047 85.641296 183.43945 90.392578 C 182.9426 91.688994 182.71481 92.926503 182.93164 93.142578 C 183.45223 93.661356 185.24023 91.428736 185.24023 90.259766 C 185.24023 88.769309 186.22587 88.600301 187.56836 89.859375 C 188.54438 90.774701 189.38667 91.035156 191.34961 91.035156 C 193.4929 91.035156 194.02285 91.235469 194.85938 92.351562 C 196.27884 94.245559 196.61178 99.406822 195.52539 102.67773 C 194.46848 105.85976 191.27401 109.52991 188.375 110.89258 C 185.781 112.11193 180.52987 117.23835 178.07227 120.95117 C 177.1315 122.37243 175.36739 125.33513 174.15234 127.53516 C 172.9373 129.73514 170.89902 133.05925 169.62305 134.92188 C 167.11234 138.58691 164.96194 143.69947 162.88672 150.93945 C 161.66763 155.19252 161.56601 156.29964 161.51562 165.78516 C 161.45478 177.24351 160.86141 180.05583 157.76367 183.58398 C 154.24187 187.59505 150.72716 196.40324 150.43164 201.95703 C 150.24493 205.46258 149.70497 208.87946 148.9375 211.41016 C 148.59961 212.52451 149.23108 212.51105 152.99023 211.32617 C 163.94485 207.87301 172.87193 203.23297 181.49023 196.51172 C 186.07287 192.9378 193.99342 184.94084 197.31445 180.53516 C 206.32216 168.58576 212.45054 153.61897 214.25391 139.16602 C 215.12252 132.20484 214.61883 117.47637 213.29297 111.08398 C 209.78028 94.150005 202.21109 79.847157 190.28906 67.607422 C 182.85636 59.976669 176.09023 54.946856 167.38477 50.582031 C 154.17528 43.958976 142.85757 41.282658 127.99023 41.267578 z M 144.16211 97.949219 L 136.73242 98.990234 L 132.11523 104.9043 L 139.54492 103.86133 L 144.16211 97.949219 z "
+       transform="matrix(0.26458333,0,0,0.26458333,141.21625,244.81668)"
+       id="path875" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="208.94958"
+       y="296.53955"
+       id="text819"><tspan
+         sodipodi:role="line"
+         x="208.94958"
+         y="296.53955"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.79999924px;font-family:Rajdhani;-inkscape-font-specification:'Rajdhani Bold';fill:#00acff;fill-opacity:1;stroke-width:0.26458332"
+         id="tspan853"> LibreWolf  </tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot826"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,208.94958,260.82715)"><flowRegion
+         id="flowRegion828"><rect
+           id="rect830"
+           width="180"
+           height="148.57143"
+           x="-325.71429"
+           y="-259.30972" /></flowRegion><flowPara
+         id="flowPara832" /></flowRoot>  </g>
+</svg>
