@@ -5,7 +5,7 @@
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a> 
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a> 
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a> 
-[![pipeline status](https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg)](https://gitlab.com/librewolf-community/librewolf/commits/master)
+<a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img alt="pipeline status" src="https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg" /></a>
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/pulls"><img src="https://img.shields.io/badge/PR-0-green.svg"></a> 
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/badge/Solved%20Issues-3-green.svg"></a> 
 <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MLP2-blue.svg"></a> 
