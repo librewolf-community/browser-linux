@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=LibreWolf
+Exec=./librewolf
+Icon=./browser/chrome/icons/default/default128.png
+Type=Application
+Categories=Network;
