@@ -21,8 +21,8 @@ printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
-sudo apt update;
-sudo apt install python python3 inkscape wget -y;
+apt update;
+apt install sudo python python3 inkscape wget -y;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
