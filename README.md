@@ -106,6 +106,16 @@ Index
 >> Infos: About ..................................................................... </a>
 </pre>
 
+Download
+-------
+
+#### Arch
+LibreWolf is available on the AUR in both [source code](https://aur.archlinux.org/packages/librewolf/) and [binary](https://aur.archlinux.org/packages/librewolf-bin) format. 
+
+#### Portable/Universal
+LibreWolf will also be available as a binary tarball and an AppImage format. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads. 
+
+
 Recommended Addons
 ------------------
 Recommended addons are not bundled and need to be installed manually
