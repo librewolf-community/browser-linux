@@ -11,7 +11,7 @@ REPOSITORY_FOLDER=$(realpath $SCRIPT_FOLDER/../);
 BRANDING_FOLDER=$SCRIPT_FOLDER/resources/source_files/browser/branding/librewolf;
 ICON_FILE=$REPOSITORY_FOLDER/branding/icon/icon.svg;
 PACKAGE_FILE="librewolf*.tar.bz2";
-APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage/;
+APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
 printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
