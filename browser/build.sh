@@ -8,18 +8,24 @@ export SHELL=/bin/bash;
 printf "\nSetting up script variables\n";
 SCRIPT_FOLDER=$(realpath $(dirname $0));
 REPOSITORY_FOLDER=$(realpath $SCRIPT_FOLDER/../);
+BRANDING_FOLDER=$SCRIPT_FOLDER/resources/source_files/browser/branding/librewolf;
+ICON_FILE=$REPOSITORY_FOLDER/branding/icon/icon.svg;
+PACKAGE_FILE="librewolf*.tar.bz2";
+APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage/;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
+printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
+printf "ICON_FILE: $ICON_FILE\n";
+printf "PACKAGE_FILE: $PACKAGE_FILE\n";
+printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 sudo apt update;
 sudo apt install python python3 inkscape wget -y;
 
-printf "\n\n------------------------------------ ICON GENERATION ----------------------------------------\n";
+printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
-ICON_FILE=$REPOSITORY_FOLDER/branding/icon/icon.svg;
-BRANDING_FOLDER=$SCRIPT_FOLDER/resources/source_files/browser/branding/librewolf;
 printf "\nGenerating icons from $ICON_FILE and moving to $BRANDING_FOLDER\n";
 
 # Linux Icons
@@ -35,19 +41,18 @@ inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h15
 
 # TODO: Add Apple Icons
 
-printf "\n\n--------------------------------------- PREBUILD --------------------------------------------\n";
+printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
 # Downloads and runs bootstrapper to install dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
-wget -nv -O - \
-https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py \
-| python - --application-choice=browser --no-interactive;
+wget https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py;
+python ./bootstrap.py --application-choice=browser --no-interactive;
 
 # adds the new rust install to PATH
 printf "\nAdding new rust install to PATH\n";
 . $HOME/.cargo/env;
 
-printf "\n\n---------------------------------------- BUILD ----------------------------------------------\n";
+printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
 # Creates and enters the folder where compiling will take place
 printf "\nCreating compile folder\n";
@@ -62,46 +67,83 @@ hg clone https://hg.mozilla.org/releases/mozilla-release;
 printf "\nCopying branding to firefox source code\n";
 cp -r $SCRIPT_FOLDER/resources/source_files/* mozilla-release;
 
-# Bootstraps, builds and packages librewolf
 cd mozilla-release;
-printf "\nRunning bootstrapper to install build dependencies\n";
+
+# Bootstraps librewolf again (using the ./mach script inside the source code)
+printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
 ./mach bootstrap --application-choice=browser --no-interactive;
+
+# Builds librewolf
 printf "\nBuilding LibreWolf\n";
 ./mach build;
+
+# Packages LibreWolf
 printf "\nPackaging LibreWolf\n";
 ./mach package;
-cd $SCRIPT_FOLDER;
 
-printf "\n\n-------------------------------------- POSTBUILD --------------------------------------------\n";
+cd $SCRIPT_FOLDER;
 
 # moves the packaged tarball to the main folder
 printf "\nRelocating binary tarball to script folder\n"
 cp ./compile_folder/mozilla-release/obj*/dist/librewolf*.tar.bz2 ./;
 
-# Remove the compile folder
-printf "\nDeleting the compile_folder\n";
-rm -rf ./compile_folder;
-
 printf "\n\n--------------------------------- SETTINGS INTEGRATION --------------------------------------\n";
 
-# Adds the librefox config files to the packaged tarball
-PACKAGE_FILE_NAME="librewolf*.tar.bz2\n";
+# Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xvf ./$PACKAGE_FILE_NAME;
+tar -xvf ./$PACKAGE_FILE;
+
+# Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n";
 cp -r $REPOSITORY_FOLDER/settings/* ./librewolf;
+
+# Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
-tar -jcvf ./$PACKAGE_FILE_NAME librewolf;
+tar -jcvf ./$PACKAGE_FILE librewolf;
+
+# Moves the final binary tarball to build_output
+printf "\nMoving binary tarball to build_output folder\n";
+mv $PACKAGE_FILE $SCRIPT_FOLDER/build_output/;
+
+printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
+
+# Copy and generate icons
+printf "\nGenerating AppImage Icons\n";
+cp $ICON_FILE $APPIMAGE_RESOURCE_FOLDER/librewolf.svg;
+ln -rs $APPIMAGE_RESOURCE_FOLDER/librewolf.svg $SCRIPT_FOLDER/resources/appimage/.DirIcon;
+
+# Copy appimage resources to main tarball
+printf "Copying AppImage resources to binary tarball folder\n";
+cp -vrT $APPIMAGE_RESOURCE_FOLDER ./librewolf;
+
+# Downloads appimage tool
+printf "\nDownloading AppImage Tool\n";
+wget https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
+chmod +x ./appimagetool-x86_64.AppImage;
+
+# Generate AppImage
+printf "\nGenerating AppImage\n";
+./appimagetool-x86_64.AppImage ./librewolf;
+chmod +x ./LibreWolf*.AppImage; 
+
+# Move AppImage to build_output folder
+printf "\nMoving AppImage to build_output folder\n";
+mv ./LibreWolf*.AppImage ./build_output;
+
+printf "\n\n---------------------------------------- CLEANUP --------------------------------------------\n";
+
+# Remove the compile folder
+printf "\nDeleting the compile_folder\n";
+rm -rvf ./compile_folder;
+
+# Delete the extracted binary tarball folder
 printf "\nDeleting extracted binary tarball folder\n";
 rm -rvf ./librewolf;
 
-# BUILD APP IMAGE #################################################################################
-# cp -r $BINARY_FOLDER ./app_image_build_folder
-# Adds the librefox config files to the packaged tarball
-# PACKAGE_FILE_NAME="librewolf*.tar.bz2";
-# tar -xvf ./$PACKAGE_FILE_NAME;
-# cp -r ../settings/* ./librewolf;
-# tar -jcvf ./$PACKAGE_FILE_NAME librewolf;
-# rm -rvf ./librewolf;
+# Delete the appimage tool
+printf "\nRemoving AppImage tool\n";
+rm -vf ./appimagetool-x86_64.AppImage
 
-
+# Delete the bootstrapper script
+printf "\nRemoving bootstrapper.py\n";
+rm -f ./bootstrap.py;
