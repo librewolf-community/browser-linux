@@ -1,9 +1,5 @@
 image: ubuntu:18.04
 
-before_script:
-  - apt update
-  - apt install python python3 wget sudo -y
-
 stages:
   - Build
 
@@ -14,4 +10,4 @@ Build LibreWolf:
         - ./build.sh
     artifacts:
         paths:
-            - "browser/librewolf*.tar.bz2"
+            - "browser/build_output"
