@@ -11,4 +11,4 @@ This folder contains all the required material to build the browser.
 
 ### Instructions
 * Run build.sh inside this folder. 
-
+* Packages will be saved in the 'build_output' folder
