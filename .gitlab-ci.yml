@@ -2,6 +2,7 @@ image: ubuntu:18.04
 
 stages:
   - Build
+  - Release
 
 Build LibreWolf:
     stage: Build
@@ -11,3 +12,12 @@ Build LibreWolf:
     artifacts:
         paths:
             - "browser/build_output"
+
+Release to Gitlab:
+  stage: Release
+  image: python3
+  script:
+    - pip3 install gitlab-release
+    - gitlab-release browser/build_output/*
+  only:
+    - tags
