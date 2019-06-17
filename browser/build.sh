@@ -134,15 +134,15 @@ printf "\n\n---------------------------------------- CLEANUP -------------------
 
 # Remove the compile folder
 printf "\nDeleting the compile_folder\n";
-rm -rvf ./compile_folder;
+rm -rf ./compile_folder;
 
 # Delete the extracted binary tarball folder
 printf "\nDeleting extracted binary tarball folder\n";
-rm -rvf ./librewolf;
+rm -rf ./librewolf;
 
 # Delete the appimage tool
 printf "\nRemoving AppImage tool\n";
-rm -vf ./appimagetool-x86_64.AppImage
+rm -f ./appimagetool-x86_64.AppImage
 
 # Delete the bootstrapper script
 printf "\nRemoving bootstrapper.py\n";
