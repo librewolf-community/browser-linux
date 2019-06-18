@@ -9,38 +9,42 @@ printf "\nSetting up script variables\n";
 SCRIPT_FOLDER=$(realpath $(dirname $0));
 REPOSITORY_FOLDER=$(realpath $SCRIPT_FOLDER/../);
 BRANDING_FOLDER=$SCRIPT_FOLDER/resources/source_files/browser/branding/librewolf;
-ICON_FILE=$REPOSITORY_FOLDER/branding/icon/icon.svg;
+ICON_FOLDER=$REPOSITORY_FOLDER/branding/icon/;
 PACKAGE_FILE="librewolf*.tar.bz2";
 APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
 printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
-printf "ICON_FILE: $ICON_FILE\n";
+printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
 printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 apt update;
-apt install sudo python python3 inkscape wget -y;
+apt install sudo python python3 inkscape icnsutils wget -y;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
-printf "\nGenerating icons from $ICON_FILE and moving to $BRANDING_FOLDER\n";
+printf "\nGenerating icons from $ICON_FOLDER and moving to $BRANDING_FOLDER\n";
 
 # Linux Icons
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/default16.png -w 16 -h16;
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/default32.png -w 32 -h32;
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/default48.png -w 48 -h48;
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/default64.png -w 64 -h64;
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/default128.png -w 128 -h128;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default16.png -w 16 -h 16;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default32.png -w 32 -h 32;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default48.png -w 48 -h 48;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default64.png -w 64 -h 64;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default128.png -w 128 -h 128;
 
 # Windows Icons
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/VisualElements_70.png -w 70 -h70;
-inkscape -z -f $ICON_FILE -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h150;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_70.png -w 70 -h70;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h150;
 
 # TODO: Add Apple Icons
+png2icns $BRANDING_FOLDER/firefox.icns $BRANDING_FOLDER/default128.png;
 
+inkscape -z -f $ICON_FOLDER/document-icon.svg -e $BRANDING_FOLDER/document-icon.png -w 128 -h 128;
+png2icns $BRANDING_FOLDER/document.icns $BRANDING_FOLDER/document-icon.png;
+rm -r $BRANDING_FOLDER/document-icon.png
 printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
 # Downloads and runs bootstrapper to install dependencies.
@@ -109,7 +113,7 @@ printf "\n\n------------------------------------ APPIMAGE BUILD ----------------
 
 # Copy and generate icons
 printf "\nGenerating AppImage Icons\n";
-cp $ICON_FILE $APPIMAGE_RESOURCE_FOLDER/librewolf.svg;
+cp $ICON_FOLDER/icon.svg $APPIMAGE_RESOURCE_FOLDER/librewolf.svg;
 ln -rs $APPIMAGE_RESOURCE_FOLDER/librewolf.svg $SCRIPT_FOLDER/resources/appimage/.DirIcon;
 
 # Copy appimage resources to main tarball
