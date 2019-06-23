@@ -24,6 +24,9 @@ printf "\nInstalling script dependencies\n";
 apt update;
 apt install sudo python python3 inkscape icnsutils wget fuse libfuse-dev -y;
 
+# Loads the FUSE kernel module
+sudo modprobe fuse;
+
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
 printf "\nGenerating icons from $ICON_FOLDER and moving to $BRANDING_FOLDER\n";
