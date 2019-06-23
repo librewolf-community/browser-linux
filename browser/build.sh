@@ -22,7 +22,7 @@ printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 apt update;
-apt install sudo python python3 inkscape icnsutils wget fuse libfuse -y;
+apt install sudo python python3 inkscape icnsutils wget fuse libfuse-dev -y;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
