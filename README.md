@@ -2,13 +2,13 @@
     <a href="https://github.com/LibreWolf-Browser/LibreWolf/"><img width="727" src="./branding/logo_2/Logo.svg.png"></a>
 </p>
 <p align="center">
-<a href="https://github.com/LibreWolf-Browser/LibreWolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a> 
-<a href="https://github.com/LibreWolf-Browser/LibreWolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a> 
-<a href="https://github.com/LibreWolf-Browser/LibreWolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a> 
+<a href="https://github.com/LibreWolf-Browser/LibreWolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a>
+<a href="https://github.com/LibreWolf-Browser/LibreWolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a>
+<a href="https://github.com/LibreWolf-Browser/LibreWolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a>
 <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img alt="pipeline status" src="https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg" /></a>
-<a href="https://github.com/LibreWolf-Browser/LibreWolf/pulls"><img src="https://img.shields.io/badge/PR-0-green.svg"></a> 
-<a href="https://github.com/LibreWolf-Browser/LibreWolf/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/badge/Solved%20Issues-3-green.svg"></a> 
-<a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MLP2-blue.svg"></a> 
+<a href="https://github.com/LibreWolf-Browser/LibreWolf/pulls"><img src="https://img.shields.io/badge/PR-0-green.svg"></a>
+<a href="https://github.com/LibreWolf-Browser/LibreWolf/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/badge/Solved%20Issues-3-green.svg"></a>
+<a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MLP2-blue.svg"></a>
 <a href="https://www.mozilla.org/en-US/MPL/" target="_blank"><img src="https://badges.frapsoft.com/os/v2/open-source.png?v=103"></a>
 </p>
 
@@ -26,11 +26,11 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
 Features
 --------
 - Latest Version of Firefox: LibreWolf is compiled directly from the latest build of Firefox Nightly. As a result, you will have the most bleeding edge of features, technologies and security updates. Stable builds are also planned in the future.
-- Completely Independent Build: LibreWolf uses a completely independent build from Firefox and has its own settings, profile folder and installation path. As a result, it can be installed alongside Firefox or any other browser. 
+- Completely Independent Build: LibreWolf uses a completely independent build from Firefox and has its own settings, profile folder and installation path. As a result, it can be installed alongside Firefox or any other browser.
 - Extensions firewall: limit internet access for extensions ([firewall-test-feature](#extensions-firewall-))
 - IJWY (I Just Want You To Shut Up): embedded server links and other calling home functions are removed ([zero unauthorized connection](#ijwy-i-just-want-you-to-shut-up) by default).
 - User settings updates: gHacks/pyllyukko base is kept up to date.
-- Settings protection: important settings are enforced/locked within `mozilla.cfg` and `policies.json`, those settings cannot be changed by addons/updates/LibreWolf itself or unwanted/accidental manipulation; To change those settings you can easily do it by editing `mozilla.cfg` and `policies.json`.
+- Settings protection: important settings are enforced/locked within `librewolf.cfg` and `policies.json`, those settings cannot be changed by addons/updates/LibreWolf itself or unwanted/accidental manipulation; To change those settings you can easily do it by editing `librewolf.cfg` and `policies.json`.
 - LibreWolf-addons: set of optional LibreWolf extensions
 - Statistics disabled: telemetry and similar functions are disabled
 - Tested settings: settings are performance aware
@@ -110,10 +110,10 @@ Download
 -------
 
 #### Arch
-LibreWolf is available on the AUR in both [source code](https://aur.archlinux.org/packages/librewolf/) and [binary](https://aur.archlinux.org/packages/librewolf-bin) format. 
+LibreWolf is available on the AUR in both [source code](https://aur.archlinux.org/packages/librewolf/) and [binary](https://aur.archlinux.org/packages/librewolf-bin) format.
 
 #### Portable/Universal
-LibreWolf will also be available as a binary tarball and an AppImage format. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads. 
+LibreWolf will also be available as a binary tarball and an AppImage format. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads.
 
 
 Recommended Addons
@@ -164,7 +164,7 @@ Edit the restricted domains setting as follow under the `about:config` page:
 
 **Extensions Firewall - Blocking The Network**
 
-To enable the feature and block the network for all the extensions open `mozilla.cfg` search for `Enable-Firewall-Feature-In-The-Next-Line` and remove the `//` in the next line.
+To enable the feature and block the network for all the extensions open `librewolf.cfg` search for `Enable-Firewall-Feature-In-The-Next-Line` and remove the `//` in the next line.
 
 Note that this will block the network access for all the extensions and a lot of extensions needs to be connected in order to work. In the current version of LibreWolf you can block the network for all the extensions or allow it for all of them, a future version may provide additional features like "per addon" setting (By default LibreWolf allows networking for extensions).
 
@@ -209,7 +209,7 @@ Using LibreWolf simultaneously with Firefox is possilbe through a different prof
 
 Edit Locked Settings
 --------------------
-Just edit `mozilla.cfg`, save and restart LibreWolf.
+Just edit `librewolf.cfg`, save and restart LibreWolf.
 
 Browser Tests - Security/Fingerprint
 ------------------------------------
@@ -267,7 +267,7 @@ Settings Index
 --------------
 ```
 // ==============================
-// Index mozilla.cfg .......... :
+// Index librewolf.cfg .......... :
 // ==============================
 //
 // ---------------------------------------------------------------------
@@ -314,7 +314,7 @@ Settings Index
 
 Cookies Settings
 ----------------
-Using different web services without cookies is impossible and cookie settings in a browser are very important when it come to privacy, in LibreWolf the settings are locked to avoid unwanted changes in such an important setting, but they can be easily changed in `mozilla.cfg` under `User Settings: Cookies settings`.
+Using different web services without cookies is impossible and cookie settings in a browser are very important when it come to privacy, in LibreWolf the settings are locked to avoid unwanted changes in such an important setting, but they can be easily changed in `librewolf.cfg` under `User Settings: Cookies settings`.
 
 Tracking Protection
 -------------------
@@ -323,28 +323,28 @@ Firefox now integrates a tracking protection feature (based on disconnect.me) it
 - Until it evolves and integrates at least list editing.
 - Because double filtering (this + ublock) is not suitable for performance.
 
-You can however easily enable this feature in `mozilla.cfg` under `User Settings: Track Protection` (just comment active lines with `//` or remove the entire section).
+You can however easily enable this feature in `librewolf.cfg` under `User Settings: Track Protection` (just comment active lines with `//` or remove the entire section).
 
 Comparing Changes And Updates
 -----------------------------
-If you want to compare changes over updates or if you already have a `user.js`/`mozilla.cfg`/`policies.json`. consider using [Compare-UserJS](https://github.com/claustromaniac/Compare-UserJS), it's an amazing tool to compare user.js files and output the diffs in detailed breakdown, developed by gHack's very own resident cat, [claustromaniac](https://github.com/claustromaniac) :cat:
+If you want to compare changes over updates or if you already have a `user.js`/`librewolf.cfg`/`policies.json`. consider using [Compare-UserJS](https://github.com/claustromaniac/Compare-UserJS), it's an amazing tool to compare user.js files and output the diffs in detailed breakdown, developed by gHack's very own resident cat, [claustromaniac](https://github.com/claustromaniac) :cat:
 
-Usage: If not on windows install [PowerShell](https://github.com/PowerShell/PowerShell) then (for example) `pwsh Compare-UserJS.ps1 mozilla.cfg user.js` (Warning that PowerShell connects to Microsoft sometimes).
+Usage: If not on windows install [PowerShell](https://github.com/PowerShell/PowerShell) then (for example) `pwsh Compare-UserJS.ps1 librewolf.cfg user.js` (Warning that PowerShell connects to Microsoft sometimes).
 
 Documentation
 -------------
 
-**Mozilla.cfg**: Locking and defaulting LibreWolf settings for security, privacy and performance.
+**librewolf.cfg**: Locking and defaulting LibreWolf settings for security, privacy and performance.
 
 **Policies.json**: Policies for enterprise environments (the settings available with `policies.json` are limited right now because this is a new feature of Firefox).
 
 **Bench diff**: Impact on the performance of LibreWolf, it can be a gain or a loss of performance +100/5000 stand for 2% gained performance and -1500/5000 stand for -30% performance loss.
 
-**lockPref**: Locked preference can not be changed by extensions or updates, they can only be changed in `mozilla.cfg`.
+**lockPref**: Locked preference can not be changed by extensions or updates, they can only be changed in `librewolf.cfg`.
 
 **Section**: Description of the settings section separated by ">>>".
 
-**Defaulting VS Enforcing**: Defaulted settings can be changed by the user or an extension if permitted within the browser while enforced settings are locked and can not be changed within the browser, enforced settings can be changed in `mozilla.cfg`.
+**Defaulting VS Enforcing**: Defaulted settings can be changed by the user or an extension if permitted within the browser while enforced settings are locked and can not be changed within the browser, enforced settings can be changed in `librewolf.cfg`.
 
 **About:config**: http://kb.mozillazine.org/About:config_entries.
 
@@ -416,7 +416,7 @@ Currently LibreWolf-TBB is in beta test, Tor compatibility may change.
 DRM Compatibility
 -----------------
 Digital rights management (DRM) is enforced off by default (this is needed for Netflix and similar); you can enable it with the following instructions:
-- Open `mozilla.cfg`
+- Open `librewolf.cfg`
 - Under the section `Section: User Settings`
 - Comment the active lines with `// ` under the subsection `User Settings: DRM/CDM - Main`
 - Comment the active lines with `// ` under the subsection `User Settings: DRM/CDM - Widevine`
