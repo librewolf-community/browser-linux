@@ -2,6 +2,7 @@
     <a href="https://github.com/LibreWolf-Browser/LibreWolf/"><img width="727" src="./branding/logo_2/Logo.svg.png"></a>
 </p>
 <p align="center">
+[![Gitter](https://badges.gitter.im/librewolf-community/community.svg)](https://gitter.im/librewolf-community/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a>
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a>
 <a href="https://github.com/LibreWolf-Browser/LibreWolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a>
