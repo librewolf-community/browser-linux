@@ -25,6 +25,7 @@ apt update;
 apt install sudo python python3 inkscape icnsutils wget fuse libfuse-dev kmod -y;
 
 # Loads the FUSE kernel module
+sudo depmod;
 sudo modprobe fuse;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
