@@ -126,12 +126,13 @@ cp -vrT $APPIMAGE_RESOURCE_FOLDER ./librewolf;
 
 # Downloads appimage tool
 printf "\nDownloading AppImage Tool\n";
-wget https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
-chmod +x ./appimagetool-x86_64.AppImage;
+wget https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage -O appimagetool;
+chmod +x ./appimagetool;
+./appimagetool --appimage-extract;
 
 # Generate AppImage
 printf "\nGenerating AppImage\n";
-./appimagetool-x86_64.AppImage ./librewolf;
+./squashfs-root/AppRun ./librewolf;
 chmod +x ./LibreWolf*.AppImage; 
 
 # Move AppImage to build_output folder
@@ -150,7 +151,8 @@ rm -rf ./librewolf;
 
 # Delete the appimage tool
 printf "\nRemoving AppImage tool\n";
-rm -f ./appimagetool-x86_64.AppImage
+rm -f ./appimagetool;
+rm -rf ./squashfs-root;
 
 # Delete the bootstrapper script
 printf "\nRemoving bootstrapper.py\n";
