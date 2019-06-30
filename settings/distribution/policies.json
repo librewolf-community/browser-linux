@@ -3,14 +3,19 @@
     "AppUpdateURL": "",
     "DisableAppUpdate": true,
     "OverridePostUpdatePage": "",
+
     "DisableMasterPasswordCreation": true,
     "DisableFeedbackCommands": true,
     "DisableFirefoxAccounts": true,
+
     "DisableFirefoxStudies": true,
+    "DisableTelemetry": true,
+
     "DisablePocket": true,
     "DisableProfileImport": true,
     "DisableSetDesktopBackground": true,
+
     "DisableSystemAddonUpdate": true,
-    "DisableTelemetry": true
+    "DisableDeveloperTools": true
   }
 }
