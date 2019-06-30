@@ -1,0 +1,1 @@
+Users/<username>/Library/Application Support/LibreWolf/Profiles/xxxxxxxx.default
