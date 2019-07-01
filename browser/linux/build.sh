@@ -4,16 +4,21 @@ printf "\n------------------------------------- SCRIPT SETUP -------------------
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash;
 
+# Aborts the script upon any faliure
+set -e;
+
 # Sets up internal script variables
 printf "\nSetting up script variables\n";
 SCRIPT_FOLDER=$(realpath $(dirname $0));
-REPOSITORY_FOLDER=$(realpath $SCRIPT_FOLDER/../);
-BRANDING_FOLDER=$SCRIPT_FOLDER/resources/source_files/browser/branding/librewolf;
+REPOSITORY_FOLDER=$(realpath $SCRIPT_FOLDER/../../);
+SOURCE_FOLDER=$REPOSITORY_FOLDER/browser/common/source_files/
+BRANDING_FOLDER=$SOURCE_FOLDER/browser/branding/librewolf;
 ICON_FOLDER=$REPOSITORY_FOLDER/branding/icon/;
 PACKAGE_FILE="librewolf*.tar.bz2";
 APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
+printf "SOURCE_FOLDER: $SOURCE_FOLDER\n";
 printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
 printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
@@ -22,11 +27,7 @@ printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 apt update;
-apt install sudo python python3 inkscape icnsutils wget fuse libfuse-dev kmod -y;
-
-# Loads the FUSE kernel module
-sudo depmod;
-sudo modprobe fuse;
+apt install sudo python python3 inkscape icnsutils wget -y;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
@@ -54,7 +55,7 @@ printf "\n\n-------------------------------------- PREBUILD --------------------
 # Downloads and runs bootstrapper to install dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
 wget https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py;
-python ./bootstrap.py --application-choice=browser --no-interactive;
+python ./bootstrap.py --application-choice=browser --no-interactive || true
 
 # adds the new rust install to PATH
 printf "\nAdding new rust install to PATH\n";
@@ -64,7 +65,7 @@ printf "\n\n--------------------------------------- BUILD ----------------------
 
 # Creates and enters the folder where compiling will take place
 printf "\nCreating compile folder\n";
-mkdir compile_folder; 
+mkdir -p compile_folder; 
 cd compile_folder;
 
 # Clones the firefox source code for compiling
@@ -73,7 +74,10 @@ hg clone https://hg.mozilla.org/releases/mozilla-release;
 
 # Copies our branding to the source code, changing it from firefox to librewolf
 printf "\nCopying branding to firefox source code\n";
-cp -r $SCRIPT_FOLDER/resources/source_files/* mozilla-release;
+cp -r $SOURCE_FOLDER/* ./mozilla-release;
+
+# Adds fix to allow user preferences to be locked
+sed -i '\|MOZ_ASSERT(!aIsLocked);  // `locked` is disallowed in user pref files|d' ./mozilla-release/modules/libpref/Preferences.cpp;
 
 cd mozilla-release;
 
@@ -103,7 +107,7 @@ tar -xvf ./$PACKAGE_FILE;
 
 # Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n";
-cp -r $REPOSITORY_FOLDER/settings/* ./librewolf;
+cp -r $REPOSITORY_FOLDER/settings ./librewolf/settings;
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";

@@ -7,17 +7,17 @@ stages:
 Build LibreWolf:
     stage: Build
     script:
-        - cd browser
+        - cd browser/linux
         - ./build.sh
     artifacts:
         paths:
-            - "browser/build_output"
+            - "browser/linux/build_output"
 
 Release to Gitlab:
   stage: Release
   image: python3
   script:
     - pip3 install gitlab-release
-    - gitlab-release browser/build_output/*
+    - gitlab-release browser/linux/build_output/*
   only:
     - tags
