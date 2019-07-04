@@ -1,11 +1,8 @@
-// >>>>>>>>>>>>>>>>>>>>
-// Section : General Settings
-// Bench Diff : ++/5000
-// >>>>>>>>>>>>>>>>>>>>
+// Sets up the .cfg file.
 
-// LibreWolf MoD
-pref("general.config.filename", "librewolf.cfg");
 
-// Default Firefox
-// ROT13 Settings primitive encryption routing that
-pref("general.config.obscure_value", 0);
+//Specifies the .cfg filename (path cannot be changed)
+pref("general.config.filename", "librewolf.cfg"); 
+
+//Allows .cfg file to be stored in plain text without obfuscation
+pref("general.config.obscure_value", 0); 
