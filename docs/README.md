@@ -10,8 +10,6 @@
     <a href="https://gitlab.com/librewolf-community/librewolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a>
     <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a>
     <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img alt="pipeline status" src="https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg" /></a>
-    <a href="https://gitlab.com/librewolf-community/librewolf/merge_requests"><img src="https://img.shields.io/badge/PR-0-green.svg"></a>
-    <a href="https://gitlab.com/librewolf-community/librewolf/issues?scope=all&utf8=%E2%9C%93&state=closed"><img src="https://img.shields.io/badge/Solved%20Issues-3-green.svg"></a>
     <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MPL2-blue.svg"></a>
 </p>
 
