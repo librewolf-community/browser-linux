@@ -31,31 +31,33 @@ apt install sudo python python3 inkscape icnsutils wget -y;
 
 printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
 
+# Displays message
 printf "\nGenerating icons from $ICON_FOLDER and moving to $BRANDING_FOLDER\n";
 
-# Linux Icons
+# Generates Linux Icons
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default16.png -w 16 -h 16;
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default32.png -w 32 -h 32;
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default48.png -w 48 -h 48;
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default64.png -w 64 -h 64;
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default128.png -w 128 -h 128;
 
-# Windows Icons
+# Generates Windows Icons
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_70.png -w 70 -h70;
 inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h150;
 
-# TODO: Add Apple Icons
+# Generates Apple Icons
 png2icns $BRANDING_FOLDER/firefox.icns $BRANDING_FOLDER/default128.png;
-
 inkscape -z -f $ICON_FOLDER/document-icon.svg -e $BRANDING_FOLDER/document-icon.png -w 128 -h 128;
 png2icns $BRANDING_FOLDER/document.icns $BRANDING_FOLDER/document-icon.png;
 rm -r $BRANDING_FOLDER/document-icon.png
+
 printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
 # Downloads and runs bootstrapper to install dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
 wget https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py;
 python ./bootstrap.py --application-choice=browser --no-interactive || true
+rm -f ./bootstrap.py;
 
 # adds the new rust install to PATH
 printf "\nAdding new rust install to PATH\n";
@@ -71,15 +73,14 @@ cd compile_folder;
 # Clones the firefox source code for compiling
 printf "\nCloning Firefox Source Code\n";
 hg clone https://hg.mozilla.org/releases/mozilla-release;
+cd mozilla-release;
 
 # Copies our branding to the source code, changing it from firefox to librewolf
 printf "\nCopying branding to firefox source code\n";
-cp -r $SOURCE_FOLDER/* ./mozilla-release;
+cp -r $SOURCE_FOLDER/* ./;
 
 #Disables pocket
-sed -i "s/'pocket'/#'pocket'/g" ./mozilla-release/browser/components/moz.build;
-
-cd mozilla-release;
+sed -i "s/'pocket'/#'pocket'/g" ./browser/components/moz.build;
 
 # Bootstraps librewolf again (using the ./mach script inside the source code)
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
@@ -93,11 +94,15 @@ printf "\nBuilding LibreWolf\n";
 printf "\nPackaging LibreWolf\n";
 ./mach package;
 
-cd $SCRIPT_FOLDER;
+# moves the packaged tarball to the script folder
+printf "\nRelocating binary tarball to script folder\n";
+cp ./obj*/dist/librewolf*.tar.bz2 $SCRIPT_FOLDER;
 
-# moves the packaged tarball to the main folder
-printf "\nRelocating binary tarball to script folder\n"
-cp ./compile_folder/mozilla-release/obj*/dist/librewolf*.tar.bz2 ./;
+# Remove the compile folder
+printf "\nDeleting the compile_folder\n";
+cd $SCRIPT_FOLDER;
+rm -rf ./compile_folder;
+
 
 printf "\n\n--------------------------------- SETTINGS INTEGRATION --------------------------------------\n";
 
@@ -139,25 +144,19 @@ printf "\nGenerating AppImage\n";
 ./squashfs-root/AppRun ./librewolf;
 chmod +x ./LibreWolf*.AppImage; 
 
-# Move AppImage to build_output folder
-printf "\nMoving AppImage to build_output folder\n";
-mv ./LibreWolf*.AppImage ./build_output;
-
-printf "\n\n---------------------------------------- CLEANUP --------------------------------------------\n";
-
-# Remove the compile folder
-printf "\nDeleting the compile_folder\n";
-rm -rf ./compile_folder;
-
-# Delete the extracted binary tarball folder
-printf "\nDeleting extracted binary tarball folder\n";
-rm -rf ./librewolf;
-
 # Delete the appimage tool
 printf "\nRemoving AppImage tool\n";
 rm -f ./appimagetool;
 rm -rf ./squashfs-root;
 
-# Delete the bootstrapper script
-printf "\nRemoving bootstrapper.py\n";
-rm -f ./bootstrap.py;
+# Move AppImage to build_output folder
+printf "\nMoving AppImage to build_output folder\n";
+mv ./LibreWolf*.AppImage ./build_output;
+
+# Delete the extracted binary tarball folder
+printf "\nDeleting extracted binary tarball folder\n";
+rm -rf ./librewolf;
+
+#printf "\n\n---------------------------------------- FLATPAK BUILD --------------------------------------------\n";
+#sudo apt install flatpak-builder;
+
