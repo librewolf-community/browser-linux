@@ -1,1 +1,2 @@
-/home/beatlink/Documents/Code/Other-Projects/Open-Source-Software/LibreWolf-Browser/librewolf/docs/README.md
+
+README has moved to docs/README.md
