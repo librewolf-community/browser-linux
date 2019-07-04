@@ -3,6 +3,7 @@ printf "\n------------------------------------- SCRIPT SETUP -------------------
 
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash;
+printf "SHELL=$SHELL\n";
 
 # Aborts the script upon any faliure
 set -e;
@@ -24,36 +25,14 @@ printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
 printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
 
+printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
+
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 apt update;
-apt install sudo python python3 inkscape icnsutils wget -y;
+apt install python python3 inkscape icnsutils wget -y;
 
-printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
-
-# Displays message
-printf "\nGenerating icons from $ICON_FOLDER and moving to $BRANDING_FOLDER\n";
-
-# Generates Linux Icons
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default16.png -w 16 -h 16;
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default32.png -w 32 -h 32;
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default48.png -w 48 -h 48;
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default64.png -w 64 -h 64;
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default128.png -w 128 -h 128;
-
-# Generates Windows Icons
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_70.png -w 70 -h70;
-inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h150;
-
-# Generates Apple Icons
-png2icns $BRANDING_FOLDER/firefox.icns $BRANDING_FOLDER/default128.png;
-inkscape -z -f $ICON_FOLDER/document-icon.svg -e $BRANDING_FOLDER/document-icon.png -w 128 -h 128;
-png2icns $BRANDING_FOLDER/document.icns $BRANDING_FOLDER/document-icon.png;
-rm -r $BRANDING_FOLDER/document-icon.png
-
-printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
-
-# Downloads and runs bootstrapper to install dependencies.
+# Downloads and runs bootstrapper to install more dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
 wget https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py;
 python ./bootstrap.py --application-choice=browser --no-interactive || true
@@ -63,7 +42,31 @@ rm -f ./bootstrap.py;
 printf "\nAdding new rust install to PATH\n";
 . $HOME/.cargo/env;
 
-printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
+printf "\n\n---------------------------------- ICON GENERATION ------------------------------------------\n";
+# Generates Icons for branding
+printf "\nGenerating icons from $ICON_FOLDER and moving to $BRANDING_FOLDER\n";
+
+# Generates Linux Icons
+printf "\nGenerating Linux Icons\n";
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default16.png -w 16 -h 16;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default32.png -w 32 -h 32;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default48.png -w 48 -h 48;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default64.png -w 64 -h 64;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/default128.png -w 128 -h 128;
+
+# Generates Windows Icons
+printf "\nGenerating Windows Icons\n";
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_70.png -w 70 -h70;
+inkscape -z -f $ICON_FOLDER/icon.svg -e $BRANDING_FOLDER/VisualElements_150.png -w 150 -h150;
+
+# Generates Apple Icons
+printf "\nGenerating Apple Icons\n";
+png2icns $BRANDING_FOLDER/firefox.icns $BRANDING_FOLDER/default128.png;
+inkscape -z -f $ICON_FOLDER/document-icon.svg -e $BRANDING_FOLDER/document-icon.png -w 128 -h 128;
+png2icns $BRANDING_FOLDER/document.icns $BRANDING_FOLDER/document-icon.png;
+rm -r $BRANDING_FOLDER/document-icon.png
+
+printf "\n\n--------------------------------- SOURCE CODE DOWNLOAD --------------------------------------\n";
 
 # Creates and enters the folder where compiling will take place
 printf "\nCreating compile folder\n";
@@ -75,12 +78,17 @@ printf "\nCloning Firefox Source Code\n";
 hg clone https://hg.mozilla.org/releases/mozilla-release;
 cd mozilla-release;
 
+printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION ---------------------------------\n";
+
 # Copies our branding to the source code, changing it from firefox to librewolf
 printf "\nCopying branding to firefox source code\n";
 cp -r $SOURCE_FOLDER/* ./;
 
-#Disables pocket
+# Disables pocket
+printf "\nDisabling Pocket\n";
 sed -i "s/'pocket'/#'pocket'/g" ./browser/components/moz.build;
+
+printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
 # Bootstraps librewolf again (using the ./mach script inside the source code)
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
@@ -144,14 +152,14 @@ printf "\nGenerating AppImage\n";
 ./squashfs-root/AppRun ./librewolf;
 chmod +x ./LibreWolf*.AppImage; 
 
+# Move AppImage to build_output folder
+printf "\nMoving AppImage to build_output folder\n";
+mv ./LibreWolf*.AppImage ./build_output;
+
 # Delete the appimage tool
 printf "\nRemoving AppImage tool\n";
 rm -f ./appimagetool;
 rm -rf ./squashfs-root;
-
-# Move AppImage to build_output folder
-printf "\nMoving AppImage to build_output folder\n";
-mv ./LibreWolf*.AppImage ./build_output;
 
 # Delete the extracted binary tarball folder
 printf "\nDeleting extracted binary tarball folder\n";
