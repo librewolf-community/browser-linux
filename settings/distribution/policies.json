@@ -4,18 +4,20 @@
     "DisableAppUpdate": true,
     "OverridePostUpdatePage": "",
 
-    "DisableMasterPasswordCreation": true,
-    "DisableFeedbackCommands": true,
+    "DisableSystemAddonUpdate": true,
+
     "DisableFirefoxAccounts": true,
+    "DisableProfileImport": false,
+    "DisableMasterPasswordCreation": true,
 
     "DisableFirefoxStudies": true,
     "DisableTelemetry": true,
+    "DisableFeedbackCommands": true,
 
     "DisablePocket": true,
-    "DisableProfileImport": true,
-    "DisableSetDesktopBackground": true,
 
-    "DisableSystemAddonUpdate": true,
+    "DisableSetDesktopBackground": false,
+
     "DisableDeveloperTools": true
   }
 }
