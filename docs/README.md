@@ -38,41 +38,6 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
 - Community-Driven
 - And much more...
 
----
-
-## Index
-
-- [Extensions Firewall](#extensions-firewall)
-    - [Description](#description)
-    - [The Settings](#the-settings)
-    - [Blocking A Domain](#blocking-a-domain)
-    - [Blocking The Network](#blocking-the-network)
-    - [More Infos](#more-infos)
-- [IJWY (I Just Want You To Shut Up)](#ijwy-i-just-want-you-to-shut-up)
-- [Edit Locked Settings](#edit-locked-settings)
-- [Browser Tests](#browser-tests)
-    - [Security/Fingerprint](#security/fingerprint)
-    - [Performances](#performances)
-    - [DNS/VPN/Proxy Leak](#dnsvpnproxy-leak)
-- [About](#about)
-- [LibreWolf Roadmap](#librewolf-roadmap)
-    - [Objectives for future versions of LibreWolf (this-may-change)](#objectives-for-future-versions-of-librewolf-this-may-change)
-    - [Todo for future versions of LibreWolf (this-may-change)](#todo-for-future-versions-of-librewolf-this-may-change)
-- [Cookies Settings](#cookies-settings)
-- [Tracking Protection](#tracking-protection)
-- [Comparing Changes And Updates](#comparing-changes-and-updates)
-- [Documentation](#documentation)
-- [LibreWolf Dark Theme](#librewolf-dark-theme)
-- [Tuning LibreWolf](#tuning-librewolf)
-    - [Restart Button](#restart-button)
-    - [Alternative Dark Theme](#alternative-dark-theme)
-    - [Linux Fix Text Colors](#linux-fix-text-colors)
-    - [LibreWolf Addons For ESR And Tor](#librewolf-addons-for-esr-and-tor)
-- [Tor Compatibility](#tor-compatibility)
-
-
-
-
 ## Download and Installation
 
 ### Linux
@@ -124,41 +89,3 @@ LibreWolf is available on the AUR in both [source code](https://aur.archlinux.or
 ## LibreWolf Roadmap
 
 See https://gitlab.com/librewolf-community/librewolf/issues
-
-
-## Tuning LibreWolf
-
-### Restart Button
-
-One simple solution is to bookmark `about:restartrequired` or `about:profiles`. When restart is needed open that page and click "normal restart". You can even go further and add the bookmarks links to your icons bar and rename the link to an empty text (you will then have a direct icon to `about:profiles` and a 2 clicks restart).
-
-![capture](https://user-images.githubusercontent.com/6892180/48963055-bd914000-ef82-11e8-8ea4-a58e56f5c4a4.png)
-...
-
-
-
-### Linux Fix Text Colors
-
-On Linux when using a dark desktop theme LibreWolf could display white text over white background or black text on black input on some sites or addons, this is fixed in LibreWolf with `lockPref("ui.use_standins_for_native_colors", true);`.
-
-If `ui.use_standins_for_native_colors` is not enough to fix everything you can fix this issue with an other additional solution by using the following values in `about:config` (you need to have Adwaita theme installed) [more details](https://github.com/DmitriK/darkContrast#text-contrast-for-dark-themes) (Note that this is not needed with the default LibreWolf settings as it is already fixed)
-
-```
-widget.content.allow-gtk-dark-theme;false
-widget.chrome.allow-gtk-dark-theme;false
-widget.content.gtk-theme-override;Adwaita:light
-```
-
-### LibreWolf Addons For ESR And Tor
-
-- [LibreWolf HTTP Watcher ESR - Tor MoD](https://addons.mozilla.org/en-US/firefox/addon/LibreWolf-http-watcher-tor-mod/): Change the url bar color on http and onion sites (to green/red)
-- [LibreWolf NoHTTP - Tor MoD](https://addons.mozilla.org/en-US/firefox/addon/nohttp-LibreWolf-mod-for-tor/): Block http traffic and/or redirect it to https (Excellent replacement for the unrecommended https-everywhere)
-
-## Tor Compatibility
-
-We do not recommend connecting over Tor on LibreWolf classic version (because of the missing LibreWolf-Tor-Addons, they are only included in the tor version for obvious reasons), use instead LibreWolf-Tor version if your threat model calls for it, or for accessing hidden services (Thus said tor settings have been enabled since v2 on all LibreWolf versions for user toriffying/proxifying their entire connection).
-
-Currently LibreWolf-TBB is in beta test, Tor compatibility may change.
-
-
-
