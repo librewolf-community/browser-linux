@@ -1,4 +1,4 @@
-![Logo](../branding/logo/Logo.svg)
+![Logo](../branding/logo/Logo.svg.png)
 
 # LibreWolf: Browse With Freedom
 
