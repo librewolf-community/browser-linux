@@ -104,17 +104,6 @@ LibreWolf is available on the AUR in both [source code](https://aur.archlinux.or
 - Build instruction will be updated soon
 
 
-
-
-## IJWY (I Just Want You To Shut Up)
-
-This is a set of settings that aim to remove all the server links embedded in Firefox and other calling home functions in the purpose of blocking un-needed connections. The objective is zero unauthorized connection (ping/telemetry/Mozilla/Google...).
-
-## Edit Locked Settings
-
-Just edit `librewolf.cfg`, save and restart LibreWolf.
-
-
 ## About
 
 **License:** [Mozilla Public License 2.0](https://gitlab.com/librewolf-community/librewolf/blob/master/LICENSE)
