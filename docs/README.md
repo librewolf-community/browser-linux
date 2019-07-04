@@ -1,6 +1,4 @@
-<p align="center">
-    <a href="https://gitlab.com/librewolf-community/librewolf/"><img width="727" src="../branding/logo/Logo.svg.png"></a>
-</p>
+![Logo](../branding/logo/Logo.svg)
 
 # LibreWolf: Browse With Freedom
 
