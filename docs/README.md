@@ -61,14 +61,14 @@ See https://gitlab.com/librewolf-community/librewolf/issues
 
 
 ## About
-**License:** [Mozilla Public License 2.0](https://gitlab.com/librewolf-community/librewolf/blob/master/LICENSE)
-**Inspired from:** [ungoogled-chromium](https://github.com/Eloston/ungoogled-chromium)
-**Based on:** [Librefox](https://github.com/intika/Librefox), whose development seems to have halted.
-**Acknowledgement**, special thanks to:
-- @intika for putting Librefox together
-- The Mozilla team for their amazing work on Firefox
-- The gHacks-User team for allowing the usage of their work
-- All the stargazers (users that are encouraging this project by starring it)
-- Icons were created with images by [OpenClipart-Vectors](https://pixabay.com/users/OpenClipart-Vectors-30363) from [Pixabay](https://pixabay.com) and from <a href="https://www.flaticon.com/authors/vaadin" title="Vaadin">Vaadin</a> on <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+* **License:** [Mozilla Public License 2.0](https://gitlab.com/librewolf-community/librewolf/blob/master/LICENSE)
+* **Inspired from:** [ungoogled-chromium](https://github.com/Eloston/ungoogled-chromium)
+* **Based on:** [Librefox](https://github.com/intika/Librefox), whose development seems to have halted.
+* **Acknowledgement**, special thanks to:
+    * @intika for putting Librefox together
+    * The Mozilla team for their amazing work on Firefox
+    * The gHacks-User team for allowing the usage of their work
+    * All the stargazers (users that are encouraging this project by starring it)
+    * Icons were created with images by [OpenClipart-Vectors](https://pixabay.com/users/OpenClipart-Vectors-30363) from [Pixabay](https://pixabay.com) and from <a href="https://www.flaticon.com/authors/vaadin" title="Vaadin">Vaadin</a> on <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 
 
