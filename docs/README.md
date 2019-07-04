@@ -126,16 +126,6 @@ LibreWolf is available on the AUR in both [source code](https://aur.archlinux.or
 See https://gitlab.com/librewolf-community/librewolf/issues
 
 
-
-
-## LibreWolf Dark Theme
-
-LibreWolf provides a classic dark theme extension ([LibreWolf Dark Theme](https://addons.mozilla.org/en-US/firefox/addon/LibreWolf-dark-theme/)).
-
-### Alternative Dark Theme
-
-<a href="https://github.com/overdodactyl/ShadowFox" target="_blank"><img height=80px src="https://raw.githubusercontent.com/overdodactyl/ShadowFox/master/.github/Screenshots/header.png"></a>
-
 ## Tuning LibreWolf
 
 ### Restart Button
