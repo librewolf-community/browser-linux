@@ -2,7 +2,7 @@
 
 # LibreWolf: Browse With Freedom
 [![Download Badge](https://img.shields.io/badge/Download-purple.svg)](https://gitlab.com/librewolf-community/librewolf/releases)
-[![Website Badge](https://img.shields.io/badge/Website-librewolf.gitlab.io-blue.svg)](https://LibreWolf.gitlab.io)
+[![Website Badge](https://img.shields.io/badge/Website-librewolf-community.gitlab.io-blue.svg)](https://LibreWolf-Community.gitlab.io)
 [![Docs Badge](https://img.shields.io/badge/Docs-librewolf.readthedocs.io-blue.svg)](https://librewolf.readthedocs.io)
 [![Chat Badge](https://img.shields.io/badge/Chat-Gitter-blue.svg)](https://gitter.im/librewolf-community/librewolf)
 [![Status Badge](https://img.shields.io/badge/Status-Active_Development-brightgreen.svg)](https://gitlab.com/librewolf-community/librewolf/commits/master)
