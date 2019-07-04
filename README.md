@@ -11,4 +11,8 @@
 
 This project is an independent fork of Firefox, with the primary goals of privacy security and user freedom. It is the community run successor to [LibreFox](https://github.com/intika/Librefox)
 
-Check the 'docs' folder of this repository for the full documentation or head to https://librewolf.readthedocs.io for the online version
+## [Documentation](https://librewolf.readthedocs.io)
+
+https://librewolf.readthedocs.io
+
+The docs are built from the `docs` folder of this repository.
