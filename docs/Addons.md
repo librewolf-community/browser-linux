@@ -1,5 +1,13 @@
 ## Addons
 
+- [Addons](#addons)
+    - [Recommended Addons](#recommended-addons)
+    - [Recommended Addons Settings](#recommended-addons-settings)
+    - [Reviewing Extensions Code](#reviewing-extensions-code)
+    - [Other Addons](#other-addons)
+        - [Privacy addons](#privacy-addons)
+        - [Other useful addons](#other-useful-addons)
+
 ### Recommended Addons
 
 Recommended addons are not bundled and need to be installed manually
