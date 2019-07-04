@@ -1,1 +1,2 @@
-./docs/README.md
+
+README has moved to docs/README.md
