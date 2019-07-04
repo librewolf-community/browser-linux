@@ -47,13 +47,6 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
 - [Download](#download)
     - [Arch](#arch)
     - [Portable/Universal](#portable/universal)
-- [Addons](#addons)
-    - [Recommended Addons](#recommended-addons)
-    - [Recommended Addons Settings](#recommended-addons-settings)
-    - [Reviewing Extensions Code](#reviewing-extensions-code)
-    - [Other Addons](#other-addons)
-        - [Privacy addons](#privacy-addons)
-        - [Other useful addons](#other-useful-addons)
 - [Installation Instructions](#installation-instructions)
     - [Windows](#windows)
     - [Linux](#linux)
@@ -94,48 +87,38 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
     - [Windows](#windows)
     - [Mac](#mac)
 
-## Download
 
-### Arch
-
-LibreWolf is available on the AUR in both [source code](https://aur.archlinux.org/packages/librewolf/) and [binary](https://aur.archlinux.org/packages/librewolf-bin) format.
-
-### Portable/Universal
-
-LibreWolf will also be available as a binary tarball and an AppImage format. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads.
-
-
-
-## Installation Instructions
-
-**Notice:** in the current state of the project LibreWolf is a set of configuration files for Firefox (awaiting a correct build of the project), therefore if you already have a Firefox profile, that profile will be used and temporary files will be removed (cookies and current session), make sure to backup your current Firefox's profile before using LibreWolf.
-Using LibreWolf simultaneously with Firefox is possible through a different profile you can follow [this wiki](https://www.ghacks.net/2008/05/29/run-multiple-firefox-profiles-simultaneously/) to do so.
-
-### Windows
-
-- Download and install the last version of Firefox [x32 release](https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0/win32/en-US/Firefox%20Setup%2064.0.exe) or [x64 release](https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0/win64/en-US/Firefox%20Setup%2064.0.exe)
-- Download LibreWolf zip file and extract it
-- Locate Firefox's installation directory (where the firefox.exe is located) `C:\Program Files\Mozilla Firefox\` or `C:\Program Files (x86)\Mozilla Firefox\` or `Tor-Install-Directory\Browser\`
-- Copy the extracted LibreWolf files to the install directory
+## Download and Installation
 
 ### Linux
 
-- Download and extract the last version of Firefox [x32 release](https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0/linux-i686/en-US/firefox-64.0.tar.bz2) or [x64 release](https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0/linux-x86_64/en-US/firefox-64.0.tar.bz2)
-- Download the LibreWolf zip file and extract it
-- Copy the extracted LibreWolf files to the newly downloaded `firefox` directory
-- You can use directly LibreWolf by running 'firefox/firefox'
-- You can as well create a shortcut to 'firefox/firefox' to open LibreWolf easily.
+#### Manual Compilation 
+
+- Build instruction will be updated soon
+
+#### AppImage
+
+LibreWolf is available in an AppImage Format. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads.
+
+#### Binary Tarball
+
+LibreWolf is available as a binary tarball. Check out the [releases page](https://gitlab.com/librewolf-community/librewolf/-/releases) for downloads.
+
+
+#### Arch
+
+LibreWolf is available on the AUR in both [source code](https://aur.archlinux.org/packages/librewolf/) and [binary](https://aur.archlinux.org/packages/librewolf-bin) format.
+
+
+### Windows
+
+- Build instruction will be updated soon
 
 ### Mac
 
-- Download and install the [last version of Firefox](https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0/mac/en-US/Firefox%2064.0.dmg)
-- Download LibreWolf zip file and extract it
-- Locate Firefox's installation directory (`Applications/Firefox.app/Contents/Resources/` or `Applications/Tor Browser.app/Contents/Resources/`)
-- Copy the extracted files to the install directory
+- Build instruction will be updated soon
 
-### Uninstall
 
-- To uninstall, just remove the files you added to your Firefox's install directory (to know what are the files to remove just check the downloaded LibreWolf zip file) then restart Firefox.
 
 ## Extensions Firewall
 
@@ -353,16 +336,4 @@ Digital rights management (DRM) is enforced off by default (this is needed for N
 
 For ESR users if you opt for `LibreWolf HTTP Watcher` you need to use this version [LibreWolf HTTP Watcher ESR - Tor MoD](https://addons.mozilla.org/en-US/firefox/addon/LibreWolf-http-watcher-tor-mod/)
 
-## Building And Packaging
 
-### Linux
-
-- Build instruction will be updated soon
-
-### Windows
-
-- Build instruction will be updated soon
-
-### Mac
-
-- Build instruction will be updated soon
