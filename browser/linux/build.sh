@@ -76,8 +76,8 @@ hg clone https://hg.mozilla.org/releases/mozilla-release;
 printf "\nCopying branding to firefox source code\n";
 cp -r $SOURCE_FOLDER/* ./mozilla-release;
 
-# Adds fix to allow user preferences to be locked
-sed -i '\|MOZ_ASSERT(!aIsLocked);  // `locked` is disallowed in user pref files|d' ./mozilla-release/modules/libpref/Preferences.cpp;
+#Disables pocket
+sed -i "s/'pocket'/#'pocket'/g" ./mozilla-release/browser/components/moz.build;
 
 cd mozilla-release;
 
