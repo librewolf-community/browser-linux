@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="314.78802mm"
+   width="292.36459mm"
    height="67.733337mm"
-   viewBox="0 0 314.78802 67.733337"
+   viewBox="0 0 292.36459 67.733336"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="Logo (Pre Merging variant 2).svg">
+   sodipodi:docname="Logo (Pre Merging).svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="187.36648"
+     inkscape:cx="279.50002"
      inkscape:cy="312.95353"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -42,7 +42,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -50,7 +50,7 @@
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:snap-bbox-midpoints="true">
     <sodipodi:guide
-       position="5.6059918,150.21715"
+       position="5.605989,150.21715"
        orientation="1,0"
        id="guide869"
        inkscape:locked="false" />
@@ -60,7 +60,7 @@
        id="guide871"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="73.339052,116.35049"
+       position="73.339049,116.35049"
        orientation="1,0"
        id="guide823"
        inkscape:locked="false" />
@@ -92,26 +92,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-141.21625,-244.81668)">
-    <g
-       id="g830"
-       transform="translate(0,-13.522126)">
-      <rect
-         ry="33.866665"
-         y="258.33881"
-         x="141.21625"
-         height="67.73333"
-         width="314.78802"
-         id="rect815"
-         style="fill:#00acff;fill-opacity:1;stroke:none;stroke-width:4.0283823;stroke-miterlimit:4;stroke-dasharray:none" />
-      <rect
-         ry="27.044252"
-         y="265.16122"
-         x="148.03986"
-         height="54.088505"
-         width="301.14081"
-         id="rect815-3"
-         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.52093244;stroke-miterlimit:4;stroke-dasharray:none" />
-    </g>
     <g
        id="g898"
        transform="translate(-5.6059837,116.35049)">
@@ -154,6 +134,17 @@
          x="208.94958"
          y="296.53955"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:50.79999924px;font-family:Rajdhani;-inkscape-font-specification:'Rajdhani Bold';fill:#00acff;fill-opacity:1;stroke-width:0.26458332"
-         id="tspan853"> LibreWolf    </tspan></text>
-  </g>
+         id="tspan853"> LibreWolf  </tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot826"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,208.94958,260.82715)"><flowRegion
+         id="flowRegion828"><rect
+           id="rect830"
+           width="180"
+           height="148.57143"
+           x="-325.71429"
+           y="-259.30972" /></flowRegion><flowPara
+         id="flowPara832"></flowPara></flowRoot>  </g>
 </svg>
