@@ -14,6 +14,21 @@
         "DisableSetDesktopBackground": false,
         "DisableDeveloperTools": true,
 
+        "Bookmarks": [
+              {
+                "Title": "Restart LibreWolf",
+                "URL": "about:restartrequired",
+                "Placement": "menu",
+                "Folder": "LibreWolf"
+              },
+              {
+                "Title": "LibreWolf Profiles",
+                "URL": "about:profiles",
+                "Placement": "menu",
+                "Folder": "LibreWolf"
+              }
+        ],
+
         "WebsiteFilter": {
             "Block": [""],
             "Exceptions": [""]
