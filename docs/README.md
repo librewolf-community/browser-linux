@@ -44,14 +44,6 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
 
 ## Index
 
-- [Download](#download)
-    - [Arch](#arch)
-    - [Portable/Universal](#portable/universal)
-- [Installation Instructions](#installation-instructions)
-    - [Windows](#windows)
-    - [Linux](#linux)
-    - [Mac](#mac)
-    - [Uninstall](#uninstall)
 - [Extensions Firewall](#extensions-firewall)
     - [Description](#description)
     - [The Settings](#the-settings)
@@ -68,7 +60,6 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
 - [LibreWolf Roadmap](#librewolf-roadmap)
     - [Objectives for future versions of LibreWolf (this-may-change)](#objectives-for-future-versions-of-librewolf-this-may-change)
     - [Todo for future versions of LibreWolf (this-may-change)](#todo-for-future-versions-of-librewolf-this-may-change)
-- [Settings Index](#settings-index)
 - [Cookies Settings](#cookies-settings)
 - [Tracking Protection](#tracking-protection)
 - [Comparing Changes And Updates](#comparing-changes-and-updates)
@@ -80,12 +71,8 @@ LibreWolf uses more than 500 privacy/security/performance settings, patches, Lib
     - [Linux Fix Text Colors](#linux-fix-text-colors)
     - [LibreWolf Addons For ESR And Tor](#librewolf-addons-for-esr-and-tor)
 - [Tor Compatibility](#tor-compatibility)
-- [DRM Compatibility](#drm-compatibility)
-- [LibreWolf ESR](#librewolf-esr)
-- [Building And Packaging](#building-and-packaging)
-    - [Linux](#linux)
-    - [Windows](#windows)
-    - [Mac](#mac)
+
+
 
 
 ## Download and Installation
@@ -159,31 +146,6 @@ This is a set of settings that aim to remove all the server links embedded in Fi
 
 Just edit `librewolf.cfg`, save and restart LibreWolf.
 
-## Browser Tests
-
-### Security/Fingerprint
-
-Firefox 60 and `privacy.resistFingerprinting` are relatively new, please give it some time to be more widely used and thus less finger-printable; If you are using a different site to analyze your browser make sure to read and understand what the test is about.
-
-- [SSLLabs](https://www.ssllabs.com/ssltest/viewMyClient.html)
-- [AmiUnique](https://amiunique.org/fp)
-- [BrowserLeaks](https://browserleaks.com/)
-- [BrowserPlugs](https://www.browserplugs.com/fingerprint-test/index.html)
-- [FingerPrintJS2](https://valve.github.io/fingerprintjs2/)
-- [Third-Party-Cookies](https://alanhogan.github.io/web-experiments/3rd/third-party-cookies.html)
-- [Testing-Notifications](https://www.bennish.net/web-notifications.html)
-- [Browser-Storage-Abuser](https://demo.agektmr.com/storage/)
-- [Service-Workers-Push-Test](https://gauntface.github.io/simple-push-demo/)
-
-### Performances
-
-Performance tests can be done here [LVP Octane](https://intika.github.io/lvp-octane/), it needs to be launched alone with other applications closed and with no other activity but the benchmark, also it's recommended to launch it many times and then calculate the average.
-
-### DNS/VPN/Proxy Leak
-
-- [IPLeak](https://ipleak.net/)
-- [Tenta-Test](https://tenta.com/test/)
-- [IP-Browserleaks](https://browserleaks.com/ip)
 
 ## About
 
@@ -206,47 +168,7 @@ Performance tests can be done here [LVP Octane](https://intika.github.io/lvp-oct
 
 See https://gitlab.com/librewolf-community/librewolf/issues
 
-## Settings Index
 
-`librewolf.cfg`:
-
-| Section | Bench Diff |
-|---------|------------|
-| User settings | +0 / 5000 |
-| Defaulting Settings | +0 / 5000 |
-|||
-| Controversial | +0 / 5000 |
-| Firefox Fingerprint | +0 / 5000 |
-| Locale/Time | +0 / 5000 |
-| Ghacks-user Selection | +100 / 5000 |
-| Extensions Manager | +0 / 5000 |
-| IJWY To Shut Up | +0 / 5000 |
-| Microsoft Windows | +0 / 5000 |
-| Firefox ESR60.x | +0 / 5000 |
-|
-| Security 1/3 | +0 / 5000 |
-| Security 2/3 | +0 / 5000 |
-| Security 3/3 (Cipher) | +0 / 5000 |
-|||
-| Performance 1/5 | +650 / 5000 |
-| Performance 2/5 | -800 / 5000 |
-| Performance 3/5 | -1720 / 5000 |
-| Performance 4/5 | -200 / 5000 |
-| Performance 5/5 | -50 / 5000 |
-|||
-| General Settings 1/3 | +100 / 5000 |
-| General Settings 2/3 | +0 / 5000 |
-| General Settings 3/3 | -40 / 5000 |
-|||
-| Disabled - ON/OFF | +0 / 5000 |
-| Disabled - Deprecated Active | +0 / 5000 |
-| Disabled - Deprecated Inactive | +0 / 5000 |
-
-`local-settings.js`:
-
-| Section | Bench Diff |
-|---------|------------|
-| General settings | ++ / 5000 |
 
 ## Cookies Settings
 
@@ -267,23 +189,15 @@ If you want to compare changes over updates or if you already have a `user.js`/`
 
 Usage: If not on windows install [PowerShell](https://github.com/PowerShell/PowerShell) then (for example) `pwsh Compare-UserJS.ps1 librewolf.cfg user.js` (Warning that PowerShell connects to Microsoft sometimes).
 
-## Documentation
 
-`librewolf.cfg`: Locking and defaulting LibreWolf settings for security, privacy and performance.
-
-`Policies.json`: Policies for enterprise environments (the settings available with `policies.json` are limited right now because this is a new feature of Firefox).
-
-`Bench diff`: Impact on the performance of LibreWolf, it can be a gain or a loss of performance +100/5000 stand for 2% gained performance and -1500/5000 stand for -30% performance loss.
-
-`lockPref`: Locked preference can not be changed by extensions or updates, they can only be changed in `librewolf.cfg`.
-
-`Defaulting VS Enforcing`: Defaulted settings can be changed by the user or an extension if permitted within the browser while enforced settings are locked and can not be changed within the browser, enforced settings can be changed in `librewolf.cfg`.
-
-`About:config`: http://kb.mozillazine.org/About:config_entries.
 
 ## LibreWolf Dark Theme
 
 LibreWolf provides a classic dark theme extension ([LibreWolf Dark Theme](https://addons.mozilla.org/en-US/firefox/addon/LibreWolf-dark-theme/)).
+
+### Alternative Dark Theme
+
+<a href="https://github.com/overdodactyl/ShadowFox" target="_blank"><img height=80px src="https://raw.githubusercontent.com/overdodactyl/ShadowFox/master/.github/Screenshots/header.png"></a>
 
 ## Tuning LibreWolf
 
@@ -294,9 +208,7 @@ One simple solution is to bookmark `about:restartrequired` or `about:profiles`. 
 ![capture](https://user-images.githubusercontent.com/6892180/48963055-bd914000-ef82-11e8-8ea4-a58e56f5c4a4.png)
 ...
 
-### Alternative Dark Theme
 
-<a href="https://github.com/overdodactyl/ShadowFox" target="_blank"><img height=80px src="https://raw.githubusercontent.com/overdodactyl/ShadowFox/master/.github/Screenshots/header.png"></a>
 
 ### Linux Fix Text Colors
 
@@ -321,19 +233,5 @@ We do not recommend connecting over Tor on LibreWolf classic version (because of
 
 Currently LibreWolf-TBB is in beta test, Tor compatibility may change.
 
-## DRM Compatibility
-
-Digital rights management (DRM) is enforced off by default (this is needed for Netflix and similar); you can enable it with the following instructions:
-
-- Open `librewolf.cfg`
-- Under the section `Section: User Settings`
-- Comment the active lines with `// ` under the subsection `User Settings: DRM/CDM - Main`
-- Comment the active lines with `// ` under the subsection `User Settings: DRM/CDM - Widevine`
-- Restart Firefox then open `about:preferences` and enable `Play DRM...` under general section
-- Firefox will download Widevine and enable it (under `about:addons` plugins section) you can force the download by clicking `Check for updates` under the tools button
-
-## LibreWolf ESR
-
-For ESR users if you opt for `LibreWolf HTTP Watcher` you need to use this version [LibreWolf HTTP Watcher ESR - Tor MoD](https://addons.mozilla.org/en-US/firefox/addon/LibreWolf-http-watcher-tor-mod/)
 
 
