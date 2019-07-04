@@ -1,14 +1,12 @@
 ![Logo](../branding/logo/Logo.svg.png)
 
 # LibreWolf: Browse With Freedom
-[![Gitter Badge](https://badges.gitter.im/librewolf-community/librewolf.svg)](https://gitter.im/librewolf-community/librewolf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-
-    <a href="https://gitlab.com/librewolf-community/librewolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a>
-    <a href="https://gitlab.com/librewolf-community/librewolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a>
-    <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a>
-    <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img alt="pipeline status" src="https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg" /></a>
-    <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MPL2-blue.svg"></a>
+[![Website Badge](https://img.shields.io/badge/Website-librewolf.gitlab.io-blue.svg)](https://LibreWolf.gitlab.io)
+[![Gitter Badge](https://badges.gitter.im/librewolf-community/librewolf.svg)](https://gitter.im/librewolf-community/librewolf)
+[![Releases Badge](https://img.shields.io/badge/Releases-green.svg)](https://gitlab.com/librewolf-community/librewolf/releases)
+[![Status Badge](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://gitlab.com/librewolf-community/librewolf/commits/master)
+[![Pipelines Badge](https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg)](https://gitlab.com/librewolf-community/librewolf/pipelines)
+[![License Badge](https://img.shields.io/badge/License-Mozilla--MPL2-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 
 This project is an independent fork of Firefox, with the primary goals of privacy security and user freedom. It is the community run successor to [LibreFox](https://github.com/intika/Librefox)
 
