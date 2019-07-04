@@ -1,4 +1,4 @@
-![Logo](https://gitlab.com/librewolf-community/librewolf/blob/master/branding/logo/Logo.svg)
+![Logo](https://gitlab.com/librewolf-community/librewolf/blob/master/branding/logo/Logo.svg.png)
 
 # LibreWolf: Browse With Freedom
 [![Download Badge](https://img.shields.io/badge/Download-purple.svg)](https://gitlab.com/librewolf-community/librewolf/releases)
