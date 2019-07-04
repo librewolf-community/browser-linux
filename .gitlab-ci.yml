@@ -4,7 +4,7 @@ stages:
   - Build
   - Release
 
-Build LibreWolf:
+Build Linux Packages:
     stage: Build
     script:
         - cd browser/linux
