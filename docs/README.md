@@ -1,15 +1,14 @@
 ![Logo](../branding/logo/Logo.svg.png)
 
 # LibreWolf: Browse With Freedom
+[![Gitter Badge](https://badges.gitter.im/librewolf-community/librewolf.svg)](https://gitter.im/librewolf-community/librewolf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-<p align="center">
-    <a href="https://gitter.im/librewolf-community/librewolf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img src="https://badges.gitter.im/librewolf-community/librewolf.svg"></a>
+
     <a href="https://gitlab.com/librewolf-community/librewolf/releases" target="_blank"><img src="https://img.shields.io/badge/Download-%20LibreWolf-green.svg"> </a>
     <a href="https://gitlab.com/librewolf-community/librewolf/releases"><img src="https://img.shields.io/badge/Version-0.0.1-green.svg"></a>
     <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img src="https://img.shields.io/badge/Maintained-Yes-green.svg"></a>
     <a href="https://gitlab.com/librewolf-community/librewolf/commits/master"><img alt="pipeline status" src="https://gitlab.com/librewolf-community/librewolf/badges/master/pipeline.svg" /></a>
     <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank"><img src="https://img.shields.io/badge/License-Mozilla--MPL2-blue.svg"></a>
-</p>
 
 This project is an independent fork of Firefox, with the primary goals of privacy security and user freedom. It is the community run successor to [LibreFox](https://github.com/intika/Librefox)
 
@@ -66,6 +65,9 @@ LibreWolf is available on the AUR in both [source code](https://aur.archlinux.or
 
 - Build instruction will be updated soon
 
+## Roadmap
+
+See https://gitlab.com/librewolf-community/librewolf/issues
 
 ## About
 
@@ -84,6 +86,4 @@ LibreWolf is available on the AUR in both [source code](https://aur.archlinux.or
 - Icon was created with images by [OpenClipart-Vectors](https://pixabay.com/users/OpenClipart-Vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=157677) from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=157677)
 - Icons made by <a href="https://www.flaticon.com/authors/vaadin" title="Vaadin">Vaadin</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 
-## LibreWolf Roadmap
 
-See https://gitlab.com/librewolf-community/librewolf/issues
