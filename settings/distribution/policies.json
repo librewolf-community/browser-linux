@@ -16,6 +16,12 @@
 
         "Bookmarks": [
               {
+                "Title": "Library",
+                "URL": "chrome://browser/content/places/places.xul",
+                "Placement": "menu",
+                "Folder": "LibreWolf"
+              },
+              {
                 "Title": "Restart LibreWolf",
                 "URL": "about:restartrequired",
                 "Placement": "menu",
