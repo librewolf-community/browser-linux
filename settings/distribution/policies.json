@@ -4,7 +4,6 @@
     "policies": {
         "AppUpdateURL": "",
 
-
         "DisableAppUpdate": true,
         "OverridePostUpdatePage": "",
         "DisableSystemAddonUpdate": true,
@@ -17,7 +16,11 @@
         "DisablePocket": true,
         "DisableSetDesktopBackground": false,
         "DisableDeveloperTools": false,
-
+        "DNSOverHTTPS": {
+          "Enabled": true,
+          "ProviderURL": "9.9.9.9",
+          "Locked": false
+        },
 
         "Bookmarks": [
               {
