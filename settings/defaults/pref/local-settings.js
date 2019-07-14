@@ -1,6 +1,5 @@
 // Sets up the .cfg file.
 
-
 //Specifies the .cfg filename (path cannot be changed)
 pref("general.config.filename", "librewolf.cfg"); 
 
