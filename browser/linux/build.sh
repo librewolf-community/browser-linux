@@ -123,6 +123,9 @@ tar -xvf ./$PACKAGE_FILE;
 # Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n";
 cp -r $REPOSITORY_FOLDER/settings ./librewolf/settings;
+cp $SCRIPT_FOLDER/resources/launch_librewolf.sh ./librewolf/launch_librewolf.sh
+mkdir -p $INSTALL_FOLDER/defaults/pref/;
+mkdir -p $INSTALL_FOLDER/distribution/;
 
 printf "\n\n--------------------------------- BINARY TARBALL RECREATION --------------------------------------\n";
 
