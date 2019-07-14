@@ -1,6 +1,10 @@
 {
+    "__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
+
     "policies": {
         "AppUpdateURL": "",
+
+
         "DisableAppUpdate": true,
         "OverridePostUpdatePage": "",
         "DisableSystemAddonUpdate": true,
@@ -12,7 +16,8 @@
         "DisableFeedbackCommands": true,
         "DisablePocket": true,
         "DisableSetDesktopBackground": false,
-        "DisableDeveloperTools": true,
+        "DisableDeveloperTools": false,
+
 
         "Bookmarks": [
               {
