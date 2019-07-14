@@ -17,6 +17,7 @@ BRANDING_FOLDER=$SOURCE_FOLDER/browser/branding/librewolf;
 ICON_FOLDER=$REPOSITORY_FOLDER/branding/icon/;
 PACKAGE_FILE="librewolf*.tar.bz2";
 APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
+FLATPAK_MANIFEST_FILE=$SCRIPT_FOLDER/resources/flatpak/io.gitlab.LibreWolf.json;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
 printf "SOURCE_FOLDER: $SOURCE_FOLDER\n";
@@ -24,6 +25,7 @@ printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
 printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
 printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
+printf "FLATPAK_MANIFEST_FILE: $FLATPAK_MANIFEST_FILE\n";
 
 printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
@@ -122,6 +124,8 @@ tar -xvf ./$PACKAGE_FILE;
 printf "\nCopying librewolf settings to extracted binary tarball\n";
 cp -r $REPOSITORY_FOLDER/settings ./librewolf/settings;
 
+printf "\n\n--------------------------------- BINARY TARBALL RECREATION --------------------------------------\n";
+
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
 tar -jcvf ./$PACKAGE_FILE librewolf;
@@ -161,10 +165,40 @@ printf "\nRemoving AppImage tool\n";
 rm -f ./appimagetool;
 rm -rf ./squashfs-root;
 
+
+printf "\n\n---------------------------------------- FLATPAK BUILD --------------------------------------------\n";
+
+# Install flatpak
+printf "\nInstalling Flatpak Builder\n";
+sudo add-apt-repository -y ppa:alexlarsson/flatpak;
+sudo apt update;
+sudo apt install -y flatpak flatpak-builder;
+
+# Install build dependencies
+printf "\nInstalling flatpak build dependencies\n";
+flatpak install -y org.gnome.Platform//3.32 org.gnome.Sdk//3.32;
+
+# Prepare for flatpak build
+printf "\nPreparing files for flatpak build\n";
+mkdir "source";
+cp -r ./librewolf ./source/librewolf;
+
+# Build Repo and standalone bundle
+printf "\nBuilding flatpak repository and bundle\n";
+flatpak-builder --repo=librewolf-flatpak-repo build-dir $FLATPAK_MANIFEST_FILE;
+flatpak build-bundle librewolf-flatpak-repo LibreWolf.flatpak $FLATPAK_MANIFEST_FILE master;
+
+# move repo and bundle to build output here
+printf "\nMoving repository and bundle to build output folder\n";
+mv libreWolf-flatpak-repo build_output;
+mv LibreWolf.flatpak build_output;
+
+# Clean up flatpak files
+printf "\nCleaning up flatpak related files\n";
+rm -rf ./build-dir;
+rm -rf ./source;
+rm -rf ./.flatpak-builder;
+
 # Delete the extracted binary tarball folder
 printf "\nDeleting extracted binary tarball folder\n";
 rm -rf ./librewolf;
-
-#printf "\n\n---------------------------------------- FLATPAK BUILD --------------------------------------------\n";
-#sudo apt install flatpak-builder;
-
