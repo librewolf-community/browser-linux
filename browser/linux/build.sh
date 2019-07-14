@@ -173,9 +173,9 @@ printf "\n\n---------------------------------------- FLATPAK BUILD -------------
 
 # Install flatpak
 printf "\nInstalling Flatpak Builder\n";
-sudo add-apt-repository -y ppa:alexlarsson/flatpak;
-sudo apt update;
-sudo apt install -y flatpak flatpak-builder;
+add-apt-repository -y ppa:alexlarsson/flatpak;
+apt update;
+apt install -y flatpak flatpak-builder;
 
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
