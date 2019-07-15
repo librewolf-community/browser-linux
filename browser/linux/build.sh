@@ -179,6 +179,7 @@ apt install -y flatpak flatpak-builder;
 
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo;
 flatpak install -y org.gnome.Platform//3.32 org.gnome.Sdk//3.32;
 
 # Prepare for flatpak build
