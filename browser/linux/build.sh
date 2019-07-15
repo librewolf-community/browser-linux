@@ -32,7 +32,7 @@ printf "\n\n-------------------------------------- PREBUILD --------------------
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
 apt update;
-apt install python python3 inkscape icnsutils wget -y;
+apt install python python3 inkscape icnsutils wget software-properties-common-y;
 
 # Downloads and runs bootstrapper to install more dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
