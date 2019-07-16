@@ -28,6 +28,7 @@ printf "\n\n-------------------------------------- PREBUILD --------------------
 
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
+apt install gnupg;
 echo 'deb http://ppa.launchpad.net/alexlarsson/flatpak/ubuntu bionic main' >>  /etc/apt/source.list;
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FA577F07;
 apt update;
