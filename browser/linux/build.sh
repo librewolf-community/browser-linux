@@ -16,21 +16,22 @@ SOURCE_FOLDER=$REPOSITORY_FOLDER/browser/common/source_files/
 BRANDING_FOLDER=$SOURCE_FOLDER/browser/branding/librewolf;
 ICON_FOLDER=$REPOSITORY_FOLDER/branding/icon/;
 PACKAGE_FILE="librewolf*.tar.bz2";
-APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
 printf "SOURCE_FOLDER: $SOURCE_FOLDER\n";
 printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
 printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
-printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
+
 
 printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
 # Installs some needed dependencies
 printf "\nInstalling script dependencies\n";
+echo 'deb http://ppa.launchpad.net/alexlarsson/flatpak/ubuntu bionic main' >>  /etc/apt/source.list;
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FA577F07;
 apt update;
-apt install python python3 inkscape icnsutils wget software-properties-common -y;
+apt install python python3 inkscape icnsutils wget flatpak flatpak-builder -y;
 
 # Downloads and runs bootstrapper to install more dependencies.
 printf "\nRunning bootstrapper to install build dependencies\n";
@@ -137,6 +138,9 @@ mv $PACKAGE_FILE $SCRIPT_FOLDER/build_output/;
 
 printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
 
+APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
+printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
+
 # Copy and generate icons
 printf "\nGenerating AppImage Icons\n";
 cp $ICON_FOLDER/icon.svg $APPIMAGE_RESOURCE_FOLDER/librewolf.svg;
@@ -168,12 +172,6 @@ rm -rf ./squashfs-root;
 
 
 printf "\n\n---------------------------------------- FLATPAK BUILD --------------------------------------------\n";
-
-# Install flatpak
-printf "\nInstalling Flatpak Builder\n";
-add-apt-repository -y ppa:alexlarsson/flatpak;
-apt update;
-apt install -y flatpak flatpak-builder;
 
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
