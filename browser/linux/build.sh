@@ -17,7 +17,6 @@ BRANDING_FOLDER=$SOURCE_FOLDER/browser/branding/librewolf;
 ICON_FOLDER=$REPOSITORY_FOLDER/branding/icon/;
 PACKAGE_FILE="librewolf*.tar.bz2";
 APPIMAGE_RESOURCE_FOLDER=$SCRIPT_FOLDER/resources/appimage;
-FLATPAK_MANIFEST_FILE=$SCRIPT_FOLDER/resources/flatpak/io.gitlab.LibreWolf.json;
 printf "SCRIPT_FOLDER: $SCRIPT_FOLDER\n";
 printf "REPOSITORY_FOLDER: $REPOSITORY_FOLDER\n";
 printf "SOURCE_FOLDER: $SOURCE_FOLDER\n";
@@ -25,7 +24,6 @@ printf "BRANDING_FOLDER: $BRANDING_FOLDER\n";
 printf "ICON_FOLDER: $ICON_FOLDER\n";
 printf "PACKAGE_FILE: $PACKAGE_FILE\n";
 printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_RESOURCE_FOLDER\n";
-printf "FLATPAK_MANIFEST_FILE: $FLATPAK_MANIFEST_FILE\n";
 
 printf "\n\n-------------------------------------- PREBUILD ---------------------------------------------\n";
 
@@ -180,17 +178,18 @@ apt install -y flatpak flatpak-builder;
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo;
-flatpak install -y org.gnome.Platform//3.32 org.gnome.Sdk//3.32;
+flatpak install -y org.gnome.Platform/x86_64/3.32 org.gnome.Sdk/x86_64/3.32;
 
 # Prepare for flatpak build
 printf "\nPreparing files for flatpak build\n";
 mkdir "source";
 cp -r ./librewolf ./source/librewolf;
+cp $SCRIPT_FOLDER/resources/flatpak/io.gitlab.LibreWolf.json ./io.gitlab.LibreWolf.json;
 
 # Build Repo and standalone bundle
 printf "\nBuilding flatpak repository and bundle\n";
-flatpak-builder --repo=librewolf-flatpak-repo build-dir $FLATPAK_MANIFEST_FILE;
-flatpak build-bundle librewolf-flatpak-repo LibreWolf.flatpak $FLATPAK_MANIFEST_FILE master;
+flatpak-builder --repo=librewolf-flatpak-repo build-dir io.gitlab.LibreWolf.json;
+flatpak build-bundle librewolf-flatpak-repo LibreWolf.flatpak io.gitlab.LibreWolf master;
 
 # move repo and bundle to build output here
 printf "\nMoving repository and bundle to build output folder\n";
