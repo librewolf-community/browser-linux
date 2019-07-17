@@ -2,7 +2,7 @@
 
 printf "\n\n-------------------------------------- DEPENDENCY INSTALLATION ---------------------------------------------\n";
 printf "\nInstalling dependencies\n";
-apt update && apt install -y python python3 wget;
+apt-get update -qq && apt-get install -qqy python python3 wget;
 wget https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py;
 python ./bootstrap.py --application-choice=browser --no-interactive || true
 rm -f ./bootstrap.py;
