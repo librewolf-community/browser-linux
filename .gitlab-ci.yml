@@ -1,11 +1,11 @@
 image: ubuntu:18.04
 
 stages:
-  - Build
+  - Linux-Build
   - Release
 
 Build Linux Packages:
-    stage: Build
+    stage: Linux-Build
     script:
         - cd browser/linux
         - ./build.sh
