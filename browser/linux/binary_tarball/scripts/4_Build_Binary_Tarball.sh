@@ -5,9 +5,9 @@ OUTPUT_TARBALL=$2;
 
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
-# Bootstraps librewolf again (using the ./mach script inside the source code)
-# printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
-# ./mach bootstrap --application-choice=browser --no-interactive;
+# Installs build dependencies (using the ./mach script inside the source code)
+printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
+./mach bootstrap --application-choice=browser --no-interactive;
 
 cd $SOURCE_FOLDER;
 
