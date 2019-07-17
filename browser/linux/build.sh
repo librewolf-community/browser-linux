@@ -1,10 +1,6 @@
 #!/bin/sh
 printf "\n------------------------------------- SCRIPT SETUP ------------------------------------------\n";
 
-# Prevents build from breaking in CI/CD environments
-#export SHELL=/bin/bash;
-#printf "SHELL=$SHELL\n";
-
 # Aborts the script upon any faliure
 set -e;
 

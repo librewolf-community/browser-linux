@@ -3,6 +3,10 @@
 SOURCE_FOLDER=$1;
 OUTPUT_TARBALL=$2;
 
+# Prevents build from breaking in CI/CD environments
+export SHELL=/bin/bash;
+printf "SHELL=$SHELL\n";
+
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
 # Installs build dependencies (using the ./mach script inside the source code)
