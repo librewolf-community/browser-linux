@@ -36,6 +36,18 @@
                 "Folder": "LibreWolf"
               },
               {
+                "Title": "Advanced Preferences",
+                "URL": "about:config",
+                "Placement": "menu",
+                "Folder": "LibreWolf"
+              },
+              {
+                "Title": "All about pages",
+                "URL": "about:about",
+                "Placement": "menu",
+                "Folder": "LibreWolf"
+              },
+              {
                 "Title": "LibreWolf Profiles",
                 "URL": "about:profiles",
                 "Placement": "menu",
