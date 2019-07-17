@@ -13,4 +13,10 @@ This project is an independent fork of Firefox, with the primary goals of privac
 
 https://librewolf-community.gitlab.io/docs
 
-The docs are built from the [`content/docs`](https://gitlab.com/librewolf-community/librewolf-community.gitlab.io/tree/master/content/docs) folder of [the librewolf-community.gitlab.io repo](https://gitlab.com/librewolf-community/librewolf-community.gitlab.io).
+The docs are built from the [LibreWolf docs repo](https://gitlab.com/librewolf-community/librewolf-docs).
+
+## [Website](https://librewolf-community.gitlab.io)
+
+https://librewolf-community.gitlab.io
+
+The website is built from the [`librewolf-community.gitlab.io` repo](https://gitlab.com/librewolf-community/librewolf-community.gitlab.io). [Hugo](https://gohugo.io) is used to generate the site.
