@@ -8,6 +8,7 @@ export SHELL=/bin/bash;
 printf "SHELL=$SHELL\n";
 
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
+cd $SOURCE_FOLDER
 
 # Installs build dependencies (using the ./mach script inside the source code)
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
