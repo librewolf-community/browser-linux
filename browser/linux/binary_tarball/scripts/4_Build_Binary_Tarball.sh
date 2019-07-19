@@ -26,5 +26,5 @@ printf "\nMoving Binary Tarball to output location\n";
 mv ./obj*/dist/librewolf*.tar.bz2 $OUTPUT_TARBALL;
 
 printf "\nDeleting the compile_folder\n";
-rm -rf ./;
+rm -rf $SOURCE_FOLDER;
 
