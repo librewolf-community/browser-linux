@@ -1,8 +1,8 @@
 #!/bin/sh
 
-APPIMAGE_CONTENT_FOLDER=$1 #$SCRIPT_FOLDER/resources/appimage;
-BINARY_TARBALL=$2
-OUTPUT_FOLDER=$3
+BINARY_TARBALL=$1
+APPIMAGE_CONTENT_FOLDER=$2
+APPIMAGE_FILE=$3
 
 _LIBREWOLF_EXTRACTED_FOLDER=./librewolf;
 _LIBREWOLF_FINAL_APPIMAGE=./LibreWolf*.AppImage;
@@ -13,10 +13,9 @@ printf "\n\n------------------------------------ APPIMAGE BUILD ----------------
 
 printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_CONTENT_FOLDER\n";
 
-# Copy and generate icons
-# printf "\nGenerating AppImage Icons\n";
-# cp $ICON_FOLDER/icon.svg $APPIMAGE_CONTENT_FOLDER/librewolf.svg;
-# ln -rs $APPIMAGE_CONTENT_FOLDER/librewolf.svg $SCRIPT_FOLDER/resources/appimage/.DirIcon;
+# Extracts the binary tarball
+printf "\nExtracting librewolf binary tarball\n";
+tar -xvf ./$BINARY_TARBALL;
 
 # Copy appimage resources to main tarball
 printf "Copying AppImage resources to binary tarball folder\n";
@@ -32,9 +31,12 @@ rm -f $_APPIMAGETOOL_FILE;
 # Generate AppImage
 printf "\nGenerating AppImage\n";
 ./squashfs-root/AppRun $_LIBREWOLF_EXTRACTED_FOLDER;
+rm -rf $_LIBREWOLF_EXTRACTED_FOLDER;
 rm -rf ./squashfs-root;
 chmod +x $_LIBREWOLF_FINAL_APPIMAGE; 
 
-# Move AppImage to build_output folder
+# Move AppImage to specified location
 printf "\nMoving AppImage to build_output folder\n";
-mv $_LIBREWOLF_FINAL_APPIMAGE $OUTPUT_FOLDER;
+mv $_LIBREWOLF_FINAL_APPIMAGE $APPIMAGE_FILE;
+
+
