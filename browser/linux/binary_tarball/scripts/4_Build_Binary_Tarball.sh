@@ -1,30 +1,34 @@
 #!/bin/sh
+printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
+# Setup Script Variables
 SOURCE_FOLDER=$1;
 OUTPUT_TARBALL=$2;
+_SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
 
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash;
-printf "SHELL=$SHELL\n";
 
-printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
-cd $SOURCE_FOLDER
+# Changes current folder to the source code folder
+cd $SOURCE_FOLDER;
 
-# Installs build dependencies (using the ./mach script inside the source code)
+# Runs bootstrapper to install dependencies
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
 ./mach bootstrap --application-choice=browser --no-interactive;
 
-cd $SOURCE_FOLDER;
-
+# Executes the actual build
 printf "\nBuilding LibreWolf\n";
 ./mach build;
 
+# Packages the build into a binary tarball
 printf "\nPackaging LibreWolf\n";
 ./mach package;
 
+# Moves the packaged tarball to the specified location
 printf "\nMoving Binary Tarball to output location\n";
-mv ./obj*/dist/librewolf*.tar.bz2 $OUTPUT_TARBALL;
+mv $_SOURCE_CODE_BINARY_TARBALL_LOCATION $OUTPUT_TARBALL;
 
-printf "\nDeleting the compile_folder\n";
+# Deletes the source code
+printf "\nDeleting source code\n";
 rm -rf $SOURCE_FOLDER;
 

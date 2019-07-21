@@ -1,25 +1,23 @@
 #!/bin/sh
+printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
 
+# Sets up script variables
 BINARY_TARBALL=$1
 APPIMAGE_CONTENT_FOLDER=$2
 APPIMAGE_FILE=$3
-
-_LIBREWOLF_EXTRACTED_FOLDER=./librewolf;
-_LIBREWOLF_FINAL_APPIMAGE=./LibreWolf*.AppImage;
+_BINARY_TARBALL_EXTRACTED_FOLDER=./librewolf;
+_BUILD_APPIMAGE_FILE=./LibreWolf*.AppImage;
 _APPIMAGETOOL_DOWNLOAD_URL=https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
+_APPIMAGETOOL_EXTRACTED_FOLDER=./squashfs-root;
 _APPIMAGETOOL_FILE=./appimagetool;
-
-printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
-
-printf "APPIMAGE_RESOURCE_FOLDER: $APPIMAGE_CONTENT_FOLDER\n";
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xvf ./$BINARY_TARBALL;
+tar -xvf $BINARY_TARBALL;
 
 # Copy appimage resources to main tarball
 printf "Copying AppImage resources to binary tarball folder\n";
-cp -vrT $APPIMAGE_CONTENT_FOLDER $_LIBREWOLF_EXTRACTED_FOLDER;
+cp -vrT $APPIMAGE_CONTENT_FOLDER $_BINARY_TARBALL_EXTRACTED_FOLDER;
 
 # Downloads appimage tool
 printf "\nDownloading AppImage Tool\n";
@@ -30,13 +28,13 @@ rm -f $_APPIMAGETOOL_FILE;
 
 # Generate AppImage
 printf "\nGenerating AppImage\n";
-./squashfs-root/AppRun $_LIBREWOLF_EXTRACTED_FOLDER;
-rm -rf $_LIBREWOLF_EXTRACTED_FOLDER;
-rm -rf ./squashfs-root;
-chmod +x $_LIBREWOLF_FINAL_APPIMAGE; 
+$_APPIMAGETOOL_EXTRACTED_FOLDER/AppRun $_BINARY_TARBALL_EXTRACTED_FOLDER;
+rm -rf $_BINARY_TARBALL_EXTRACTED_FOLDER;
+rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
+chmod +x $_BUILD_APPIMAGE_FILE; 
 
 # Move AppImage to specified location
 printf "\nMoving AppImage to build_output folder\n";
-mv $_LIBREWOLF_FINAL_APPIMAGE $APPIMAGE_FILE;
+mv $_BUILD_APPIMAGE_FILE $APPIMAGE_FILE;
 
 

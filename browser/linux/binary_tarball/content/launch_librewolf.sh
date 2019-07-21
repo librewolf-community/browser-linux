@@ -14,6 +14,8 @@ if [ "$1" = "--install-settings" ]; then
 fi
 
 # Sets up settings links
+mkdir -p $INSTALL_FOLDER/defaults/pref/;
+mkdir -p $INSTALL_FOLDER/distribution/;
 ln -s $PROFILE_SETTINGS_FOLDER/local-settings.js $INSTALL_FOLDER/defaults/pref/local-settings.js;
 ln -s $PROFILE_SETTINGS_FOLDER/policies.json $INSTALL_FOLDER/distribution/policies.json;
 ln -s $PROFILE_SETTINGS_FOLDER/librewolf.cfg $INSTALL_FOLDER/librewolf.cfg;

@@ -1,15 +1,17 @@
 #!/bin/sh
-
-SOURCE_CODE_FOLDER=$1
-FOLDER_TO_ADD=$2
-
 printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION ---------------------------------\n";
 
-# Copies our custom source code changes (mostly branding) to the source code
-printf "\nCopying custom files to firefox source code\n";
-cp -r $FOLDER_TO_ADD/* $SOURCE_CODE_FOLDER/;
+# Setup Script Variables
+SOURCE_CODE_FOLDER=$1;
+SOURCE_CODE_CUSTOMIZATION_FOLDER=$2;
+_POCKET_SED_STRING="s/'pocket'/#'pocket'/g";
+_POCKET_FILE=$SOURCE_CODE_FOLDER/browser/components/moz.build;
 
-# Disables pocket
+# Copy Source Code Changes to Source Code
+printf "\nCopying branding and source code changes to firefox source code\n";
+cp -r $SOURCE_CODE_CUSTOMIZATION_FOLDER/* $SOURCE_CODE_FOLDER/;
+
+# Disables Pocket
 printf "\nDisabling Pocket\n";
-sed -i "s/'pocket'/#'pocket'/g" $SOURCE_CODE_FOLDER/browser/components/moz.build;
+sed -i $_POCKET_SED_STRING $_POCKET_FILE;
 
