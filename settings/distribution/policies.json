@@ -2,8 +2,7 @@
     "__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
 
     "policies": {
-        "AppUpdateURL": "",
-
+        "AppUpdateURL": "https://localhost",
         "DisableAppUpdate": true,
         "OverridePostUpdatePage": "",
         "DisableSystemAddonUpdate": true,
@@ -18,7 +17,7 @@
         "DisableDeveloperTools": false,
         "DNSOverHTTPS": {
           "Enabled": true,
-          "ProviderURL": "9.9.9.9",
+          "ProviderURL": "https://dns.quad9.net/dns-query",
           "Locked": false
         },
 
@@ -56,8 +55,8 @@
         ],
 
         "WebsiteFilter": {
-            "Block": [""],
-            "Exceptions": [""]
+            "Block": ["https://localhost/*"],
+            "Exceptions": ["https://localhost/*"]
         },
 
         "Extensions": {
