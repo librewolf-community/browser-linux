@@ -34,7 +34,7 @@ rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
 chmod +x $_BUILD_APPIMAGE_FILE; 
 
 # Move AppImage to specified location
-printf "\nMoving AppImage to build_output folder\n";
+printf "\nMoving AppImage to specified location\n";
 mv $_BUILD_APPIMAGE_FILE $APPIMAGE_FILE;
 
 

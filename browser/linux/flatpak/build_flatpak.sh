@@ -20,14 +20,14 @@ _FLATPAK_BUILD_FOLDER=build-dir;
 # Install flatpak
 printf "\nInstalling flatpak\n";
 echo $_APT_REPO >> $_APT_SOURCE_LIST;
-apt update && apt install -y gnupg2 && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $_APT_REPO_KEY;
-apt update;
-apt install -y $_APT_PACKAGES_TO_INSTALL;
+apt-get -qq update && apt-get -qqy install gnupg2 && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $_APT_REPO_KEY;
+apt-get -qq update;
+apt-get -qqy install $_APT_PACKAGES_TO_INSTALL;
 
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
 flatpak remote-add --if-not-exists $_FLATHUB_REPO;
-flatpak install -y $_FLATHUB_PACKAGES_TO_INSTALL;
+flatpak install -y flathub $_FLATHUB_PACKAGES_TO_INSTALL;
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
@@ -35,7 +35,7 @@ tar -xvf $BINARY_TARBALL;
 
 # Prepare for flatpak build
 printf "\nPreparing files for flatpak build\n";
-mkdir $_FLATPAK_BUILD_SOURCE_FOLDER && mv -r $_EXTRACTED_BINARY_TARBALL_FOLDER $_FLATPAK_BUILD_SOURCE_FOLDER/librewolf;
+mkdir $_FLATPAK_BUILD_SOURCE_FOLDER && mv $_EXTRACTED_BINARY_TARBALL_FOLDER $_FLATPAK_BUILD_SOURCE_FOLDER/librewolf;
 
 # Build Repo and standalone bundle
 printf "\nBuilding flatpak repository and bundle\n";

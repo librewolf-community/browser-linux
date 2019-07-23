@@ -11,13 +11,16 @@ Build Linux Packages:
         - ./build.sh
     artifacts:
         paths:
-            - "browser/linux/LibreWolf.tar.bz2"
+            - "LibreWolf.tar.bz2"
+            - "LibreWolf.AppImage"
+            - "librewolf-flatpak-repo"
+            - "LibreWolf.flatpak"
 
 Release to Gitlab:
   stage: Release
   image: python3
   script:
     - pip3 install gitlab-release
-    - gitlab-release browser/linux/build_output/*
+    - gitlab-release LibreWolf.tar.bz2 LibreWolf.AppImage librewolf-flatpak-repo LibreWolf.flatpak
   only:
     - tags
