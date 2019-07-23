@@ -37,9 +37,13 @@ tar -xvf $BINARY_TARBALL;
 printf "\nPreparing files for flatpak build\n";
 mkdir $_FLATPAK_BUILD_SOURCE_FOLDER && mv $_EXTRACTED_BINARY_TARBALL_FOLDER $_FLATPAK_BUILD_SOURCE_FOLDER/librewolf;
 
-# Build Repo and standalone bundle
-printf "\nBuilding flatpak repository and bundle\n";
-flatpak-builder --repo=$FLATPAK_REPO $_FLATPAK_BUILD_FOLDER $FLATPAK_JSON_FILE;
+# Build Repo
+printf "\nBuilding flatpak repository\n";
+cp "$FLATPAK_JSON_FILE" ./;
+flatpak-builder  --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
+
+# Build bundle
+printf "\nBuilding flatpak bundle\n";
 flatpak build-bundle $FLATPAK_REPO $FLATPAK_BUNDLE io.gitlab.LibreWolf master;
 
 # Clean up flatpak files
