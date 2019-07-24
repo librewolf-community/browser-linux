@@ -8,7 +8,8 @@ Build Linux Packages:
     stage: Linux-Build
     script:
         - cd browser/linux
-        - curl http://security.ubuntu.com/ubuntu/pool/main/b/bubblewrap/bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
+        - apt-get install -y wget 
+        - wget http://security.ubuntu.com/ubuntu/pool/main/b/bubblewrap/bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
         - dpkg -i ./bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
         - bwrap --dev-bind / / bash
         - ./build.sh
