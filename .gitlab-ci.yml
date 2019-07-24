@@ -9,7 +9,7 @@ Build Linux Packages:
     script:
         - cd browser/linux
         - apt-get update 
-        - apt-get install -y wget 
+        - apt-get install -y wget libcap2
         - wget http://security.ubuntu.com/ubuntu/pool/main/b/bubblewrap/bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
         - dpkg -i ./bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
         - bwrap --dev-bind / / bash
