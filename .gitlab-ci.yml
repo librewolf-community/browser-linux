@@ -8,8 +8,12 @@ Build Linux Packages:
     stage: Linux-Build
     script:
         - cd browser/linux
+        - wget http://security.ubuntu.com/ubuntu/pool/main/b/bubblewrap/bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
+        - dpkg -i ./bubblewrap_0.2.1-1ubuntu0.1_amd64.deb
+        - bwrap --dev-bind / / bash
         - ./build.sh
     artifacts:
+        name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Packages"
         paths:
             - "LibreWolf.tar.bz2"
             - "LibreWolf.AppImage"
