@@ -8,7 +8,7 @@ Build Linux Packages:
     stage: Linux-Build
     script:
         - cd browser/linux
-        - echo 0 > /proc/sys/kernel/userns_restrict
+        - sysctl -w kernel.unprivileged_userns_clone=1
         - bwrap --dev-bind / / bash
         - ./build.sh
     artifacts:
