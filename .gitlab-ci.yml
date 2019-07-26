@@ -1,10 +1,10 @@
 image: ubuntu:18.04
 
 variables:
-    BINARY_TARBALL: "LibreWolf.tar.bz2"
-    APPIMAGE_FILE: "LibreWolf.AppImage"
-    FLATPAK_REPO: "librewolf-flatpak-repo"
-    FLATPAK_BUNDLE: "LibreWolf.flatpak"
+    BINARY_TARBALL: "$CI_PROJECT_DIR/LibreWolf.tar.bz2"
+    APPIMAGE_FILE: "$CI_PROJECT_DIR/LibreWolf.AppImage"
+    FLATPAK_REPO: "$CI_PROJECT_DIR/librewolf-flatpak-repo"
+    FLATPAK_BUNDLE: "$CI_PROJECT_DIR/LibreWolf.flatpak"
 
 stages:
   - Linux-Build
