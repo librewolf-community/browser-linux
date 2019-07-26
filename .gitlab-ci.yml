@@ -1,26 +1,53 @@
 image: ubuntu:18.04
 
+variables:
+    BINARY_TARBALL: "LibreWolf.tar.bz2"
+    APPIMAGE_FILE: "LibreWolf.AppImage"
+    FLATPAK_REPO: "librewolf-flatpak-repo"
+    FLATPAK_BUNDLE: "LibreWolf.flatpak"
+
 stages:
   - Linux-Build
-  - Release
+  - Linux-Package
+  - Linux-Deploy
 
-Build Linux Packages:
+Build Linux Tarball:
     stage: Linux-Build
+    tags:
+        - librewolf
     script:
-        - cd browser/linux
-        - sysctl -w kernel.unprivileged_userns_clone=1
-        - bwrap --dev-bind / / bash
-        - ./build.sh
+        - ./browser/linux/binary_tarball/build_tarball.sh $BINARY_TARBALL
     artifacts:
-        name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Packages"
+        name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Tarball"
         paths:
-            - "LibreWolf.tar.bz2"
-            - "LibreWolf.AppImage"
-            - "librewolf-flatpak-repo"
-            - "LibreWolf.flatpak"
+            - "$BINARY_TARBALL"
+
+
+Build AppImage:
+    stage: Linux-Package
+    tags:
+        - gitlab-org
+    script:
+        - ./browser/linux/appimage/build_appimage.sh $BINARY_TARBALL $APPIMAGE_FILE
+    artifacts:
+        name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Appimage"
+        paths:
+            - "$APPIMAGE_FILE"
+
+Build Flatpak:
+    stage: Linux-Package
+    tags:
+        - gitlab-org
+    script:
+        - ./browser/linux/flatpak/build_flatpak.sh
+    artifacts:
+        name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Flatpak"
+        paths:
+            - "$FLATPAK_REPO"
+            - "$FLATPAK_BUNDLE"
 
 Release to Gitlab:
-  stage: Release
+  stage: Linux-Deploy
   image: python3
   script:
     - pip3 install gitlab-release

@@ -1,11 +1,13 @@
 #!/bin/sh
 printf "\n\n---------------------------------------- FLATPAK BUILD --------------------------------------------\n";
 
+# Aborts the script upon any faliure
+set -e;
+
 # Setup Script Variables
 BINARY_TARBALL=$1;
-FLATPAK_JSON_FILE=$2;
-FLATPAK_REPO=$3;
-FLATPAK_BUNDLE=$4;
+FLATPAK_REPO=$2;
+FLATPAK_BUNDLE=$3;
 _APT_SOURCE_LIST=/etc/apt/source.list;
 _APT_REPO='deb http://ppa.launchpad.net/alexlarsson/flatpak/ubuntu bionic main'
 _APT_REPO_KEY=FA577F07;
@@ -13,6 +15,7 @@ _APT_PACKAGES_TO_INSTALL="flatpak flatpak-builder";
 _FLATHUB_REPO="flathub https://flathub.org/repo/flathub.flatpakrepo";
 _FLATHUB_PACKAGES_TO_INSTALL="org.gnome.Platform/x86_64/3.32 org.gnome.Sdk/x86_64/3.32";
 _EXTRACTED_BINARY_TARBALL_FOLDER=./librewolf
+_FLATPAK_JSON_FILE=./content/io.gitlab.LibreWolf.json;
 _FLATPAK_BUILD_SOURCE_FOLDER=./source;
 _FLATPAK_BUILD_FOLDER=build-dir;
 
@@ -39,7 +42,7 @@ mkdir $_FLATPAK_BUILD_SOURCE_FOLDER && mv $_EXTRACTED_BINARY_TARBALL_FOLDER $_FL
 
 # Build Repo
 printf "\nBuilding flatpak repository\n";
-cp "$FLATPAK_JSON_FILE" ./;
+cp "$_FLATPAK_JSON_FILE" ./;
 flatpak-builder  --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
 
 # Build bundle

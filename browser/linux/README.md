@@ -11,4 +11,4 @@ This folder contains all the required material to build the browser on Linux pla
 
 ### Instructions
 * Run build.sh inside this folder. 
-* Packages will be saved in the 'build_output' folder. 
+* Packages will be saved in the repository root folder. 

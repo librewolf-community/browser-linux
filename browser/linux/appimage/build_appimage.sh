@@ -1,15 +1,18 @@
 #!/bin/sh
 printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
 
+# Aborts the script upon any faliure
+set -e;
+
 # Sets up script variables
 BINARY_TARBALL=$1
-APPIMAGE_CONTENT_FOLDER=$2
-APPIMAGE_FILE=$3
+APPIMAGE_FILE=$2
 _BINARY_TARBALL_EXTRACTED_FOLDER=./librewolf;
 _BUILD_APPIMAGE_FILE=./LibreWolf*.AppImage;
 _APPIMAGETOOL_DOWNLOAD_URL=https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
 _APPIMAGETOOL_EXTRACTED_FOLDER=./squashfs-root;
 _APPIMAGETOOL_FILE=./appimagetool;
+_APPIMAGE_CONTENT_FOLDER=./content
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
@@ -17,7 +20,7 @@ tar -xvf $BINARY_TARBALL;
 
 # Copy appimage resources to main tarball
 printf "Copying AppImage resources to binary tarball folder\n";
-cp -vrT $APPIMAGE_CONTENT_FOLDER $_BINARY_TARBALL_EXTRACTED_FOLDER;
+cp -vrT $_APPIMAGE_CONTENT_FOLDER $_BINARY_TARBALL_EXTRACTED_FOLDER;
 
 # Downloads appimage tool
 printf "\nDownloading AppImage Tool\n";
