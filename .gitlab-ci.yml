@@ -39,7 +39,7 @@ Build Flatpak:
     tags:
         - gitlab-org
     script:
-        - ./browser/linux/flatpak/build_flatpak.sh
+        - ./browser/linux/flatpak/build_flatpak.sh $BINARY_TARBALL $FLATPAK_REPO $FLATPAK_BUNDLE
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Flatpak"
         paths:

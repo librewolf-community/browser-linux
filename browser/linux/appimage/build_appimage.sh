@@ -7,12 +7,13 @@ set -e;
 # Sets up script variables
 BINARY_TARBALL=$1
 APPIMAGE_FILE=$2
-_BINARY_TARBALL_EXTRACTED_FOLDER=./librewolf;
-_BUILD_APPIMAGE_FILE=./LibreWolf*.AppImage;
+SCRIPT_FOLDER=$(realpath $(dirname $0));
+_BINARY_TARBALL_EXTRACTED_FOLDER=$SCRIPT_FOLDER/librewolf;
+_BUILD_APPIMAGE_FILE=$SCRIPT_FOLDER/LibreWolf*.AppImage;
 _APPIMAGETOOL_DOWNLOAD_URL=https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
-_APPIMAGETOOL_EXTRACTED_FOLDER=./squashfs-root;
-_APPIMAGETOOL_FILE=./appimagetool;
-_APPIMAGE_CONTENT_FOLDER=./content
+_APPIMAGETOOL_EXTRACTED_FOLDER=$SCRIPT_FOLDER/squashfs-root;
+_APPIMAGETOOL_FILE=$SCRIPT_FOLDER/appimagetool;
+_APPIMAGE_CONTENT_FOLDER=$SCRIPT_FOLDER/content
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
