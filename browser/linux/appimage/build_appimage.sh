@@ -7,17 +7,18 @@ set -e;
 # Sets up script variables
 BINARY_TARBALL=$1
 APPIMAGE_FILE=$2
-SCRIPT_FOLDER=$(realpath $(dirname $0));
-_BINARY_TARBALL_EXTRACTED_FOLDER=$SCRIPT_FOLDER/librewolf;
-_BUILD_APPIMAGE_FILE=$SCRIPT_FOLDER/LibreWolf*.AppImage;
+_SCRIPT_FOLDER=$(realpath $(dirname $0));
+_BINARY_TARBALL_EXTRACTED_FOLDER=$_SCRIPT_FOLDER/librewolf;
+_BUILD_APPIMAGE_FILE=$_SCRIPT_FOLDER/LibreWolf*.AppImage;
 _APPIMAGETOOL_DOWNLOAD_URL=https://github.com/AppImage/AppImageKit/releases/latest/download/appimagetool-x86_64.AppImage;
-_APPIMAGETOOL_EXTRACTED_FOLDER=$SCRIPT_FOLDER/squashfs-root;
-_APPIMAGETOOL_FILE=$SCRIPT_FOLDER/appimagetool;
-_APPIMAGE_CONTENT_FOLDER=$SCRIPT_FOLDER/content
+_APPIMAGETOOL_EXTRACTED_FOLDER=$_SCRIPT_FOLDER/squashfs-root;
+_APPIMAGETOOL_FILE=$_SCRIPT_FOLDER/appimagetool;
+_APPIMAGE_CONTENT_FOLDER=$_SCRIPT_FOLDER/content
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xvf $BINARY_TARBALL;
+mkdir $_BINARY_TARBALL_EXTRACTED_FOLDER;
+tar -xvf $BINARY_TARBALL -C $_BINARY_TARBALL_EXTRACTED_FOLDER;
 
 # Copy appimage resources to main tarball
 printf "Copying AppImage resources to binary tarball folder\n";
@@ -25,16 +26,18 @@ cp -vrT $_APPIMAGE_CONTENT_FOLDER $_BINARY_TARBALL_EXTRACTED_FOLDER;
 
 # Downloads appimage tool
 printf "\nDownloading AppImage Tool\n";
+apt -qq update && apt -qqy install wget;  
 wget $_APPIMAGETOOL_DOWNLOAD_URL -O $_APPIMAGETOOL_FILE;
 chmod +x $_APPIMAGETOOL_FILE;
-$_APPIMAGETOOL_FILE --appimage-extract;
-rm -f $_APPIMAGETOOL_FILE;
+#$_APPIMAGETOOL_FILE --appimage-mount $_APPIMAGETOOL_EXTRACTED_FOLDER;
+#rm -f $_APPIMAGETOOL_FILE;
 
 # Generate AppImage
 printf "\nGenerating AppImage\n";
-$_APPIMAGETOOL_EXTRACTED_FOLDER/AppRun $_BINARY_TARBALL_EXTRACTED_FOLDER;
+#$_APPIMAGETOOL_EXTRACTED_FOLDER/AppRun $_BINARY_TARBALL_EXTRACTED_FOLDER;
+ARCH=x86_64 $_APPIMAGETOOL_FILE $_BINARY_TARBALL_EXTRACTED_FOLDER;
 rm -rf $_BINARY_TARBALL_EXTRACTED_FOLDER;
-rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
+#rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
 chmod +x $_BUILD_APPIMAGE_FILE; 
 
 # Move AppImage to specified location

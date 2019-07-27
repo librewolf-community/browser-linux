@@ -8,6 +8,7 @@ set -e;
 BINARY_TARBALL=$1;
 FLATPAK_REPO=$2;
 FLATPAK_BUNDLE=$3;
+_SCRIPT_FOLDER=$(realpath $(dirname $0));
 _APT_SOURCE_LIST=/etc/apt/source.list;
 _APT_REPO='deb http://ppa.launchpad.net/alexlarsson/flatpak/ubuntu bionic main'
 _APT_REPO_KEY=FA577F07;
@@ -15,7 +16,7 @@ _APT_PACKAGES_TO_INSTALL="flatpak flatpak-builder";
 _FLATHUB_REPO="flathub https://flathub.org/repo/flathub.flatpakrepo";
 _FLATHUB_PACKAGES_TO_INSTALL="org.gnome.Platform/x86_64/3.32 org.gnome.Sdk/x86_64/3.32";
 _EXTRACTED_BINARY_TARBALL_FOLDER=./librewolf
-_FLATPAK_JSON_FILE=./content/io.gitlab.LibreWolf.json;
+_FLATPAK_JSON_FILE=$_SCRIPT_FOLDER/content/io.gitlab.LibreWolf.json;
 _FLATPAK_BUILD_SOURCE_FOLDER=./source;
 _FLATPAK_BUILD_FOLDER=build-dir;
 
