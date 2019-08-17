@@ -29,7 +29,7 @@ printf "\nDownloading AppImage Tool\n";
 apt -qq update && apt -qqy install wget;  
 wget $_APPIMAGETOOL_DOWNLOAD_URL -O $_APPIMAGETOOL_FILE;
 chmod +x $_APPIMAGETOOL_FILE;
-$_APPIMAGETOOL_FILE --appimage-mount $_APPIMAGETOOL_EXTRACTED_FOLDER;
+$_APPIMAGETOOL_FILE --appimage-extract $_APPIMAGETOOL_EXTRACTED_FOLDER;
 rm -f $_APPIMAGETOOL_FILE;
 
 # Generate AppImage

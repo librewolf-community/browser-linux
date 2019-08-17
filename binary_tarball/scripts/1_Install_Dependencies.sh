@@ -6,5 +6,5 @@ _DEPENDENCIES="mercurial wget git";
 
 # Installs Dependencies
 printf "\nInstalling dependencies: $_DEPENDENCIES\n";
-apt-get -qq update;
-apt-get -y -qq install $_DEPENDENCIES;
+DEBIAN_FRONTEND=noninteractive apt-get -qq update;
+DEBIAN_FRONTEND=noninteractive apt-get -y -qq install $_DEPENDENCIES;
