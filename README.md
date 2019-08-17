@@ -20,3 +20,9 @@ The docs are built from the [LibreWolf docs repo](https://gitlab.com/librewolf-c
 https://librewolf-community.gitlab.io
 
 The website is built from the [`librewolf-community.gitlab.io` repo](https://gitlab.com/librewolf-community/librewolf-community.gitlab.io). [Hugo](https://gohugo.io) is used to generate the site.
+
+## Browser Files
+This folder contains platform specific subfolders which houses the scripts and files required to compile LibreWolf on various platforms such as Linux, Windows, Mac and android.
+All of the platforms are self explanatory with the exception of common. Common stores files common to all platforms, mainly our custom branding to be applied to the source code.
+
+
