@@ -44,7 +44,7 @@ mkdir $_FLATPAK_BUILD_SOURCE_FOLDER && mv $_EXTRACTED_BINARY_TARBALL_FOLDER $_FL
 # Build Repo
 printf "\nBuilding flatpak repository\n";
 cp "$_FLATPAK_JSON_FILE" ./;
-flatpak-builder  --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
+flatpak-builder --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
 
 # Build bundle
 printf "\nBuilding flatpak bundle\n";

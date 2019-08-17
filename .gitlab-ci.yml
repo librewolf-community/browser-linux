@@ -35,6 +35,7 @@ Build AppImage:
             - "$APPIMAGE_FILE"
 
 Build Flatpak:
+    image: black0/flatpak
     stage: Linux-Package
     tags:
         - gitlab-org
