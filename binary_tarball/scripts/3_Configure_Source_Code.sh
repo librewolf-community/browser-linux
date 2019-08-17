@@ -3,13 +3,15 @@ printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION --------
 
 # Setup Script Variables
 SOURCE_CODE_FOLDER=$1;
-SOURCE_CODE_CUSTOMIZATION_FOLDER=$2;
+_COMMON_REPO='git@gitlab.com:librewolf-community/browser/common.git';
 _POCKET_SED_STRING="s/'pocket'/#'pocket'/g";
 _POCKET_FILE=$SOURCE_CODE_FOLDER/browser/components/moz.build;
 
 # Copy Source Code Changes to Source Code
 printf "\nCopying branding and source code changes to firefox source code\n";
-cp -r $SOURCE_CODE_CUSTOMIZATION_FOLDER/* $SOURCE_CODE_FOLDER/;
+git clone $_COMMON_REPO common;
+cp -r common/source_files/* $SOURCE_CODE_FOLDER/;
+rm -rf common;
 
 # Disables Pocket
 printf "\nDisabling Pocket\n";
