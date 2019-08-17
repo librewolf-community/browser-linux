@@ -7,28 +7,25 @@ variables:
     FLATPAK_BUNDLE: "$CI_PROJECT_DIR/LibreWolf.flatpak"
 
 stages:
-  - Linux-Build
-  - Linux-Package
-  - Linux-Deploy
+  - Build
+  - Package
+  - Deploy
 
-Build Linux Tarball:
-    stage: Linux-Build
-    tags:
-        - librewolf
+Build Tarball:
+    stage: Build
+    tags: [librewolf]
     script:
-        - $CI_PROJECT_DIR/linux/binary_tarball/build_tarball.sh $BINARY_TARBALL
+        - $CI_PROJECT_DIR/binary_tarball/build_tarball.sh $BINARY_TARBALL
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Tarball"
         paths:
             - "$BINARY_TARBALL"
 
-
 Build AppImage:
-    stage: Linux-Package
-    tags:
-        - gitlab-org
+    stage: Package
+    tags: [gitlab-org]
     script:
-        - $CI_PROJECT_DIR/linux/appimage/build_appimage.sh $BINARY_TARBALL $APPIMAGE_FILE
+        - $CI_PROJECT_DIR/appimage/build_appimage.sh $BINARY_TARBALL $APPIMAGE_FILE
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Appimage"
         paths:
@@ -36,11 +33,11 @@ Build AppImage:
 
 Build Flatpak:
     image: black0/flatpak
-    stage: Linux-Package
+    stage: Package
     tags:
         - gitlab-org
     script:
-        - $CI_PROJECT_DIR/linux/flatpak/build_flatpak.sh $BINARY_TARBALL $FLATPAK_REPO $FLATPAK_BUNDLE
+        - $CI_PROJECT_DIR/flatpak/build_flatpak.sh $BINARY_TARBALL $FLATPAK_REPO $FLATPAK_BUNDLE
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Flatpak"
         paths:
@@ -48,7 +45,7 @@ Build Flatpak:
             - "$FLATPAK_BUNDLE"
 
 Release to Gitlab:
-  stage: Linux-Deploy
+  stage: Deploy
   image: python3
   script:
     - pip3 install gitlab-release
