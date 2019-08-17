@@ -3,7 +3,7 @@ printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION --------
 
 # Setup Script Variables
 SOURCE_CODE_FOLDER=$1;
-_COMMON_REPO='git@gitlab.com:librewolf-community/browser/common.git';
+_COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
 _POCKET_SED_STRING="s/'pocket'/#'pocket'/g";
 _POCKET_FILE=$SOURCE_CODE_FOLDER/browser/components/moz.build;
 
