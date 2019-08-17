@@ -16,7 +16,7 @@ Build Linux Tarball:
     tags:
         - librewolf
     script:
-        - ./browser/linux/binary_tarball/build_tarball.sh $BINARY_TARBALL
+        - $CI_PROJECT_DIR/linux/binary_tarball/build_tarball.sh $BINARY_TARBALL
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Tarball"
         paths:
@@ -28,7 +28,7 @@ Build AppImage:
     tags:
         - gitlab-org
     script:
-        - ./browser/linux/appimage/build_appimage.sh $BINARY_TARBALL $APPIMAGE_FILE
+        - $CI_PROJECT_DIR/linux/appimage/build_appimage.sh $BINARY_TARBALL $APPIMAGE_FILE
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Appimage"
         paths:
@@ -40,7 +40,7 @@ Build Flatpak:
     tags:
         - gitlab-org
     script:
-        - ./browser/linux/flatpak/build_flatpak.sh $BINARY_TARBALL $FLATPAK_REPO $FLATPAK_BUNDLE
+        - $CI_PROJECT_DIR/linux/flatpak/build_flatpak.sh $BINARY_TARBALL $FLATPAK_REPO $FLATPAK_BUNDLE
     artifacts:
         name: "Librewolf-$CI_COMMIT_REF_NAME-Linux-Flatpak"
         paths:
