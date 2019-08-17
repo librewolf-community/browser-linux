@@ -5,6 +5,6 @@ printf "\n\n-------------------------------------- DEPENDENCY INSTALLATION -----
 _DEPENDENCIES="mercurial wget";
 
 # Installs Dependencies
-printf "\nInstalling dependencies\n";
+printf "\nInstalling dependencies: $_DEPENDENCIES\n";
 apt-get -qq update;
 apt-get -qq install -y $_DEPENDENCIES;
