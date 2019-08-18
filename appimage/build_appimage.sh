@@ -1,4 +1,9 @@
 #!/bin/sh
+"""
+
+
+"""
+
 printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
 
 # Aborts the script upon any faliure
@@ -29,16 +34,18 @@ printf "\nDownloading AppImage Tool\n";
 apt -qq update && apt -qqy install wget;  
 wget $_APPIMAGETOOL_DOWNLOAD_URL -O $_APPIMAGETOOL_FILE;
 chmod +x $_APPIMAGETOOL_FILE;
-$_APPIMAGETOOL_FILE --appimage-extract $_APPIMAGETOOL_EXTRACTED_FOLDER;
-rm -f $_APPIMAGETOOL_FILE;
 
 # Generate AppImage
 printf "\nGenerating AppImage\n";
-ARCH=x86_64 $_APPIMAGETOOL_EXTRACTED_FOLDER/AppRun $_BINARY_TARBALL_EXTRACTED_FOLDER;
-rm -rf $_BINARY_TARBALL_EXTRACTED_FOLDER;
-rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
+ARCH=x86_64 $_APPIMAGETOOL_FILE --appimage-extract-and-run $_BINARY_TARBALL_EXTRACTED_FOLDER;
 chmod +x $_BUILD_APPIMAGE_FILE; 
 
 # Move AppImage to specified location
 printf "\nMoving AppImage to specified location\n";
 mv $_BUILD_APPIMAGE_FILE $APPIMAGE_FILE;
+
+# Cleanup files
+printf "\nCleaning up AppImage files\n";
+rm -rf $_BINARY_TARBALL_EXTRACTED_FOLDER;
+rm -f $_APPIMAGETOOL_FILE;
+rm -rf $_APPIMAGETOOL_EXTRACTED_FOLDER;
