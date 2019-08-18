@@ -3,9 +3,10 @@ printf "\n\n--------------------------------- SETTINGS INTEGRATION -------------
 
 # Setup Script Variables
 BINARY_TARBALL=$1;
-TOGGLE_SETTINGS_SCRIPT=$2l
+TOGGLE_SETTINGS_SCRIPT=$2;
 LAUNCHER_SCRIPT=$3;
-_EXTRACTED_TARBALL_FOLDER=./librewolf;
+_SCRIPT_FOLDER=$(realpath $(dirname $0));
+_EXTRACTED_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf;
 _SETTINGS_REPO='https://gitlab.com/librewolf-community/settings.git'; 
 
 # Extracts the binary tarball
