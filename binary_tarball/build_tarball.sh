@@ -7,7 +7,6 @@ set -e;
 # Sets up script variables
 BINARY_TARBALL=$1;
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
-_REPOSITORY_FOLDER=$(realpath $_SCRIPT_FOLDER/../);
 _SOURCE_FOLDER=$_SCRIPT_FOLDER/compile;
 _TOGGLE_SETTINGS_SCRIPT=$_SCRIPT_FOLDER/content/toggle-settings.sh;
 _LAUNCH_SCRIPT=$_SCRIPT_FOLDER/content/launch_librewolf.sh;
