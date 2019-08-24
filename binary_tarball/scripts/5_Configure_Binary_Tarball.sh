@@ -22,6 +22,6 @@ cp $LAUNCHER_SCRIPT $_EXTRACTED_TARBALL_FOLDER/launch_librewolf.sh;
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
-tar -jcf $BINARY_TARBALL $_EXTRACTED_TARBALL_FOLDER;
+tar -jvcf $BINARY_TARBALL $_EXTRACTED_TARBALL_FOLDER;
 
 
