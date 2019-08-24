@@ -11,9 +11,9 @@ FLATPAK_BUNDLE=$3;
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _FLATHUB_REPO="flathub https://flathub.org/repo/flathub.flatpakrepo";
 _FLATHUB_PACKAGES_TO_INSTALL="org.gnome.Platform/x86_64/3.32 org.gnome.Sdk/x86_64/3.32";
-_EXTRACTED_BINARY_TARBALL_FOLDER=./librewolf
+_EXTRACTED_BINARY_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf
 _FLATPAK_JSON_FILE=$_SCRIPT_FOLDER/content/io.gitlab.LibreWolf.json;
-_FLATPAK_BUILD_SOURCE_FOLDER=./source;
+_FLATPAK_BUILD_SOURCE_FOLDER=$_SCRIPT_FOLDER/source;
 _FLATPAK_BUILD_FOLDER=build-dir;
 
 # Install build dependencies
@@ -23,7 +23,7 @@ flatpak install -y flathub $_FLATHUB_PACKAGES_TO_INSTALL;
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xvf $BINARY_TARBALL;
+tar -xvf $BINARY_TARBALL -C $_EXTRACTED_BINARY_TARBALL_FOLDER;
 
 # Prepare for flatpak build
 printf "\nPreparing files for flatpak build\n";
