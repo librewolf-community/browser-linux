@@ -21,7 +21,7 @@ _APPIMAGETOOL_FILE=$_SCRIPT_FOLDER/appimagetool;
 _APPIMAGE_CONTENT_FOLDER=$_SCRIPT_FOLDER/content
 
 # Installs needed dependencies
-apt-get update && apt-get install file;
+apt-get update && apt-get -y install file;
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
