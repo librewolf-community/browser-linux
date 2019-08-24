@@ -20,6 +20,9 @@ _APPIMAGETOOL_EXTRACTED_FOLDER=$_SCRIPT_FOLDER/squashfs-root;
 _APPIMAGETOOL_FILE=$_SCRIPT_FOLDER/appimagetool;
 _APPIMAGE_CONTENT_FOLDER=$_SCRIPT_FOLDER/content
 
+# Installs needed dependencies
+apt-get update && apt-get install file;
+
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
 mkdir $_BINARY_TARBALL_EXTRACTED_FOLDER;
