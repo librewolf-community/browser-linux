@@ -1,6 +1,7 @@
 stages:
   - build
   - paks
+  - deploy
 
 .carch_aarch64: &carch_aarch64
   variables:
@@ -33,7 +34,7 @@ stages:
   only:
     - tags
   script:
-    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-flatpak-repo" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.flatpak"
+    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.flatpak"
 
 .appimage_config: &appimage_config
   stage: paks
@@ -81,3 +82,12 @@ appimage_aarch64:
   tags: [aarch64b]
   <<: *carch_aarch64
   <<: *appimage_config
+
+Release to Gitlab:
+  stage: deploy
+  image: python3
+  script:
+    - pip3 install gitlab-release
+    - gitlab-release "LibreWolf.{x86_64,aarch64}.tar.bz2" "librewolf*.pkg.tar.*" "LibreWolf.{x86_64,aarch64}.AppImage" "librewolf-{x86_64,aarch64}-flatpak-repo" "LibreWolf.{x86_64,aarch64}.flatpak"
+  only:
+    - tags
