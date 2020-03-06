@@ -4,22 +4,27 @@
     "runtime-version": "3.32",
     "sdk": "org.gnome.Sdk",
     "command": "librewolf",
-    "modules": [{
-        "name": "librewolf",
-        "buildsystem": "simple",
-        "build-commands": [
-            "mkdir -p /app/share && mv librewolf -t /app/share",
-            "mkdir -p /app/bin && ln -s /app/share/librewolf/librewolf /app/bin/"
-        ],
-        "sources": [{
-            "type": "dir",
-            "path": "source"
-         }]
-    }],
+    "modules": [
+        {
+            "name": "librewolf",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/share && mv librewolf -t /app/share",
+                "mkdir -p /app/bin && ln -s /app/share/librewolf/librewolf /app/bin/"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "flatpak/source"
+                }
+            ]
+        }
+    ],
     "finish-args": [
-        "--share=ipc", "--socket=x11",  /* X11 + XShm access */
-        "--socket=wayland",             /* Wayland access */
-        "--filesystem=home:rw",         /* We want full fs access so we can read the files */
-        "--share=network"               /* Needs to talk to the network: */
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--filesystem=home:rw",
+        "--share=network"
     ]
 }
