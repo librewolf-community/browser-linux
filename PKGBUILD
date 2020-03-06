@@ -22,7 +22,7 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
-install='librewolf.install'
+# install='librewolf.install'
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         $pkgname.cfg.patch
@@ -59,10 +59,10 @@ prepare() {
   # uncomment it if you are OK with a slight potential decrease in privacy,
   # or even better: check what I'm doing there.
 
-  cd ${srcdir}/settings
-  patch -Np1 -i ${srcdir}/${pkgname}.cfg.patch
-  rm -f librewolf.cfg.orig
-  cd ${srcdir}/firefox-$pkgver
+  # cd ${srcdir}/settings
+  # patch -Np1 -i ${srcdir}/${pkgname}.cfg.patch
+  # rm -f librewolf.cfg.orig
+  # cd ${srcdir}/firefox-$pkgver
 
   cat >../mozconfig <<END
 ac_add_options --enable-application=browser
