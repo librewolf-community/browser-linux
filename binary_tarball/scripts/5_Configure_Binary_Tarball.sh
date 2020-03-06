@@ -11,7 +11,7 @@ _SETTINGS_REPO='https://gitlab.com/librewolf-community/settings.git';
 
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xf $BINARY_TARBALL;
+tar -xf $BINARY_TARBALL -C $_EXTRACTED_TARBALL_FOLDER/..;
 
 # Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n";
@@ -22,6 +22,6 @@ cp $LAUNCHER_SCRIPT $_EXTRACTED_TARBALL_FOLDER/launch_librewolf.sh;
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
-tar -jvcf $BINARY_TARBALL $_EXTRACTED_TARBALL_FOLDER;
+tar -jvcf $BINARY_TARBALL -C $_EXTRACTED_TARBALL_FOLDER .;
 
 
