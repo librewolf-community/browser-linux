@@ -30,7 +30,7 @@ stages:
     name: "Librewolf-${CI_COMMIT_TAG}-Flatpak-${CARCH}"
     paths:
       - "LibreWolf.${CARCH}.flatpak"
-      - "${CI_PROJECT_DIR}/librewolf-flatpak-repo"
+      - "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo"
   only:
     - tags
   script:
@@ -85,7 +85,7 @@ appimage_aarch64:
 
 Release to Gitlab:
   stage: deploy
-  image: python3
+  image: python:latest
   script:
     - pip3 install gitlab-release
     - gitlab-release "LibreWolf.{x86_64,aarch64}.tar.bz2" "librewolf*.pkg.tar.*" "LibreWolf.{x86_64,aarch64}.AppImage" "librewolf-{x86_64,aarch64}-flatpak-repo" "LibreWolf.{x86_64,aarch64}.flatpak"
