@@ -90,6 +90,6 @@ Release to Gitlab:
   image: python:latest
   script:
     - pip3 install gitlab-release
-    - gitlab-release "LibreWolf.{x86_64,aarch64}.tar.bz2" "librewolf*.pkg.tar.*" "LibreWolf.{x86_64,aarch64}.AppImage" "librewolf-{x86_64,aarch64}-flatpak-repo" "LibreWolf.{x86_64,aarch64}.flatpak"
+    - gitlab-release "LibreWolf.*.tar.bz2 librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo LibreWolf.*.flatpak"
   only:
     - tags
