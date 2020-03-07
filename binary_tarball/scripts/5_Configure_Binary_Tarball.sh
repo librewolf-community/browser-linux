@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf "\n\n--------------------------------- SETTINGS INTEGRATION --------------------------------------\n";
 
 # Setup Script Variables

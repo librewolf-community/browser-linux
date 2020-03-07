@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf "\n------------------------------------- BINARY TARBALL BUILD ------------------------------------------\n";
 
 # Aborts the script upon any faliure

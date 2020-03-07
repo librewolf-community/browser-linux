@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf "\n------------------------------------- SCRIPT SETUP ------------------------------------------\n";
 
 # Aborts the script upon any faliure

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION ---------------------------------\n";
 
 # Setup Script Variables

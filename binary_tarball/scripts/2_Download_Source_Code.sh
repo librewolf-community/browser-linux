@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 printf "\n\n--------------------------------- SOURCE CODE DOWNLOAD --------------------------------------\n";
 
 # Setup Script Variables
