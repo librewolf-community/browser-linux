@@ -5,7 +5,7 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
-pkgver=73.0.1
+pkgver=74.0
 pkgrel=1
 pkgdesc="Community-maintained fork of Librefox: a privacy and security-focused browser"
 arch=(x86_64 aarch64)
@@ -22,15 +22,12 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
-# install='librewolf.install'
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
-        $pkgname.cfg.patch
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
         "git+https://gitlab.com/${pkgname}-community/settings.git")
-sha256sums=('53415180e74da60fc91700ce1ff33bf5b6f51e65353017a98270899a08e0c3d2'
+sha256sums=('74589c2836d7c30134636823c3caefbcaed0ea7c3abb2def9e3ddd9f86d9440a'
             '0471d32366c6f415f7608b438ddeb10e2f998498c389217cdd6cc52e8249996b'
-            'e03332f0e865949df5af9c231a364e9e1068fca0439621b98c2d4160d93e674f'
             'SKIP'
             'SKIP')
 
@@ -42,27 +39,8 @@ if [[ $CARCH == 'aarch64' ]]; then
 fi
 
 prepare() {
-  _POCKET_SED_STRING="s/'pocket'/#'pocket'/g"
-  # this one only to remove an annoying error message:
-  _POCKET_SED_STRING_2='s#SaveToPocket.init();#// SaveToPocket.init();#g'
-  _POCKET_FILE=./browser/components/moz.build
-  _POCKET_FILE_2=./browser/components/BrowserGlue.jsm
-
   mkdir mozbuild
   cd firefox-$pkgver
-
-  # NOTE:
-  # unlock some prefs I deem worthy of keeping unlocked or slightly less restricted
-  # (with librewolf installed systemwide, you'd otherwise always have to sudo around in /usr/lib)
-  # it mainly keeps addon update / install settings / urls unlocked
-  # as well as form fill settings
-  # uncomment it if you are OK with a slight potential decrease in privacy,
-  # or even better: check what I'm doing there.
-
-  # cd ${srcdir}/settings
-  # patch -Np1 -i ${srcdir}/${pkgname}.cfg.patch
-  # rm -f librewolf.cfg.orig
-  # cd ${srcdir}/firefox-$pkgver
 
   cat >../mozconfig <<END
 ac_add_options --enable-application=browser
@@ -129,7 +107,7 @@ ac_add_options --disable-webrtc
 
 END
 
-# ac_add_options --enable-optimize  <- ?
+  # ac_add_options --enable-optimize  <- ?
 
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
   patch -p1 -i ../arm.patch
@@ -137,12 +115,13 @@ END
 
 fi
 
+  # Disabling Pocket
+  sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
+  # this one only to remove an annoying error message:
+  sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
+
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./
-
-  # Disabling Pocket
-  sed -i ${_POCKET_SED_STRING} $_POCKET_FILE
-  # sed -i ${_POCKET_SED_STRING_2} $_POCKET_FILE_2
 }
 
 
