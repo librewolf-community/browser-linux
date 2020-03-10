@@ -92,6 +92,6 @@ Release to Gitlab:
     - pip3 install gitlab-release
     - tar czf librewolf-aarch64-flatpak-repo.tar.gz librewolf-aarch64-flatpak-repo
     - tar czf librewolf-x86_64-flatpak-repo.tar.gz librewolf-x86_64-flatpak-repo
-    - gitlab-release "LibreWolf.*.tar.bz2 librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo.tar.gz LibreWolf.*.flatpak"
+    - "gitlab-release LibreWolf.*.tar.bz2 librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo.tar.gz LibreWolf.*.flatpak"
   only:
     - tags
