@@ -6,11 +6,11 @@
 pkgname=librewolf
 _pkgname=LibreWolf
 pkgver=74.0
-pkgrel=1
-pkgdesc="Community-maintained fork of Librefox: a privacy and security-focused browser"
+pkgrel=2
+pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
-url="https://LibreWolf.gitlab.io"
+url="https://librewolf-community.gitlab.io/"
 depends=(gtk3 libxt startup-notification mime-types dbus-glib ffmpeg nss
          ttf-font libpulse)
 makedepends=(unzip zip diffutils python2-setuptools yasm mesa imake inetutils
