@@ -1,4 +1,4 @@
-# Maintainer: lsf
+# Maintainer: ohfp
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Jakub Schmidtke <sjakub@gmail.com>
@@ -95,7 +95,6 @@ END
 if [[ $CARCH == 'aarch64' ]]; then
 cat >>../mozconfig <<END
 # taken from manjaro build:
-ac_add_options --enable-lto
 ac_add_options --enable-optimize="-g0 -O2"
 export MOZ_DEBUG_FLAGS=" "
 export CFLAGS+=" -g0"
@@ -135,7 +134,6 @@ build() {
   # LTO needs more open files
   ulimit -n 4096
 
-if [[ $CARCH != 'aarch64' ]]; then
   # -fno-plt with cross-LTO causes obscure LLVM errors
   # LLVM ERROR: Function Import: link error
   CFLAGS="${CFLAGS/-fno-plt/}"
@@ -143,9 +141,20 @@ if [[ $CARCH != 'aarch64' ]]; then
 
   # Do 3-tier PGO
   echo "Building instrumented browser..."
+
+if [[ $CARCH == 'aarch64' ]]; then
+
+  cat >.mozconfig ../mozconfig - <<END
+ac_add_options --enable-profile-generate
+END
+
+else
+
   cat >.mozconfig ../mozconfig - <<END
 ac_add_options --enable-profile-generate=cross
 END
+
+fi
   ./mach build
 
   echo "Profiling instrumented browser..."
@@ -169,16 +178,28 @@ END
   ./mach clobber
 
   echo "Building optimized browser..."
+
+if [[ $CARCH == 'aarch64' ]]; then
+
+  cat >.mozconfig ../mozconfig - <<END
+ac_add_options --enable-lto
+ac_add_options --enable-profile-use
+ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
+ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
+# seems to break on arm
+# ac_add_options --enable-linker=gold
+END
+
+else
+
   cat >.mozconfig ../mozconfig - <<END
 ac_add_options --enable-lto=cross
 ac_add_options --enable-profile-use=cross
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
 ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
-# seems to break on arm
 ac_add_options --enable-linker=gold
 END
-else
-  cat >.mozconfig ../mozconfig
+
 fi
 
   ./mach build
