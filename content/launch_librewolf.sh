@@ -26,7 +26,4 @@ export SNAP_NAME="firefox";
 
 # Launches librewolf
 chmod +x $INSTALL_FOLDER/librewolf;
-$INSTALL_FOLDER/librewolf "$@"; 
-
-
-
+$INSTALL_FOLDER/librewolf "$@";
