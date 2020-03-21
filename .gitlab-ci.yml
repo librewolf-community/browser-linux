@@ -1,7 +1,7 @@
 stages:
   - build
   - paks
-  - deploy
+  # - deploy
 
 .carch_aarch64: &carch_aarch64
   variables:
@@ -85,13 +85,13 @@ appimage_aarch64:
   <<: *carch_aarch64
   <<: *appimage_config
 
-Release to Gitlab:
-  stage: deploy
-  image: python:latest
-  script:
-    - pip3 install gitlab-release
-    - tar czf librewolf-aarch64-flatpak-repo.tar.gz librewolf-aarch64-flatpak-repo
-    - tar czf librewolf-x86_64-flatpak-repo.tar.gz librewolf-x86_64-flatpak-repo
-    - "gitlab-release librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo.tar.gz LibreWolf.*.flatpak"
-  only:
-    - tags
+# Release to Gitlab:
+  # stage: deploy
+  # image: python:latest
+  # script:
+    # - pip3 install gitlab-release
+    # - tar czf librewolf-aarch64-flatpak-repo.tar.gz librewolf-aarch64-flatpak-repo
+    # - tar czf librewolf-x86_64-flatpak-repo.tar.gz librewolf-x86_64-flatpak-repo
+    # - "gitlab-release librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo.tar.gz LibreWolf.*.flatpak"
+  # only:
+    # - tags
