@@ -27,8 +27,15 @@ tar -xf $OUTPUT_TARBALL -C librewolf_unpacked
 printf "\nCopying librewolf settings to extracted binary tarball\n"
 
 cp -r $CI_PROJECT_DIR/src/settings $EXTRACTED_TARBALL_FOLDER/settings
+# no need to keep that in there
+rm -rf "${_EXTRACTED_TARBALL_FOLDER}/settings/.git";
 cp $CI_PROJECT_DIR/content/toggle-settings.sh $EXTRACTED_TARBALL_FOLDER/settings
 cp $CI_PROJECT_DIR/content/launch_librewolf.sh $EXTRACTED_TARBALL_FOLDER/launch_librewolf.sh
+
+# Somewhat crude workaround to use settings per default
+# until we've worked out how to use `--install-settings` with links
+# in all major packages instead
+cp $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n"
