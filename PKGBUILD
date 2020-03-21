@@ -5,8 +5,9 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
+_ublockver=1.25.2
 pkgver=74.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -22,14 +23,17 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
+noextract=("ublock_origin-$pkgver-an+fx.xpi")
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
-        "git+https://gitlab.com/${pkgname}-community/settings.git")
+        "git+https://gitlab.com/${pkgname}-community/settings.git"
+        "https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-$_ublockver-an+fx.xpi")
 sha256sums=('74589c2836d7c30134636823c3caefbcaed0ea7c3abb2def9e3ddd9f86d9440a'
             '0471d32366c6f415f7608b438ddeb10e2f998498c389217cdd6cc52e8249996b'
             'SKIP'
-            'SKIP')
+            'SKIP'
+            '997aac00064665641298047534c9392492ef09f0cbf177b6a30d4fa288081579')
 
 if [[ $CARCH == 'aarch64' ]]; then
   source+=(arm.patch
@@ -217,6 +221,8 @@ package() {
   ./mach package
 
   local vendorjs="$pkgdir/usr/lib/$pkgname/browser/defaults/preferences/vendor.js"
+
+  # move the following part to librewolf.cfg instead?
   install -Dvm644 /dev/stdin "$vendorjs" <<END
 // Use LANG environment variable to choose locale
 pref("intl.locale.requested", "");
@@ -231,6 +237,7 @@ pref("browser.shell.checkDefaultBrowser", false);
 pref("extensions.autoDisableScopes", 11);
 END
 
+  install -Dm644 "${srcdir}/ublock_origin-$pkgver-an+fx.xpi" "$pkgdir"/usr/lib/${pkgname}/browser/extensions/uBlock0@raymondhill.net.xpi
   cp -r ${srcdir}/settings/* ${pkgdir}/usr/lib/${pkgname}/
 
   local distini="$pkgdir/usr/lib/$pkgname/distribution/distribution.ini"
