@@ -11,6 +11,8 @@ OUTPUT_TARBALL=$CI_PROJECT_DIR/LibreWolf.${CARCH}.tar.bz2
 SOURCE_CODE_BINARY_TARBALL_LOCATION="$CI_PROJECT_DIR/src/firefox-*/obj*/dist/librewolf*.tar.bz2"
 EXTRACTED_TARBALL_FOLDER=$CI_PROJECT_DIR/librewolf_unpacked/librewolf
 
+_ublockver=1.25.2
+
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash
 
@@ -36,6 +38,8 @@ cp $CI_PROJECT_DIR/content/launch_librewolf.sh $EXTRACTED_TARBALL_FOLDER/launch_
 # until we've worked out how to use `--install-settings` with links
 # in all major packages instead
 cp $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
+
+install -Dm644 "$CI_PROJECT_DIR/ublock_origin-$_ublockver-an+fx.xpi" "$EXTRACTED_TARBALL_FOLDER"/browser/extensions/uBlock0@raymondhill.net.xpi
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n"

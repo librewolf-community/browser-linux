@@ -23,7 +23,7 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
-noextract=("ublock_origin-$pkgver-an+fx.xpi")
+noextract=("ublock_origin-$ublockver-an+fx.xpi")
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
@@ -237,7 +237,7 @@ pref("browser.shell.checkDefaultBrowser", false);
 pref("extensions.autoDisableScopes", 11);
 END
 
-  install -Dm644 "${srcdir}/ublock_origin-$pkgver-an+fx.xpi" "$pkgdir"/usr/lib/${pkgname}/browser/extensions/uBlock0@raymondhill.net.xpi
+  install -Dm644 "${srcdir}/ublock_origin-$ublockver-an+fx.xpi" "$pkgdir"/usr/lib/${pkgname}/browser/extensions/uBlock0@raymondhill.net.xpi
   cp -r ${srcdir}/settings/* ${pkgdir}/usr/lib/${pkgname}/
 
   local distini="$pkgdir/usr/lib/$pkgname/distribution/distribution.ini"
