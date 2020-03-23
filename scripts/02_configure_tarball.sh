@@ -27,7 +27,6 @@ tar -xf $OUTPUT_TARBALL -C librewolf_unpacked
 
 # Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n"
-
 cp -r $CI_PROJECT_DIR/src/settings $EXTRACTED_TARBALL_FOLDER/settings
 # no need to keep that in there
 rm -rf "${_EXTRACTED_TARBALL_FOLDER}/settings/.git";
@@ -37,8 +36,10 @@ cp $CI_PROJECT_DIR/content/launch_librewolf.sh $EXTRACTED_TARBALL_FOLDER/launch_
 # Somewhat crude workaround to use settings per default
 # until we've worked out how to use `--install-settings` with links
 # in all major packages instead
-cp $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
+printf "\nWorkaround: auto-enable Settings\n"
+cp -r $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
 
+printf "\nAdd uBlock origin\n"
 install -Dm644 "$CI_PROJECT_DIR/ublock_origin-$_ublockver-an+fx.xpi" "$EXTRACTED_TARBALL_FOLDER"/browser/extensions/uBlock0@raymondhill.net.xpi
 
 # Repacks the binary tarball
