@@ -11,8 +11,6 @@ OUTPUT_TARBALL=$CI_PROJECT_DIR/LibreWolf.${CARCH}.tar.bz2
 SOURCE_CODE_BINARY_TARBALL_LOCATION="$CI_PROJECT_DIR/src/firefox-*/obj*/dist/librewolf*.tar.bz2"
 EXTRACTED_TARBALL_FOLDER=$CI_PROJECT_DIR/librewolf_unpacked/librewolf
 
-_ublockver=1.25.2
-
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash
 
@@ -29,7 +27,7 @@ tar -xf $OUTPUT_TARBALL -C librewolf_unpacked
 printf "\nCopying librewolf settings to extracted binary tarball\n"
 cp -r $CI_PROJECT_DIR/src/settings $EXTRACTED_TARBALL_FOLDER/settings
 # no need to keep that in there
-rm -rf "${_EXTRACTED_TARBALL_FOLDER}/settings/.git";
+rm -rf "${EXTRACTED_TARBALL_FOLDER}/settings/.git";
 cp $CI_PROJECT_DIR/content/toggle-settings.sh $EXTRACTED_TARBALL_FOLDER/settings
 cp $CI_PROJECT_DIR/content/launch_librewolf.sh $EXTRACTED_TARBALL_FOLDER/launch_librewolf.sh
 
@@ -37,10 +35,7 @@ cp $CI_PROJECT_DIR/content/launch_librewolf.sh $EXTRACTED_TARBALL_FOLDER/launch_
 # until we've worked out how to use `--install-settings` with links
 # in all major packages instead
 printf "\nWorkaround: auto-enable Settings\n"
-cp -r $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
-
-printf "\nAdd uBlock origin\n"
-install -Dm644 "$CI_PROJECT_DIR/ublock_origin-$_ublockver-an+fx.xpi" "$EXTRACTED_TARBALL_FOLDER"/browser/extensions/uBlock0@raymondhill.net.xpi
+cp -r $EXTRACTED_TARBALL_FOLDER/settings/* $EXTRACTED_TARBALL_FOLDER;
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n"

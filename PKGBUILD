@@ -23,17 +23,14 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
-noextract=("ublock_origin-$ublockver-an+fx.xpi")
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
-        "git+https://gitlab.com/${pkgname}-community/settings.git"
-        "https://addons.cdn.mozilla.net/user-media/addons/607454/ublock_origin-$_ublockver-an+fx.xpi")
+        "git+https://gitlab.com/${pkgname}-community/settings.git")
 sha256sums=('74589c2836d7c30134636823c3caefbcaed0ea7c3abb2def9e3ddd9f86d9440a'
             '0471d32366c6f415f7608b438ddeb10e2f998498c389217cdd6cc52e8249996b'
             'SKIP'
-            'SKIP'
-            '997aac00064665641298047534c9392492ef09f0cbf177b6a30d4fa288081579')
+            'SKIP')
 
 if [[ $CARCH == 'aarch64' ]]; then
   source+=(arm.patch
@@ -123,6 +120,9 @@ fi
   sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
   # this one only to remove an annoying error message:
   sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
+
+  # allow SearchEngines option in non-ESR builds
+  sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
 
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./
@@ -237,7 +237,6 @@ pref("browser.shell.checkDefaultBrowser", false);
 pref("extensions.autoDisableScopes", 11);
 END
 
-  install -Dm644 "${srcdir}/ublock_origin-$ublockver-an+fx.xpi" "$pkgdir"/usr/lib/${pkgname}/browser/extensions/uBlock0@raymondhill.net.xpi
   cp -r ${srcdir}/settings/* ${pkgdir}/usr/lib/${pkgname}/
 
   local distini="$pkgdir/usr/lib/$pkgname/distribution/distribution.ini"
