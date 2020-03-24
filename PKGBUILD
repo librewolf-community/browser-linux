@@ -5,7 +5,6 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
-_ublockver=1.25.2
 pkgver=74.0
 pkgrel=3
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
