@@ -9,6 +9,16 @@ This project follows the official Firefox releases, but also uses
 
 ## [Unreleased]
 
+### Fixed
+
+- Installation of uBlock
+- Removal and addition of search engines via `policies.json`
+
+### Known Issues
+
+- Appimage and Flatpak settings loading still needs to be tested
+- Appimage and Flatpak still don't work on older distributions
+
 ## [74.0-2] - 2020-03-10
 
 ### Fixed
