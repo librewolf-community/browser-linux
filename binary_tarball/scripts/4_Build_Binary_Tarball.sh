@@ -57,12 +57,12 @@ LLVM_PROFDATA=llvm-profdata \
 
 if [[ ! -s merged.profdata ]]; then
   echo "No profile data produced."
-  return 1
+  exit 1
 fi
 
 if [[ ! -s jarlog ]]; then
   echo "No jar log produced."
-  return 1
+  exit 1
 fi
 
 echo "Removing instrumented browser..."

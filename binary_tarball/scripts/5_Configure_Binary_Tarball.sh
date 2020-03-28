@@ -1,6 +1,9 @@
 #!/bin/bash
 printf "\n\n--------------------------------- SETTINGS INTEGRATION --------------------------------------\n";
 
+# Aborts the script upon any faliure
+set -e;
+
 # Setup Script Variables
 BINARY_TARBALL=$1;
 TOGGLE_SETTINGS_SCRIPT=$2;
@@ -32,7 +35,7 @@ cp $LAUNCHER_SCRIPT $_EXTRACTED_TARBALL_FOLDER/launch_librewolf.sh;
 # until we've worked out how to use `--install-settings` with links
 # in all major packages instead
 printf "\nWorkaround: auto-enable Settings\n"
-cp $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
+cp -r $_EXTRACTED_TARBALL_FOLDER/settings/* $_EXTRACTED_TARBALL_FOLDER;
 
 # Add distribution.ini
 distini="$_EXTRACTED_TARBALL_FOLDER/distribution/distribution.ini"
