@@ -1,9 +1,4 @@
 #!/bin/bash
-"""
-
-
-"""
-
 printf "\n\n------------------------------------ APPIMAGE BUILD -----------------------------------------\n";
 
 # Aborts the script upon any faliure
@@ -21,7 +16,16 @@ _APPIMAGETOOL_FILE=$_SCRIPT_FOLDER/appimagetool;
 _APPIMAGE_CONTENT_FOLDER=$_SCRIPT_FOLDER/content
 
 # Installs needed dependencies
-apt-get update && apt-get -y install file;
+apt-get update && apt-get -y install file wget;
+
+if [[ -z "${TARBALL_URL}" ]];then
+  wget "${TARBALL_URL}"
+fi
+
+if [[ ! -f "${BINARY_TARBALL}" ]];then
+  echo "Tarball not provided via pipeline or download."
+  exit 1
+fi
 
 if [[ $CARCH == 'aarch64' ]]; then
   apt install -y zlib1g-dev

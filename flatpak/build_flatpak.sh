@@ -16,6 +16,17 @@ _FLATPAK_JSON_FILE=$_SCRIPT_FOLDER/content/io.gitlab.LibreWolf.json;
 _FLATPAK_BUILD_SOURCE_FOLDER=$_SCRIPT_FOLDER/source;
 _FLATPAK_BUILD_FOLDER=build-dir;
 
+
+if [[ -z "${TARBALL_URL}" ]];then
+  apt update && apt-install -y wget
+  wget "${TARBALL_URL}"
+fi
+
+if [[ ! -f "${BINARY_TARBALL}" ]];then
+  echo "Tarball not provided via pipeline or download."
+  exit 1
+fi
+
 # Install build dependencies
 printf "\nInstalling flatpak build dependencies\n";
 

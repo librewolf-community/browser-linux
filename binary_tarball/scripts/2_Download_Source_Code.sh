@@ -1,10 +1,12 @@
 #!/bin/bash
 printf "\n\n--------------------------------- SOURCE CODE DOWNLOAD --------------------------------------\n";
 
+if [[ -z ${pkgver} || -z ${pkgrel} ]]; then
+    echo '$pkgrel and/or $pkgver not provided'
+    exit 1
+fi
 # Setup Script Variables
 SOURCE_FOLDER=$1;
-# hardcoded vor now, we'll parse the _pkgver later on, probably from tags
-pkgver="73.0.1"
 _SOURCE_CODE_URL="https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz";
 _SOURCE_TAR="firefox-${pkgver}.tar.xz"
 

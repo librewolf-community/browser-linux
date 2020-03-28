@@ -1,7 +1,20 @@
 stages:
   - build
   - paks
-  # - deploy
+
+# variables:
+  # GENERIC: $GENERIC
+  # ARCH: $ARCH
+  # FLATPAK: $FLATPAK
+  # APPIMAGE: $FLATPAK
+  # pkgver: $PKGVER
+  # pkgrel: $PKGREL
+  # AARCH64: $AARCH64
+  # X86_64: $X86_64
+  # download tarball if none available as artifact,
+  # ie. not built in the same pipeline run
+  # TARBALL_URL: $TARBALL_URL
+  # $RELEASE, to trigger deploy, maybe?
 
 .carch_aarch64: &carch_aarch64
   variables:
@@ -11,18 +24,23 @@ stages:
   variables:
     CARCH: 'x86_64'
 
-.main_build_config: &main_build_config
+.tarball_build_config: &tarball_build_config
   stage: build
   script:
-    - ./scripts/01_arch_build.sh
-    - ./scripts/02_configure_tarball.sh
+    - ./binary_tarball/build_tarball.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2"
   artifacts:
     name: "Librewolf-${CI_COMMIT_TAG}-${CARCH}"
     paths:
-      - "librewolf*pkg.tar*"
       - "LibreWolf.${CARCH}.tar.bz2"
-  only:
-    - tags
+
+.arch_build_config: &arch_build_config
+  stage: build
+  script:
+    - ./arch/01_build.sh
+  artifacts:
+    name: "Librewolf-Arch-${CI_COMMIT_TAG}-${CARCH}"
+    paths:
+      - "librewolf*pkg.tar*"
 
 .flatpak_config: &flatpak_config
   stage: paks
@@ -31,8 +49,6 @@ stages:
     paths:
       - "LibreWolf.${CARCH}.flatpak"
       - "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo"
-  only:
-    - tags
   script:
     - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.flatpak"
 
@@ -42,56 +58,79 @@ stages:
     name: "Librewolf-${CI_COMMIT_TAG}-AppImage-${CARCH}"
     paths:
       - "LibreWolf.${CARCH}.AppImage"
-  only:
-    - tags
   script:
     - ./appimage/build_appimage.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.AppImage"
 
-build_x86_64:
+arch_x86_64:
   image: archlinux/base
   tags: [x86_64b]
   <<: *carch_x86_64
-  <<: *main_build_config
+  <<: *arch_build_config
+  only:
+    variables:
+      - $ARCH && $X86_64
 
-build_aarch64:
+arch_aarch64:
   image: registry.gitlab.com/ohfp/manjaro-arm-docker
   tags: [aarch64b]
   <<: *carch_aarch64
-  <<: *main_build_config
+  <<: *arch_build_config
+  only:
+    variables:
+      - $ARCH && $AARCH64
+
+tarball_x86_64:
+  image: ubuntu:16.04
+  tags: [x86_64b]
+  <<: *carch_x86_64
+  <<: *tarball_build_config
+  only:
+    variables:
+      - $TARBALL && $X86_64
+
+tarball_aarch64:
+  image: arm64v8/ubuntu:16.04
+  tags: [aarch64b]
+  <<: *carch_aarch64
+  <<: *tarball_build_config
+  only:
+    variables:
+      - $TARBALL && AARCH64
 
 flatpak_x86_64:
-  image: ubuntu:18.04
+  image: ubuntu:16.04
   tags: [flat_runner]
   <<: *carch_x86_64
   <<: *flatpak_config
+  only:
+    variables:
+      - $FLATPAK && $X86_64
 
 flatpak_aarch64:
-  image: arm64v8/ubuntu:18.04
+  image: arm64v8/ubuntu:16.04
   tags: [flat_runner_aarch64]
   <<: *carch_aarch64
   <<: *flatpak_config
+  only:
+    variables:
+      - $FLATPAK && $AARCH64
 
 appimage_x86_64:
-  image: ubuntu:18.04
+  image: ubuntu:16.04
   tags: [x86_64b]
   <<: *carch_x86_64
   <<: *appimage_config
+  only:
+    variables:
+      - $APPIMAGE && $X86_64
 
 appimage_aarch64:
-  image: arm64v8/ubuntu:18.04
+  image: arm64v8/ubuntu:16.04
   tags:
     - aarch64b
     - arm64  # can also be run on any other less powerful aarch64 runner
   <<: *carch_aarch64
   <<: *appimage_config
-
-# Release to Gitlab:
-  # stage: deploy
-  # image: python:latest
-  # script:
-    # - pip3 install gitlab-release
-    # - tar czf librewolf-aarch64-flatpak-repo.tar.gz librewolf-aarch64-flatpak-repo
-    # - tar czf librewolf-x86_64-flatpak-repo.tar.gz librewolf-x86_64-flatpak-repo
-    # - "gitlab-release librewolf*.pkg.tar.* LibreWolf.*.AppImage librewolf-*-flatpak-repo.tar.gz LibreWolf.*.flatpak"
-  # only:
-    # - tags
+  only:
+    variables:
+      - $APPIMAGE && $AARCH64

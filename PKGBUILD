@@ -5,8 +5,11 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
-pkgver=74.0
-pkgrel=3
+# pkgver=74.0
+# pkgrel=3
+# now provided as ci variables
+pkgver=$pkgver
+pkgrel=$pkgrel
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -94,7 +97,7 @@ mk_add_options MOZ_TELEMETRY_REPORTING=0
 END
 
 if [[ $CARCH == 'aarch64' ]]; then
-cat >>../mozconfig <<END
+  cat >>../mozconfig <<END
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
 export MOZ_DEBUG_FLAGS=" "
@@ -131,7 +134,6 @@ fi
 build() {
   cd firefox-$pkgver
 
-  export MOZ_SOURCE_REPO="$_repo"
   export MOZ_NOSPAM=1
   export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
 
@@ -159,6 +161,7 @@ ac_add_options --enable-profile-generate=cross
 END
 
 fi
+
   ./mach build
 
   echo "Profiling instrumented browser..."
@@ -221,19 +224,13 @@ package() {
 
   local vendorjs="$pkgdir/usr/lib/$pkgname/browser/defaults/preferences/vendor.js"
 
-  # move the following part to librewolf.cfg instead?
   install -Dvm644 /dev/stdin "$vendorjs" <<END
-// Use LANG environment variable to choose locale
-pref("intl.locale.requested", "");
-
 // Use system-provided dictionaries
 pref("spellchecker.dictionary_path", "/usr/share/hunspell");
 
-// Disable default browser checking.
-pref("browser.shell.checkDefaultBrowser", false);
-
 // Don't disable extensions in the application directory
-pref("extensions.autoDisableScopes", 11);
+// done in librewolf.cf
+// pref("extensions.autoDisableScopes", 11);
 END
 
   cp -r ${srcdir}/settings/* ${pkgdir}/usr/lib/${pkgname}/
@@ -243,12 +240,12 @@ END
 [Global]
 id=io.gitlab.${pkgname}
 version=1.0
-about=LibreWolf Arch Linux
+about=LibreWolf
 
 [Preferences]
-app.distributor=archlinux
+app.distributor="LibreWolf Community"
 app.distributor.channel=$pkgname
-app.partner.archlinux=archlinux
+app.partner.librewolf=$pkgname
 END
 
   for i in 16 32 48 64 128; do
