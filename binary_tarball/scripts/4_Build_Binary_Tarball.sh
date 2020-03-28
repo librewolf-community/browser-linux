@@ -24,6 +24,13 @@ export SHELL=/bin/bash;
 # Changes current folder to the source code folder
 cd $srcdir;
 
+# Runs bootstrapper to install dependencies
+printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
+./mach bootstrap --application-choice=browser --no-interactive;
+
+# deleting it earlier breaks because bootstrap seems to create a new one
+rm -f common/source_files/mozconfig
+
 # Do 3-tier PGO
 echo "Building instrumented browser..."
 
@@ -40,9 +47,6 @@ ac_add_options --enable-profile-generate=cross
 END
 
 fi
-# Runs bootstrapper to install dependencies
-printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
-./mach bootstrap --application-choice=browser --no-interactive;
 
 # Executes the actual build
 printf "\nBuilding LibreWolf\n";

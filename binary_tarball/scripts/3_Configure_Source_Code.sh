@@ -97,5 +97,3 @@ sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/Bro
 
 # allow SearchEngines option in non-ESR builds
 sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
-
-rm -f common/source_files/mozconfig
