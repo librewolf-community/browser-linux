@@ -95,7 +95,7 @@ tarball_aarch64:
   <<: *tarball_build_config
   only:
     variables:
-      - $TARBALL && AARCH64
+      - $TARBALL && $AARCH64
 
 flatpak_x86_64:
   image: ubuntu:16.04
