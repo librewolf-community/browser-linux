@@ -3,7 +3,7 @@ printf "\n\n-------------------------------------- DEPENDENCY INSTALLATION -----
 
 # Setup Script Variables
 # _DEPENDENCIES="mercurial wget git flatpak flatpak-builder";
-_DEPENDENCIES="wget git xvfb";
+_DEPENDENCIES="wget git xvfb xz";
 
 # Installs Dependencies
 printf "\nInstalling dependencies: $_DEPENDENCIES\n";
