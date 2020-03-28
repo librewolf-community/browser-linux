@@ -28,8 +28,7 @@ cd $srcdir;
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
 ./mach bootstrap --application-choice=browser --no-interactive;
 
-# deleting it earlier breaks because bootstrap seems to create a new one
-rm -f common/source_files/mozconfig
+rm -f mozconfig
 
 # Do 3-tier PGO
 echo "Building instrumented browser..."
