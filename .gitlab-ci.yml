@@ -3,7 +3,7 @@ stages:
   - paks
 
 # variables:
-  # GENERIC: $GENERIC
+# TARBALL: $TARBALL
   # ARCH: $ARCH
   # FLATPAK: $FLATPAK
   # APPIMAGE: $FLATPAK

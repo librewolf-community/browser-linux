@@ -18,7 +18,7 @@ _APPIMAGE_CONTENT_FOLDER=$_SCRIPT_FOLDER/content
 # Installs needed dependencies
 apt-get update && apt-get -y install file wget;
 
-if [[ -z "${TARBALL_URL}" ]];then
+if [[ ! -z "${TARBALL_URL}" ]];then
   wget "${TARBALL_URL}"
 fi
 

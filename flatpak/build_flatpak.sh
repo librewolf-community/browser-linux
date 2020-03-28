@@ -17,8 +17,8 @@ _FLATPAK_BUILD_SOURCE_FOLDER=$_SCRIPT_FOLDER/source;
 _FLATPAK_BUILD_FOLDER=build-dir;
 
 
-if [[ -z "${TARBALL_URL}" ]];then
-  apt update && apt-install -y wget
+if [[ ! -z "${TARBALL_URL}" ]];then
+  apt update && apt install -y wget
   wget "${TARBALL_URL}"
 fi
 
