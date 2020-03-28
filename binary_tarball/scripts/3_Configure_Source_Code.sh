@@ -2,20 +2,20 @@
 printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION ---------------------------------\n";
 
 # Setup Script Variables
-SOURCE_CODE_FOLDER=$1;
+srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
-_MOZBUILD=$SOURCE_CODE_FOLDER/../mozbuild
+_MOZBUILD=$srcdir/../mozbuild
 
 mkdir -p ${_MOZBUILD}
 
 # Copy Source Code Changes to Source Code
 printf "\nCopying branding and source code changes to firefox source code\n";
 git clone $_COMMON_REPO common;
-cp -r common/source_files/* $SOURCE_CODE_FOLDER/;
+cp -r common/source_files/* $srcdir/;
 rm -rf common;
 
-cd $SOURCE_CODE_FOLDER
+cd $srcdir
 
 cat >../mozconfig <<END
 ac_add_options --enable-application=browser

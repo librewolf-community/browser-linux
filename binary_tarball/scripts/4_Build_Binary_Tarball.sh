@@ -2,7 +2,7 @@
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
 # Setup Script Variables
-SOURCE_FOLDER=$1;
+srcdir=$1;
 OUTPUT_TARBALL=$2;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
@@ -22,7 +22,7 @@ CXXFLAGS="${CXXFLAGS/-fno-plt/}"
 export SHELL=/bin/bash;
 
 # Changes current folder to the source code folder
-cd $SOURCE_FOLDER;
+cd $srcdir;
 
 # Do 3-tier PGO
 echo "Building instrumented browser..."
@@ -110,5 +110,5 @@ mv $_SOURCE_CODE_BINARY_TARBALL_LOCATION $OUTPUT_TARBALL;
 
 # Deletes the source code
 printf "\nDeleting source code\n";
-rm -rf $SOURCE_FOLDER;
+rm -rf $srcdir;
 
