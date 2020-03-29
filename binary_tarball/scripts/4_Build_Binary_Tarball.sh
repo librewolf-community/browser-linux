@@ -75,8 +75,8 @@ echo "Building instrumented browser..."
 # fi
 
 # Executes the actual build
-printf "\nBuilding LibreWolf\n";
-./mach build;
+# printf "\nBuilding LibreWolf\n";
+# ./mach build;
 
 # echo "Profiling instrumented browser..."
 # ./mach package
