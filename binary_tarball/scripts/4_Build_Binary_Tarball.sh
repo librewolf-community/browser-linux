@@ -6,9 +6,18 @@ srcdir=$1;
 OUTPUT_TARBALL=$2;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
+_MOZBUILD=$srcdir/../mozbuild
+
+export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+export CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
 
 export MOZ_NOSPAM=1
 export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
+
+if [[ $CARCH == 'aarch64' ]]; then
+  LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+fi
 
 # LTO needs more open files
 ulimit -n 4096
@@ -35,13 +44,13 @@ echo "Building instrumented browser..."
 
 if [[ $CARCH == 'aarch64' ]]; then
 
-cat >.mozconfig ../mozconfig - <<END
+cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
 ac_add_options --enable-profile-generate
 END
 
 else
 
-cat >.mozconfig ../mozconfig - <<END
+cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
 ac_add_options --enable-profile-generate=cross
 END
 
@@ -75,7 +84,7 @@ echo "Building optimized browser..."
 
 if [[ $CARCH == 'aarch64' ]]; then
 
-cat >.mozconfig ../mozconfig - <<END
+cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
 ac_add_options --enable-lto
 ac_add_options --enable-profile-use
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
@@ -86,7 +95,7 @@ END
 
 else
 
-cat >.mozconfig ../mozconfig - <<END
+cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
 ac_add_options --enable-lto=cross
 ac_add_options --enable-profile-use=cross
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata

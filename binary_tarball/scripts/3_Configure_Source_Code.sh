@@ -17,7 +17,7 @@ rm -rf common;
 
 cd $srcdir
 
-cat >../mozconfig <<END
+cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
 
 # This supposedly speeds up compilation (We test through dogfooding anyway)
@@ -69,7 +69,7 @@ mk_add_options MOZ_TELEMETRY_REPORTING=0
 END
 
 if [[ $CARCH == 'aarch64' ]]; then
-    cat >>../mozconfig <<END
+    cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
 export MOZ_DEBUG_FLAGS=" "
