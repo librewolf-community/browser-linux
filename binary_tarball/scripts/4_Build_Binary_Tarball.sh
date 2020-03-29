@@ -34,11 +34,6 @@ fi
 # LTO needs more open files
 ulimit -n 4096
 
-# -fno-plt with cross-LTO causes obscure LLVM errors
-# LLVM ERROR: Function Import: link error
-CFLAGS="${CFLAGS/-fno-plt/}"
-CXXFLAGS="${CXXFLAGS/-fno-plt/}"
-
 # Prevents build from breaking in CI/CD environments
 export SHELL=/bin/bash;
 
@@ -69,7 +64,12 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-ac_add_options --enable-profile-generate=cross
+# -fno-plt with cross-LTO causes obscure LLVM errors
+# LLVM ERROR: Function Import: link error
+# CFLAGS="${CFLAGS/-fno-plt/}"
+# CXXFLAGS="${CXXFLAGS/-fno-plt/}"
+
+ac_add_options --enable-profile-generate
 END
 
 fi
@@ -114,8 +114,8 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-ac_add_options --enable-lto=cross
-ac_add_options --enable-profile-use=cross
+ac_add_options --enable-lto
+ac_add_options --enable-profile-use
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
 ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
 ac_add_options --enable-linker=gold
