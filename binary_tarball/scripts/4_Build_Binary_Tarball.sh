@@ -53,7 +53,7 @@ cargo install cbindgen
 rm -f mozconfig
 
 # Do 3-tier PGO
-echo "Building instrumented browser..."
+# echo "Building instrumented browser..."
 
 # if [[ $CARCH == 'aarch64' ]]; then
 #
@@ -114,10 +114,6 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-# ac_add_options --enable-lto
-# ac_add_options --enable-profile-use
-# ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
-# ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
 ac_add_options --enable-linker=gold
 END
 
