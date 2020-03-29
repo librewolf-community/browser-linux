@@ -55,50 +55,50 @@ rm -f mozconfig
 # Do 3-tier PGO
 echo "Building instrumented browser..."
 
-if [[ $CARCH == 'aarch64' ]]; then
+# if [[ $CARCH == 'aarch64' ]]; then
+#
+# cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
+# ac_add_options --enable-profile-generate
+# END
+#
+# else
+#
+# cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
+# # -fno-plt with cross-LTO causes obscure LLVM errors
+# # LLVM ERROR: Function Import: link error
+# # CFLAGS="${CFLAGS/-fno-plt/}"
+# # CXXFLAGS="${CXXFLAGS/-fno-plt/}"
+#
+# ac_add_options --enable-profile-generate
+# END
 
-cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-ac_add_options --enable-profile-generate
-END
-
-else
-
-cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-# -fno-plt with cross-LTO causes obscure LLVM errors
-# LLVM ERROR: Function Import: link error
-# CFLAGS="${CFLAGS/-fno-plt/}"
-# CXXFLAGS="${CXXFLAGS/-fno-plt/}"
-
-ac_add_options --enable-profile-generate
-END
-
-fi
+# fi
 
 # Executes the actual build
 printf "\nBuilding LibreWolf\n";
 ./mach build;
 
-echo "Profiling instrumented browser..."
-./mach package
-LLVM_PROFDATA=llvm-profdata \
-  JARLOG_FILE="$PWD/jarlog" \
-  xvfb-run -s "-screen 0 1920x1080x24 -nolisten local" \
-  ./mach python build/pgo/profileserver.py
-
-if [[ ! -s merged.profdata ]]; then
-  echo "No profile data produced."
-  exit 1
-fi
-
-if [[ ! -s jarlog ]]; then
-  echo "No jar log produced."
-  exit 1
-fi
-
-echo "Removing instrumented browser..."
-./mach clobber
-
-echo "Building optimized browser..."
+# echo "Profiling instrumented browser..."
+# ./mach package
+# LLVM_PROFDATA=llvm-profdata \
+  # JARLOG_FILE="$PWD/jarlog" \
+  # xvfb-run -s "-screen 0 1920x1080x24 -nolisten local" \
+  # ./mach python build/pgo/profileserver.py
+#
+# if [[ ! -s merged.profdata ]]; then
+  # echo "No profile data produced."
+  # exit 1
+# fi
+#
+# if [[ ! -s jarlog ]]; then
+  # echo "No jar log produced."
+  # exit 1
+# fi
+#
+# echo "Removing instrumented browser..."
+# ./mach clobber
+#
+# echo "Building optimized browser..."
 
 if [[ $CARCH == 'aarch64' ]]; then
 
@@ -114,10 +114,10 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-ac_add_options --enable-lto
-ac_add_options --enable-profile-use
-ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
-ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
+# ac_add_options --enable-lto
+# ac_add_options --enable-profile-use
+# ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
+# ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
 ac_add_options --enable-linker=gold
 END
 
