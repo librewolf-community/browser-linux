@@ -21,8 +21,11 @@ cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
 
 # to build on ubuntu and pick up clang
-ac_add_options --with-libclang-path="/usr/lib/llvm-9/lib"
-ac_add_options --with-clang-path="/usr/bin/clang-9"
+#ac_add_options --with-libclang-path="/usr/lib/llvm-9/lib"
+#ac_add_options --with-clang-path="/usr/bin/clang-9"
+ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
+ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
+ac_add_options --disable-install-strip
 
 # let's see if this works: make things backwards-compatible as much as possible
 # TODO: check if this would also work when building on something newer to have it run on
@@ -88,8 +91,8 @@ export CXXFLAGS+=" -g0"
 export RUSTFLAGS="-Cdebuginfo=0"
 
 # from ALARM
-# See https://bugzilla.mozilla.org/show_bug.cgi?id=1430094
-ac_add_options --disable-webrtc
+# should only fail on armv7x
+# ac_add_options --disable-webrtc
 
 END
 
@@ -97,8 +100,20 @@ END
   patch -p1 -i ${$CI_PROJECT_DIR}/arm.patch
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${$CI_PROJECT_DIR}/build-arm-libopus.patch
   patch -p1 -i ${$CI_PROJECT_DIR}/build-arm-libopus.patch
+  # might not even be needed for aarch64?
+  patch -p1 -i ${$CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
+  patch -p1 -i ${$CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch
+
+else
+    cat >>${CI_PROJECT_DIR}/mozconfig <<END
+ac_add_options --disable-elf-hack
+END
 
 fi
+
+# hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
+patch -p1 -i "${$CI_PROJECT_DIR}/deb_patches/drop-check-glibc-symbols.patch"
+patch -p1 -i "${$CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";

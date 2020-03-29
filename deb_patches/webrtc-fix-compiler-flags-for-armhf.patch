@@ -1,0 +1,35 @@
+# Description: Don't pass -mfloat-abi=softfp on armhf
+# Author: Chris Coulson <chris.coulson@canonical.com>
+# Forwarded: no
+
+--- a/build/gyp.mozbuild
++++ b/build/gyp.mozbuild
+@@ -107,9 +107,15 @@ if CONFIG['ARM_ARCH']:
+         gyp_vars['arm_neon'] = 1
+         gyp_vars['build_with_neon'] = 1
+     else:
+-        # CPU detection for ARM works on Android only.  armv7 always uses CPU
+-        # detection, so we have to set armv7=0 for non-Android target
+-        gyp_vars['armv7'] = 0
++        gyp_vars['armv7'] = 1
++        # We enable NEON for Ubuntu armhf. Note that these don't really
++        # have any effect here as NEON is hardcoded on in
++        # media/webrtc/trunk/webrtc/build/common.gypi. Disabling these
++        # without fixing that file will result in a link failure, as
++        # targets hidden behind the build_with_neon flag don't get
++        # built but WEBRTC_HAS_NEON is still defined
++        gyp_vars['arm_neon'] = 1
++        gyp_vars['build_with_neon'] = 1
+     # For libyuv
+     gyp_vars['arm_version'] = int(CONFIG['ARM_ARCH'])
+ 
+--- a/media/webrtc/trunk/webrtc/build/config/compiler/BUILD.gn
++++ b/media/webrtc/trunk/webrtc/build/config/compiler/BUILD.gn
+@@ -590,7 +590,6 @@ config("compiler_cpu_abi") {
+       if (!is_nacl) {
+         cflags += [
+           "-march=$arm_arch",
+-          "-mfloat-abi=$arm_float_abi",
+         ]
+       }
+       if (arm_tune != "") {

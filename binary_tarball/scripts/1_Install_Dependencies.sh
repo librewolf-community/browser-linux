@@ -5,7 +5,43 @@ set -e
 
 # Setup Script Variables
 # _DEPENDENCIES="mercurial wget git flatpak flatpak-builder";
-_DEPENDENCIES="wget git xvfb build-essential xz-utils curl python3 libjack-dev nasm-mozilla libstdc++6";
+_DEPENDENCIES="wget git xvfb \
+ xz-utils \
+ curl python3 libjack-dev \
+        autotools-dev \
+        autoconf2.13 \
+        zip \
+        libx11-dev \
+        libx11-xcb-dev \
+        libxt-dev \
+        libxext-dev \
+        libgtk2.0-dev  \
+        libgtk-3-dev  \
+        libglib2.0-dev  \
+        libpango1.0-dev  \
+        libfontconfig1-dev \
+        libfreetype6-dev  \
+        libstartup-notification0-dev \
+        libasound2-dev \
+        libcurl4-openssl-dev \
+        libdbus-glib-1-dev \
+        hardening-wrapper \
+        lsb-release \
+        libiw-dev \
+        mesa-common-dev \
+        libnotify-dev \
+        libxrender-dev \
+        libpulse-dev \
+        yasm \
+        unzip \
+        dbus-x11 \
+        python \
+        cargo \
+        rustc \
+        nodejs-mozilla \
+        nasm-mozilla \
+        gcc-mozilla"
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Installs Dependencies
@@ -20,6 +56,7 @@ wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
 apt-get update
 apt-get -y install clang-9 libclang-9-dev
 
-# Installs (non-ancient) clang
-curl -sL https://deb.nodesource.com/setup_13.x | bash -
-apt-get install -y nodejs
+# Installs (non-ancient) nodejs
+# => use nodejs-mozilla instead
+# curl -sL https://deb.nodesource.com/setup_13.x | bash -
+# apt-get install -y nodejs

@@ -1,0 +1,36 @@
+Description: point clang to the toolchain provided by the gcc-mozilla package (version 7 required for C++ 17), and statically link against libstdc++
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+Bug-Ubuntu: https://launchpad.net/bugs/1856861
+
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -1387,6 +1387,9 @@ set_config('_DEPEND_CFLAGS', depend_cfla
+ set_config('_HOST_DEPEND_CFLAGS', depend_cflags(host_c_compiler))
+ 
+ 
++add_old_configure_assignment('CXXFLAGS', ['--gcc-toolchain=/usr/lib/gcc-mozilla'])
++
++
+ @depends(c_compiler)
+ def preprocess_option(compiler):
+     # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
+@@ -2074,7 +2074,7 @@
+             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
+         else:
+             flags.append('-Wl,--sysroot=%s' % macos_sdk)
+-
++    flags.append('-static-libstdc++')
+     return flags
+ 
+ 
+--- a/servo/components/style/build_gecko.rs
++++ b/servo/components/style/build_gecko.rs
+@@ -148,6 +148,8 @@ impl BuilderExt for Builder {
+             builder = builder.with_rustfmt(path);
+         }
+ 
++        builder = builder.clang_arg("--gcc-toolchain=/usr/lib/gcc-mozilla");
++
+         for dir in SEARCH_PATHS.iter() {
+             builder = builder.clang_arg("-I").clang_arg(dir.to_str().unwrap());
+         }
