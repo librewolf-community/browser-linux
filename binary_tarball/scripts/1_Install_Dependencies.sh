@@ -5,7 +5,7 @@ set -e
 
 # Setup Script Variables
 # _DEPENDENCIES="mercurial wget git flatpak flatpak-builder";
-_DEPENDENCIES="wget git xvfb build-essential xz-utils curl python3";
+_DEPENDENCIES="wget git xvfb build-essential xz-utils curl python3 jackd";
 
 # Installs Dependencies
 printf "\nInstalling dependencies: $_DEPENDENCIES\n";
