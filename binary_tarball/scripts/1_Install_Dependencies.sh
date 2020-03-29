@@ -5,7 +5,7 @@ set -e
 
 # Setup Script Variables
 # _DEPENDENCIES="mercurial wget git flatpak flatpak-builder";
-_DEPENDENCIES="wget git xvfb build-essential xz-utils curl python3 libjack-dev";
+_DEPENDENCIES="wget git xvfb build-essential xz-utils curl python3 libjack-dev nasm-mozilla";
 export DEBIAN_FRONTEND=noninteractive
 
 # Installs Dependencies
