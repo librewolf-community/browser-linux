@@ -13,8 +13,8 @@ DEBIAN_FRONTEND=noninteractive apt-get -qq update;
 DEBIAN_FRONTEND=noninteractive apt-get -y -qq install $_DEPENDENCIES;
 
 # Installs (non-ancient) clang
-# DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common apt-transport-https ca-certificates
-# apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main"
-# DEBIAN_FRONTEND=noninteractive wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
-# DEBIAN_FRONTEND=noninteractive apt-get update
-# DEBIAN_FRONTEND=noninteractive apt-get -y install clang-9
+DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common apt-transport-https ca-certificates
+apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main"
+DEBIAN_FRONTEND=noninteractive wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
+DEBIAN_FRONTEND=noninteractive apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get -y install clang-9
