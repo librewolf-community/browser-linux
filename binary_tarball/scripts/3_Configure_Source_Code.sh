@@ -24,12 +24,16 @@ ac_add_options --enable-application=browser
 ac_add_options --with-libclang-path="/usr/lib/llvm-9/lib"
 ac_add_options --with-clang-path="/usr/bin/clang-9"
 
+# let's see if this works: make things backwards-compatible as much as possible
+# TODO: check if this would also work when building on something newer to have it run on
+# 16.04/xenial later on as well?
+ac_add_options --enable-stdcxx-compat
+
 # This supposedly speeds up compilation (We test through dogfooding anyway)
 ac_add_options --disable-tests
 ac_add_options --disable-debug
 
-# might cause issues for appimage/flatpak, so keep it unset
-# ac_add_options --prefix=/usr
+ac_add_options --prefix=/usr
 ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-rust-simd
@@ -84,6 +88,7 @@ export CXXFLAGS+=" -g0"
 export RUSTFLAGS="-Cdebuginfo=0"
 
 # from ALARM
+# See https://bugzilla.mozilla.org/show_bug.cgi?id=1430094
 ac_add_options --disable-webrtc
 
 END
