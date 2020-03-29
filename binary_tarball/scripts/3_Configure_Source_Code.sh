@@ -20,6 +20,10 @@ cd $srcdir
 cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
 
+# to build on ubuntu and pick up clang
+ac_add_options --with-libclang-path="/usr/lib/${CARCH}-linux-gnu/"
+ac_add_options --with-clang-path="/usr/bin/clang-9"
+
 # This supposedly speeds up compilation (We test through dogfooding anyway)
 ac_add_options --disable-tests
 ac_add_options --disable-debug
