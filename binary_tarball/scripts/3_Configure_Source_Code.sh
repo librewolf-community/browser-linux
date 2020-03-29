@@ -20,10 +20,6 @@ cd $srcdir
 cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
 
-# to build on ubuntu and pick up clang
-ac_add_options --with-libclang-path="/usr/lib/${CARCH}-linux-gnu/"
-ac_add_options --with-clang-path="/usr/bin/clang-9"
-
 # This supposedly speeds up compilation (We test through dogfooding anyway)
 ac_add_options --disable-tests
 ac_add_options --disable-debug
@@ -33,11 +29,13 @@ ac_add_options --disable-debug
 ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-rust-simd
-export CC='clang-9'
-export CXX='clang++-9'
-export AR=llvm-ar-9
-export NM=llvm-nm-9
-export RANLIB=llvm-ranlib-9
+
+# let mach bootstrap do its thing instead
+# export CC='clang-9'
+# export CXX='clang++-9'
+# export AR=llvm-ar-9
+# export NM=llvm-nm-9
+# export RANLIB=llvm-ranlib-9
 
 # Branding
 ac_add_options --enable-update-channel=release
