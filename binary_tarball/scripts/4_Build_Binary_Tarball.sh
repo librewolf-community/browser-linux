@@ -1,8 +1,6 @@
 #!/bin/bash
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
-set -e
-
 # Setup Script Variables
 srcdir=$1;
 OUTPUT_TARBALL=$2;
@@ -48,7 +46,7 @@ cd $srcdir;
 
 # Runs bootstrapper to install dependencies
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
-./mach bootstrap --application-choice=browser --no-interactive;
+./mach bootstrap --application-choice=browser --no-interactive
 
 # add cargo binary to path
 source /root/.cargo/env
