@@ -46,6 +46,8 @@ cd $srcdir;
 
 # ./mach configure
 
+rm -f mozconfig
+
 # add cargo binary to path
 # source /root/.cargo/env
 
