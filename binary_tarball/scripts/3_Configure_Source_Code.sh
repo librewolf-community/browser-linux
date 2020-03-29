@@ -97,12 +97,12 @@ export RUSTFLAGS="-Cdebuginfo=0"
 END
 
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-  patch -p1 -i ${$CI_PROJECT_DIR}/arm.patch
+  patch -p1 -i ${CI_PROJECT_DIR}/arm.patch
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${$CI_PROJECT_DIR}/build-arm-libopus.patch
-  patch -p1 -i ${$CI_PROJECT_DIR}/build-arm-libopus.patch
+  patch -p1 -i ${CI_PROJECT_DIR}/build-arm-libopus.patch
   # might not even be needed for aarch64?
-  patch -p1 -i ${$CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
-  patch -p1 -i ${$CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch
+  patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
+  patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch
 
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
@@ -112,8 +112,8 @@ END
 fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
-patch -p1 -i "${$CI_PROJECT_DIR}/deb_patches/drop-check-glibc-symbols.patch"
-patch -p1 -i "${$CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-check-glibc-symbols.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
