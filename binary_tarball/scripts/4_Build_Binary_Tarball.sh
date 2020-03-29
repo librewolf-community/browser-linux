@@ -51,9 +51,8 @@ printf "\nRunning bootstrapper to install build dependencies (using ./mach scrip
 # add cargo binary to path
 source /root/.cargo/env
 
-# Runs bootstrapper agin to install dependencies (like cbindgen)
-printf "\nRunning bootstrapper to install remaining build dependencies (using ./mach script within source code)\n";
-./mach bootstrap --application-choice=browser --no-interactive
+# install cbindgen
+cargo install cbindgen
 
 rm -f mozconfig
 
