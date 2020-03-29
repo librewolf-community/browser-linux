@@ -42,17 +42,17 @@ export RANLIB=llvm-ranlib-9
 
 # Branding
 ac_add_options --enable-update-channel=release
-ac_add_options --with-app-name=${pkgname}
-ac_add_options --with-app-basename=${_pkgname}
-ac_add_options --with-branding=browser/branding/${pkgname}
-ac_add_options --with-distribution-id=io.gitlab.${pkgname}
+ac_add_options --with-app-name=librewolf
+ac_add_options --with-app-basename=LibreWolf
+ac_add_options --with-branding=browser/branding/librewolf
+ac_add_options --with-distribution-id=io.gitlab.librewolf
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
 export MOZ_REQUIRE_SIGNING=0
 
 # System libraries
-ac_add_options --with-system-nspr
-ac_add_options --with-system-nss
+# ac_add_options --with-system-nspr
+# ac_add_options --with-system-nss
 
 # Features
 ac_add_options --enable-alsa
