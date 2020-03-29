@@ -24,15 +24,16 @@ ac_add_options --enable-application=browser
 ac_add_options --disable-tests
 ac_add_options --disable-debug
 
-ac_add_options --prefix=/usr
+# might cause issues for appimage/flatpak, so keep it unset
+# ac_add_options --prefix=/usr
 ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-rust-simd
-export CC='clang'
-export CXX='clang++'
-export AR=llvm-ar
-export NM=llvm-nm
-export RANLIB=llvm-ranlib
+export CC='clang-9'
+export CXX='clang++-9'
+export AR=llvm-ar-9
+export NM=llvm-nm-9
+export RANLIB=llvm-ranlib-9
 
 # Branding
 ac_add_options --enable-update-channel=release

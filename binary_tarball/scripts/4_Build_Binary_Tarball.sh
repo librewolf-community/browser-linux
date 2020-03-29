@@ -1,6 +1,8 @@
 #!/bin/bash
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
+set -e
+
 # Setup Script Variables
 srcdir=$1;
 OUTPUT_TARBALL=$2;
@@ -8,12 +10,23 @@ CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
 _MOZBUILD=$srcdir/../mozbuild
 
-export CPPFLAGS="-D_FORTIFY_SOURCE=2"
-export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
-export CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+# we do change / unset some of them later, but setting them as set by Arch
+# might make it easier to maintain changes in build scripts on both sides
+
+if [[ $CARCH == 'aarch64' ]]; then
+  export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+  export CFLAGS="-march=armv8-a -O2 -pipe -fstack-protector-strong -fno-plt"
+  export CXXFLAGS="-march=armv8-a -O2 -pipe -fstack-protector-strong -fno-plt"
+  export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
+else
+  export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+  export CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+  export CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt"
+  export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
+fi
 
 export MOZ_NOSPAM=1
-export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
+export MOZBUILD_STATE_PATH="${_MOZBUILD}"
 
 if [[ $CARCH == 'aarch64' ]]; then
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
@@ -36,6 +49,9 @@ cd $srcdir;
 # Runs bootstrapper to install dependencies
 printf "\nRunning bootstrapper to install build dependencies (using ./mach script within source code)\n";
 ./mach bootstrap --application-choice=browser --no-interactive;
+
+# add cargo binary to path
+source /root/.cargo/env
 
 rm -f mozconfig
 
