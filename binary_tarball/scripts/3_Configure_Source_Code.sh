@@ -105,6 +105,7 @@ END
 
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
+# ubuntu seems to recommend this
 ac_add_options --disable-elf-hack
 END
 

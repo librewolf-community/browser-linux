@@ -69,6 +69,7 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
+# seems to mess with the libstdc++-static patch
 # ac_add_options --enable-linker=gold
 END
 

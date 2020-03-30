@@ -36,9 +36,13 @@ sha256sums=('74589c2836d7c30134636823c3caefbcaed0ea7c3abb2def9e3ddd9f86d9440a'
 
 if [[ $CARCH == 'aarch64' ]]; then
   source+=(arm.patch
-           https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch)
+           https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch
+           https://gitlab.com/librewolf-community/browser/linux/-/raw/master/deb_patches/fix-armhf-webrtc-build.patch
+           https://gitlab.com/librewolf-community/browser/linux/-/raw/master/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch)
   sha256sums+=('6ca87d2ac7dc48e6f595ca49ac8151936afced30d268a831c6a064b52037f6b7'
-               '2d4d91f7e35d0860225084e37ec320ca6cae669f6c9c8fe7735cdbd542e3a7c9')
+               '2d4d91f7e35d0860225084e37ec320ca6cae669f6c9c8fe7735cdbd542e3a7c9'
+               '035c209c1a03d1ddd99016d2b5b6df035e3cd7ddfe78851f7376628aa1d8188a'
+               '3d8f6aa6d6602c765c640d9934c42bf627f9a77835908429c37cdcef4171d300')
 fi
 
 prepare() {
@@ -106,7 +110,7 @@ export CXXFLAGS+=" -g0"
 export RUSTFLAGS="-Cdebuginfo=0"
 
 # from ALARM
-ac_add_options --disable-webrtc
+# ac_add_options --disable-webrtc
 
 END
 
@@ -115,6 +119,9 @@ END
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
   patch -p1 -i ../arm.patch
   patch -p1 -i ../build-arm-libopus.patch
+  # do we need those for aarch64 as well?
+  patch -p1 -i ../fix-armhf-webrtc-build.patch
+  patch -p1 -i ../webrtc-fix-compiler-flags-for-armhf.patch
 
 fi
 
