@@ -25,7 +25,6 @@ ac_add_options --enable-application=browser
 #ac_add_options --with-clang-path="/usr/bin/clang-9"
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
 ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
-ac_add_options --disable-install-strip
 
 # let's see if this works: make things backwards-compatible as much as possible
 # TODO: check if this would also work when building on something newer to have it run on

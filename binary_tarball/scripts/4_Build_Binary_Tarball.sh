@@ -7,7 +7,7 @@ OUTPUT_TARBALL=$2;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
 _MOZBUILD=$srcdir/../mozbuild
-export PATH=/usr/lib/nasm-mozilla/bin:$PATH
+# export PATH=/usr/lib/nasm-mozilla/bin:$PATH
 
 # we do change / unset some of them later, but setting them as set by Arch
 # might make it easier to maintain changes in build scripts on both sides
@@ -87,4 +87,3 @@ mv $_SOURCE_CODE_BINARY_TARBALL_LOCATION $OUTPUT_TARBALL;
 # Deletes the source code
 printf "\nDeleting source code\n";
 rm -rf $srcdir;
-
