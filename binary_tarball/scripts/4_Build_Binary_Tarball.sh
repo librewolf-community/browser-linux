@@ -64,7 +64,7 @@ END
 else
 
 cat >.mozconfig ${CI_PROJECT_DIR}/mozconfig - <<END
-ac_add_options --enable-linker=gold
+# ac_add_options --enable-linker=gold
 END
 
 fi
