@@ -5,7 +5,7 @@
     "sdk": "org.gnome.Sdk",
     "command": "librewolf",
     "modules": [
-        "flatpak/shared-modules/gtk2/gtk2.json",
+        "flatpak/content/shared-modules/gtk2/gtk2.json",
         {
             "name": "librewolf",
             "buildsystem": "simple",
