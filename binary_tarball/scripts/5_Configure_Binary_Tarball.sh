@@ -9,18 +9,13 @@ BINARY_TARBALL=$1;
 TOGGLE_SETTINGS_SCRIPT=$2;
 LAUNCHER_SCRIPT=$3;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
-OUTPUT_TARBALL=$CI_PROJECT_DIR/LibreWolf.${CARCH}.tar.bz2
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _EXTRACTED_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf;
 _SETTINGS_REPO='https://gitlab.com/librewolf-community/settings.git';
 
-# Moves the packaged tarball to the specified location
-printf "\nMoving Binary Tarball to output location\n"
-mv $BINARY_TARBALL $OUTPUT_TARBALL
-
 # Extracts the binary tarball
 printf "\nExtracting librewolf binary tarball\n";
-tar -xf $OUTPUT_TARBALL -C $_EXTRACTED_TARBALL_FOLDER/..;
+tar -xf $BINARY_TARBALL -C $_EXTRACTED_TARBALL_FOLDER/..;
 
 # Adds the librefox config files to the packaged tarball
 printf "\nCopying librewolf settings to extracted binary tarball\n";
@@ -54,4 +49,4 @@ END
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
-tar -jvcf $OUTPUT_TARBALL -C $_EXTRACTED_TARBALL_FOLDER .;
+tar -jvcf $BINARY_TARBALL -C $_EXTRACTED_TARBALL_FOLDER .;
