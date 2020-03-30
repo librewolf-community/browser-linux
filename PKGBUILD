@@ -5,11 +5,9 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
-# pkgver=74.0
-# pkgrel=3
-# now provided as ci variables
-pkgver=$pkgver
-pkgrel=$pkgrel
+# how to get ci vars instead?
+pkgver=74.0
+pkgrel=3
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
