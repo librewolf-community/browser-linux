@@ -60,7 +60,8 @@ flatpak build-bundle $FLATPAK_REPO $FLATPAK_BUNDLE io.gitlab.LibreWolf master;
 printf "\nCleaning up flatpak related files\n";
 rm -rf $_FLATPAK_BUILD_FOLDER;
 rm -rf $_FLATPAK_BUILD_SOURCE_FOLDER;
-rm -rf ./.flatpak-builder;
+# keep it cached
+# rm -rf ./.flatpak-builder;
 
 # Delete the extracted binary tarball folder
 printf "\nDeleting extracted binary tarball folder\n";
