@@ -102,6 +102,10 @@ tarball_aarch64:
 flatpak_x86_64:
   image: ubuntu:16.04
   tags: [flat_runner]
+  cache:
+    paths:
+      - .flatpak-builder
+    key: flatpak_x86_64
   <<: *carch_x86_64
   <<: *flatpak_config
   only:
@@ -111,6 +115,10 @@ flatpak_x86_64:
 flatpak_aarch64:
   image: arm64v8/ubuntu:16.04
   tags: [flat_runner_aarch64]
+  cache:
+    paths:
+      - .flatpak-builder
+    key: flatpak_aarch64
   <<: *carch_aarch64
   <<: *flatpak_config
   only:
