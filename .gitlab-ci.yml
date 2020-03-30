@@ -47,10 +47,10 @@ stages:
   artifacts:
     name: "Librewolf-${pkgver}-${pkgrel}-Flatpak-${CARCH}"
     paths:
-      - "LibreWolf-${pkgver}-${pkgrel}-${CARCH}.flatpak"
-      - "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}-${CARCH}-flatpak-repo"
+      - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.flatpak"
+      - "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}.${CARCH}.flatpak-repo"
   script:
-    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}-${CARCH}-flatpak-repo" "LibreWolf-${pkgver}-${pkgrel}-${CARCH}.flatpak"
+    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}.${CARCH}.flatpak-repo" "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.flatpak"
 
 .appimage_config: &appimage_config
   stage: paks
