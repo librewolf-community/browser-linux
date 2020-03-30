@@ -7,7 +7,11 @@ OUTPUT_TARBALL=$2;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="./obj*/dist/librewolf*.tar.bz2";
 _MOZBUILD=$srcdir/../mozbuild
-DEB_BUILD_HARDENING=1
+export DEB_BUILD_HARDENING=1
+export DEB_BUILD_HARDENING_STACKPROTECTOR=1
+export DEB_BUILD_HARDENING_FORTIFY=1
+export DEB_BUILD_HARDENING_FORMAT=1
+export DEB_BUILD_HARDENING_PIE=1
 # export PATH=/usr/lib/nasm-mozilla/bin:$PATH
 
 # we do change / unset some of them later, but setting them as set by Arch
