@@ -5,6 +5,7 @@
     "sdk": "org.gnome.Sdk",
     "command": "librewolf",
     "modules": [
+        "shared-modules/gtk2/gtk2.json",
         {
             "name": "librewolf",
             "buildsystem": "simple",
@@ -23,6 +24,16 @@
     "finish-args": [
         "--share=ipc",
         "--socket=x11",
+        "--socket=pulseaudio",
+        "--persist=.librewolf",
+        "--filesystem=xdg-download:rw",
+        "--device=all",
+        "--talk-name=org.freedesktop.FileManager1",
+        "--system-talk-name=org.freedesktop.NetworkManager",
+        "--talk-name=org.a11y.Bus",
+        "--talk-name=org.gnome.SessionManager",
+        "--talk-name=org.freedesktop.ScreenSaver",
+        "--talk-name=\"org.gtk.vfs.*\"",
         "--socket=wayland",
         "--filesystem=home:rw",
         "--share=network"
