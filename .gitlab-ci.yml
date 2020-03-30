@@ -27,39 +27,39 @@ stages:
 .tarball_build_config: &tarball_build_config
   stage: build
   script:
-    - ./binary_tarball/build_tarball.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2"
+    - ./binary_tarball/build_tarball.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
   artifacts:
-    name: "Librewolf-${CI_COMMIT_TAG}-${CARCH}"
+    name: "Librewolf-Tarball-${pkgver}-${pkgrel}-${CARCH}"
     paths:
-      - "LibreWolf.${CARCH}.tar.bz2"
+      - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
 
 .arch_build_config: &arch_build_config
   stage: build
   script:
     - ./arch/01_build.sh
   artifacts:
-    name: "Librewolf-Arch-${CI_COMMIT_TAG}-${CARCH}"
+    name: "Librewolf-Arch-${pkgver}-${pkgrel}-${CARCH}"
     paths:
-      - "librewolf*pkg.tar*"
+      - "librewolf-${pkgver}-${pkgrel}-${CARCH}.pkg.tar*"
 
 .flatpak_config: &flatpak_config
   stage: paks
   artifacts:
-    name: "Librewolf-${CI_COMMIT_TAG}-Flatpak-${CARCH}"
+    name: "Librewolf-${pkgver}-${pkgrel}-Flatpak-${CARCH}"
     paths:
-      - "LibreWolf.${CARCH}.flatpak"
-      - "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo"
+      - "LibreWolf-${pkgver}-${pkgrel}-${CARCH}.flatpak"
+      - "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}-${CARCH}-flatpak-repo"
   script:
-    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${CARCH}-flatpak-repo" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.flatpak"
+    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}-${CARCH}-flatpak-repo" "LibreWolf-${pkgver}-${pkgrel}-${CARCH}.flatpak"
 
 .appimage_config: &appimage_config
   stage: paks
   artifacts:
-    name: "Librewolf-${CI_COMMIT_TAG}-AppImage-${CARCH}"
+    name: "Librewolf-${pkgver}-${pkgrel}-AppImage-${CARCH}"
     paths:
-      - "LibreWolf.${CARCH}.AppImage"
+      - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.AppImage"
   script:
-    - ./appimage/build_appimage.sh "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/LibreWolf.${CARCH}.AppImage"
+    - ./appimage/build_appimage.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.AppImage"
 
 arch_x86_64:
   image: archlinux/base

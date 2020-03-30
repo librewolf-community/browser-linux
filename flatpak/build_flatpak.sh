@@ -33,7 +33,7 @@ printf "\nInstalling flatpak build dependencies\n";
 # we're using a pre-prepared flatpak-image witch aarch64
 apt update && apt install -y software-properties-common
 add-apt-repository -y ppa:alexlarsson/flatpak
-apt update && apt install -y flatpak-builder
+apt update && apt install -y flatpak-builder bzip2
 flatpak remote-add --if-not-exists $_FLATHUB_REPO;
 flatpak install -y flathub $_FLATHUB_PACKAGES_TO_INSTALL;
 
