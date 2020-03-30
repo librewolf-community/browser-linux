@@ -43,6 +43,8 @@ stages:
       - "librewolf-${pkgver}-${pkgrel}-${CARCH}.pkg.tar*"
 
 .flatpak_config: &flatpak_config
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   stage: paks
   artifacts:
     name: "Librewolf-${pkgver}-${pkgrel}-Flatpak-${CARCH}"
