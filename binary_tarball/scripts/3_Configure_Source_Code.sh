@@ -21,8 +21,6 @@ cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
 
 # to build on ubuntu and pick up clang
-#ac_add_options --with-libclang-path="/usr/lib/llvm-9/lib"
-#ac_add_options --with-clang-path="/usr/bin/clang-9"
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
 ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
 
@@ -39,12 +37,6 @@ ac_add_options --prefix=/usr
 ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-rust-simd
-
-export CC='clang-9'
-export CXX='clang++-9'
-export AR=llvm-ar-9
-export NM=llvm-nm-9
-export RANLIB=llvm-ranlib-9
 
 # Branding
 ac_add_options --enable-update-channel=release
@@ -93,6 +85,12 @@ export RUSTFLAGS="-Cdebuginfo=0"
 # should only fail on armv7x
 # ac_add_options --disable-webrtc
 
+export CC='clang-8'
+export CXX='clang++-8'
+export AR=llvm-ar-8
+export NM=llvm-nm-8
+export RANLIB=llvm-ranlib-8
+
 END
 
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
@@ -107,6 +105,13 @@ else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # ubuntu seems to recommend this
 ac_add_options --disable-elf-hack
+
+export CC='clang-9'
+export CXX='clang++-9'
+export AR=llvm-ar-9
+export NM=llvm-nm-9
+export RANLIB=llvm-ranlib-9
+
 END
 
 fi
