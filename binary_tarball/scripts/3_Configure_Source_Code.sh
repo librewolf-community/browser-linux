@@ -95,7 +95,7 @@ END
 
   LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
   patch -p1 -i ${CI_PROJECT_DIR}/arm.patch
-  wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${$CI_PROJECT_DIR}/build-arm-libopus.patch
+  wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${CI_PROJECT_DIR}/build-arm-libopus.patch
   patch -p1 -i ${CI_PROJECT_DIR}/build-arm-libopus.patch
   # might not even be needed for aarch64?
   patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
