@@ -50,7 +50,7 @@ END
 
 # Create Appstream metadate file
 export DATE=$(date +%Y-%m-%d)
-envsubst < ${_SCRIPT_FOLDER}/content/io.gitlab.LibreWolf.appdata.xml.in > ${_EXTRACTED_TARBALL_FOLDER}/io.gitlab.LibreWolf.appdata.xml
+envsubst < ${_SCRIPT_FOLDER}/../content/io.gitlab.LibreWolf.appdata.xml.in > ${_EXTRACTED_TARBALL_FOLDER}/io.gitlab.LibreWolf.appdata.xml
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
