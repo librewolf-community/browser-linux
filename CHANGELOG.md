@@ -7,17 +7,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
-## [Unreleased]
+## [74.0-4] - 2020-03-31
+
+### Added
+
+- AppImage and Flatpak improvements (metadata, conventions)
+- (Mostly) we working Flatpak release
+- **Untested**: AppImage and Flatpak releases for `aarch64` are now also built on Ubuntu 16.04
+
+### Known Issues
+
+- AppImage is working properly (and probably not a completely valid AppImage): It creates a new profile in `~/.librewolf` on each launch.
+- AppImage and Flatpak releases cannot be built as PGO/profiled builds at the moment
+- AppStream metadata is not completely valid (missing screenshots)
+- Build scripts are not tested outside of a dockerized environment
+
+## [74.0-3] - 2020-03-31
+
+### Added
+
+- WebRTC enabled for `aarch64` builds
 
 ### Fixed
 
 - Installation of uBlock
 - Removal and addition of search engines via `policies.json`
+- Building the intermediary tarball on Ubuntu 16.04 (Xenial) to ensure AppImage and Flatpak compatibility
 
 ### Known Issues
 
 - Appimage and Flatpak settings loading still needs to be tested
 - Appimage and Flatpak still don't work on older distributions
+- LibreWolf built on Ubuntu 16.04 cannot be a profiled/PGO build at the time.
 
 ## [74.0-2] - 2020-03-10
 

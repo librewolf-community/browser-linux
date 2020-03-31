@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <id type="desktop">io.gitlab.LibreWolf</id>
+<component type="desktop-application">
+  <id>io.gitlab.LibreWolf</id>
   <launchable type="desktop-id">io.gitlab.LibreWolf</launchable>
   <name>LibreWolf</name>
   <summary>LibreWolf Web Browser</summary>
@@ -35,4 +35,8 @@
   </keywords>
   <url type="homepage">https://librewolf-community.gitlab.io/</url>
   <url type="bugtracker">https://gitlab.com/groups/librewolf-community/-/issues/</url>
-</application>
+  <provides>
+    <id>io.gitlab.LibreWolf</id>
+  </provides>
+  <content_rating type="oars-1.1" />
+</component>
