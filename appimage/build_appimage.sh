@@ -50,7 +50,7 @@ chmod +x $_APPIMAGETOOL_FILE;
 install -Dvm644 "$_BINARY_TARBALL_EXTRACTED_FOLDER/io.gitlab.LibreWolf.appdata.xml" "$_BINARY_TARBALL_EXTRACTED_FOLDER/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
 
 # add libdbus-glib-1.so.2, just in case
-install -Dvm644 "/usr/lib/{$CARCH}-linux-gnu/libdbus-glib-1.so.2" "$_BINARY_TARBALL_EXTRACTED_FOLDER/usr/lib/libdbus-glib-1.so."2
+install -Dvm644 "/usr/lib/${CARCH}-linux-gnu/libdbus-glib-1.so.2" "$_BINARY_TARBALL_EXTRACTED_FOLDER/usr/lib/libdbus-glib-1.so."2
 
 # Generate AppImage
 printf "\nGenerating AppImage\n";
