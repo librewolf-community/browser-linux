@@ -1,1 +1,3 @@
 compile_folder/
+common/**
+settings/**
