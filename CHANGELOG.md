@@ -11,13 +11,12 @@ This project follows the official Firefox releases, but also uses
 
 ### Added
 
-- AppImage and Flatpak improvements (metadata, conventions)
-- (Mostly) we working Flatpak release
+- AppImage and Flatpak improvements (metadata, conventions etc.)
+- (Mostly) working Flatpak release
 - **Untested**: AppImage and Flatpak releases for `aarch64` are now also built on Ubuntu 16.04
 
 ### Known Issues
 
-- AppImage is working properly (and probably not a completely valid AppImage): It creates a new profile in `~/.librewolf` on each launch.
 - AppImage and Flatpak releases cannot be built as PGO/profiled builds at the moment
 - AppStream metadata is not completely valid (missing screenshots)
 - Build scripts are not tested outside of a dockerized environment
