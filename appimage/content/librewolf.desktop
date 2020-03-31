@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=LibreWolf
-Exec=librewolf
+Exec=librewolf %u
 Icon=librewolf
 Type=Application
-Categories=Network;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
+StartupWMClass=LibreWolf
+Categories=Network;WebBrowser;
+StartupNotify=true
+Terminal=false
+X-MultipleArgs=false
+Keywords=Internet;WWW;Browser;Web;Explorer
