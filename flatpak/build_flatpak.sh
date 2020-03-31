@@ -52,6 +52,10 @@ printf "\nBuilding flatpak repository\n";
 cp "$_FLATPAK_JSON_FILE" ./;
 flatpak-builder --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
 
+# add appstream metadata
+# TODO: firefox uses files/share/appdata/ in their flatpak, but https://docs.flatpak.org/en/latest/conventions.html says otherwise. which is "more" correct?
+install -Dvm644 "$_EXTRACTED_BINARY_TARBALL_FOLDER/io.gitlab.LibreWolf.appdata.xml" "$_FLATPAK_BUILD_FOLDER/files/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
+
 # Build bundle
 printf "\nBuilding flatpak bundle\n";
 flatpak build-bundle $FLATPAK_REPO $FLATPAK_BUNDLE io.gitlab.LibreWolf master;
