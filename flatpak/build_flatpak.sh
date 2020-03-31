@@ -56,6 +56,11 @@ flatpak-builder --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_F
 # TODO: firefox uses files/share/appdata/ in their flatpak, but https://docs.flatpak.org/en/latest/conventions.html says otherwise. which is "more" correct?
 install -Dvm644 "$_FLATPAK_BUILD_SOURCE_FOLDER/librewolf/io.gitlab.LibreWolf.appdata.xml" "$_FLATPAK_BUILD_FOLDER/files/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
 
+# add .desktop file
+install -Dvm644 "$_SCRIPT_FOLDER/content/librewolf.desktop" "$_FLATPAK_BUILD_FOLDER/files/share/application/librewolf.desktop"
+# it's not clear if the above is sufficient; follow what mozilla does
+install -Dvm644 "$_SCRIPT_FOLDER/content/librewolf.desktop" "$_FLATPAK_BUILD_FOLDER/export/share/application/librewolf.desktop"
+
 # Build bundle
 printf "\nBuilding flatpak bundle\n";
 flatpak build-bundle $FLATPAK_REPO $FLATPAK_BUNDLE io.gitlab.LibreWolf master;
