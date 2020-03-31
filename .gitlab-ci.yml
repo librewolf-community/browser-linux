@@ -137,8 +137,7 @@ appimage_x86_64:
 appimage_aarch64:
   image: arm64v8/ubuntu:16.04
   tags:
-    - aarch64b
-    - arm64  # can also be run on any other less powerful aarch64 runner
+    - arm64
   <<: *carch_aarch64
   <<: *appimage_config
   only:
