@@ -4,9 +4,9 @@ printf "\n\n-------------------------------------- DEPENDENCY INSTALLATION -----
 set -e
 
 # Setup Script Variables
-# _DEPENDENCIES="mercurial wget git flatpak flatpak-builder";
 _DEPENDENCIES="wget git xvfb \
  xz-utils \
+ gettext-base \
  curl python3 libjack-dev \
         autotools-dev \
         autoconf2.13 \

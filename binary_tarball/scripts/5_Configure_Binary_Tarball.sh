@@ -38,7 +38,7 @@ distini="$_EXTRACTED_TARBALL_FOLDER/distribution/distribution.ini"
 
 install -Dvm644 /dev/stdin "$distini" <<END
 [Global]
-id=io.gitlab.${pkgname}
+id=io.gitlab.LibreWolf
 version=1.0
 about=LibreWolf
 
@@ -47,6 +47,10 @@ app.distributor="LibreWolf Community"
 app.distributor.channel=librewolf
 app.partner.librewolf=librewolf
 END
+
+# Create Appstream metadate file
+export DATE=$(date +%Y-%m-%d)
+envsubst < ${_SCRIPT_FOLDER}/content/io.gitlab.LibreWolf.appdata.xml.in > ${_EXTRACTED_TARBALL_FOLDER}/io.gitlab.LibreWolf.appdata.xml
 
 # Repacks the binary tarball
 printf "\nRecompressing binary tarball\n";
