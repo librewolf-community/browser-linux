@@ -33,7 +33,11 @@ export MOZ_NOSPAM=1
 export MOZBUILD_STATE_PATH="${_MOZBUILD}"
 
 if [[ $CARCH == 'aarch64' ]]; then
-  LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+  export MOZ_DEBUG_FLAGS=" "
+  export CFLAGS+=" -g0"
+  export CXXFLAGS+=" -g0"
+  export RUSTFLAGS="-Cdebuginfo=0"
+  export LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 fi
 
 # LTO needs more open files

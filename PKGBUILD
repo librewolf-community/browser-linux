@@ -7,7 +7,7 @@ pkgname=librewolf
 _pkgname=LibreWolf
 # how to get ci vars instead?
 pkgver=74.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -102,25 +102,29 @@ if [[ $CARCH == 'aarch64' ]]; then
   cat >>../mozconfig <<END
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
-export MOZ_DEBUG_FLAGS=" "
-export CFLAGS+=" -g0"
-export CXXFLAGS+=" -g0"
-export RUSTFLAGS="-Cdebuginfo=0"
-
 # from ALARM
 # ac_add_options --disable-webrtc
 
 END
 
-  # ac_add_options --enable-optimize  <- ?
+  export MOZ_DEBUG_FLAGS=" "
+  export CFLAGS+=" -g0"
+  export CXXFLAGS+=" -g0"
+  export RUSTFLAGS="-Cdebuginfo=0"
 
-  LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+  export LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
   patch -p1 -i ../arm.patch
   patch -p1 -i ../build-arm-libopus.patch
   # do we need those for aarch64 as well?
   patch -p1 -i ../fix-armhf-webrtc-build.patch
   patch -p1 -i ../webrtc-fix-compiler-flags-for-armhf.patch
 
+else
+
+  cat >>../mozconfig <<END
+# probably not needed, enabled by default?
+ac_add_options --enable-optimize
+END
 fi
 
   # Disabling Pocket
@@ -243,7 +247,7 @@ END
   local distini="$pkgdir/usr/lib/$pkgname/distribution/distribution.ini"
   install -Dvm644 /dev/stdin "$distini" <<END
 [Global]
-id=io.gitlab.${pkgname}
+id=io.gitlab.${_pkgname}
 version=1.0
 about=LibreWolf
 

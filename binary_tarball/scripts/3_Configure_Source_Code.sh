@@ -76,10 +76,6 @@ if [[ $CARCH == 'aarch64' ]]; then
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
-export MOZ_DEBUG_FLAGS=" "
-export CFLAGS+=" -g0"
-export CXXFLAGS+=" -g0"
-export RUSTFLAGS="-Cdebuginfo=0"
 
 # from ALARM
 # should only fail on armv7x
@@ -93,7 +89,12 @@ export RANLIB=llvm-ranlib-8
 
 END
 
-  LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+  export MOZ_DEBUG_FLAGS=" "
+  export CFLAGS+=" -g0"
+  export CXXFLAGS+=" -g0"
+  export RUSTFLAGS="-Cdebuginfo=0"
+
+  export LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
   patch -p1 -i ${CI_PROJECT_DIR}/arm.patch
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${CI_PROJECT_DIR}/build-arm-libopus.patch
   patch -p1 -i ${CI_PROJECT_DIR}/build-arm-libopus.patch
@@ -112,6 +113,8 @@ export AR=llvm-ar-9
 export NM=llvm-nm-9
 export RANLIB=llvm-ranlib-9
 
+# probably not needed, enabled by default?
+ac_add_options --enable-optimize
 END
 
 fi
