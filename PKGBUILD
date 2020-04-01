@@ -7,7 +7,7 @@ pkgname=librewolf
 _pkgname=LibreWolf
 # how to get ci vars instead?
 pkgver=74.0
-pkgrel=4
+pkgrel=5
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -202,8 +202,6 @@ ac_add_options --enable-lto
 ac_add_options --enable-profile-use
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
 ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
-# seems to break on arm
-# ac_add_options --enable-linker=gold
 END
 
 else
@@ -227,9 +225,6 @@ fi
 package() {
   cd firefox-$pkgver
   DESTDIR="$pkgdir" ./mach install
-
-  # also create regular tarball for non-distro-specific packaging
-  ./mach package
 
   local vendorjs="$pkgdir/usr/lib/$pkgname/browser/defaults/preferences/vendor.js"
 

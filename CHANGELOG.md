@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
+## [74.0-5] - 2020-04-01
+
+### Added
+
+- WebRTC related settings unlocked (but still disabled) in `librewolf.cfg`
+
 ## [74.0-4] - 2020-03-31
 
 ### Added
