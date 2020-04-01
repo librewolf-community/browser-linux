@@ -20,13 +20,12 @@ This project follows the official Firefox releases, but also uses
 - AppImage and Flatpak releases cannot be built as PGO/profiled builds at the moment
 - AppStream metadata is not completely valid (missing screenshots)
 - Build scripts are not tested outside of a dockerized environment
-- Building on `aarch64` with WebRTC enabled works, but it seems that WebRTC still doesn't.
 
 ## [74.0-3] - 2020-03-31
 
 ### Added
 
-- WebRTC enabled for `aarch64` builds
+- WebRTC enabled for `aarch64` builds (`librewolf.cfg` still blocks it by default, intentionally)
 
 ### Fixed
 
