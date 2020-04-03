@@ -99,8 +99,9 @@ END
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${CI_PROJECT_DIR}/build-arm-libopus.patch
   patch -p1 -i ${CI_PROJECT_DIR}/build-arm-libopus.patch
   # might not even be needed for aarch64?
-  patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
-  patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch
+  # trying without them
+  # patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch
+  # patch -p1 -i ${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch
 
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
