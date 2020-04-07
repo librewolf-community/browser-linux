@@ -1,10 +1,8 @@
-Description: point clang to the toolchain provided by the gcc-mozilla package (version 7 required for C++ 17), and statically link against libstdc++
-Author: Olivier Tilloy <olivier.tilloy@canonical.com>
-Bug-Ubuntu: https://launchpad.net/bugs/1856861
-
+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+index 627596b..6c3b5b3 100755
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1387,6 +1387,9 @@ set_config('_DEPEND_CFLAGS', depend_cfla
+@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cflags(c_compiler))
  set_config('_HOST_DEPEND_CFLAGS', depend_cflags(host_c_compiler))
  
  
@@ -14,7 +12,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
  @depends(c_compiler)
  def preprocess_option(compiler):
      # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
-@@ -2074,7 +2074,7 @@
+@@ -2116,7 +2119,7 @@ def linker_ldflags(linker, macos_sdk):
              flags.append('-Wl,-syslibroot,%s' % macos_sdk)
          else:
              flags.append('-Wl,--sysroot=%s' % macos_sdk)
@@ -23,6 +21,8 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
      return flags
  
  
+diff --git a/servo/components/style/build_gecko.rs b/servo/components/style/build_gecko.rs
+index a502b7d..28370f6 100644
 --- a/servo/components/style/build_gecko.rs
 +++ b/servo/components/style/build_gecko.rs
 @@ -148,6 +148,8 @@ impl BuilderExt for Builder {
