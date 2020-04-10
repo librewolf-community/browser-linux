@@ -46,8 +46,13 @@ apt -qq update && apt -qqy install wget;
 wget $_APPIMAGETOOL_DOWNLOAD_URL -O $_APPIMAGETOOL_FILE;
 chmod +x $_APPIMAGETOOL_FILE;
 
+# Installs appstream-util and appstreamcli
+apt -qqy install appstream-util appstream
+
 # add appstream metadata
-install -Dvm644 "$_BINARY_TARBALL_EXTRACTED_FOLDER/io.gitlab.LibreWolf.appdata.xml" "$_BINARY_TARBALL_EXTRACTED_FOLDER/usr/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
+install -Dvm644 "$_BINARY_TARBALL_EXTRACTED_FOLDER/io.gitlab.LibreWolf.appdata.xml" "$_BINARY_TARBALL_EXTRACTED_FOLDER/usr/share/metainfo/librewolf.appdata.xml"
+
+# install -Dvm644 "$_BINARY_TARBALL_EXTRACTED_FOLDER/librewolf.desktop" "$_BINARY_TARBALL_EXTRACTED_FOLDER/io.gitlab.LibreWolf.desktop"
 
 # add libdbus-glib-1.so.2, just in case
 install -Dvm644 "/usr/lib/${CARCH}-linux-gnu/libdbus-glib-1.so.2" "$_BINARY_TARBALL_EXTRACTED_FOLDER/usr/lib/libdbus-glib-1.so."2
