@@ -11,8 +11,11 @@ This project follows the official Firefox releases, but also uses
 
 ### Added
 
-- DoH disabled by default
 - Remove Internal Plugin Certificates from Mozilla
+
+### Changed
+
+- DoH disabled by default
 
 ### Fixed
 
@@ -20,19 +23,19 @@ This project follows the official Firefox releases, but also uses
 
 ## [75.0-1] - 2020-04-08
 
-### Added
+### Changed
 
 - New upstream release 75.0
 
 ## [74.0.1-1] - 2020-04-04
 
-### Added
+### Changed
 
 - New upstream release 74.0.1
 
 ## [74.0-5] - 2020-04-01
 
-### Added
+### Changed
 
 - WebRTC related settings unlocked (but still disabled) in `librewolf.cfg`
 
