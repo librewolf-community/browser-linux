@@ -122,11 +122,21 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-libstdcxx-check.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/add-missing-include-functional.patch"
 
+# Remove some pre-installed addons that might be questionable
+patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
+
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
 sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
 # this one only to remove an annoying error message:
 sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
+
+# Remove Internal Plugin Certificates
+_cert_sed='s#if (aCert.organizationalUnit == "Mozilla [[:alpha:]]\+") {\n'
+_cert_sed+='[[:blank:]]\+return AddonManager\.SIGNEDSTATE_[[:upper:]]\+;\n'
+_cert_sed+='[[:blank:]]\+}#'
+_cert_sed+='// NOTE: removed#g'
+sed -z "$_cert_sed" -i toolkit/mozapps/extensions/internal/XPIInstall.jsm
 
 # allow SearchEngines option in non-ESR builds
 sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json

@@ -7,7 +7,7 @@ pkgname=librewolf
 _pkgname=LibreWolf
 # how to get ci vars instead?
 pkgver=75.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -26,11 +26,13 @@ options=(!emptydirs !makeflags !strip)
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
-        "git+https://gitlab.com/${pkgname}-community/settings.git")
+        "git+https://gitlab.com/${pkgname}-community/settings.git"
+        "remove_addons.patch")
 sha256sums=('bbb1054d8f2717c634480556d3753a8483986af7360e023bb6232df80b746b0f'
             '0471d32366c6f415f7608b438ddeb10e2f998498c389217cdd6cc52e8249996b'
             'SKIP'
-            'SKIP')
+            'SKIP'
+            '24b75ba55cb4a2c9a088a22279a1f07fd3b8f3ef4f47774c0c12b79f4bfad124')
 
 if [[ $CARCH == 'aarch64' ]]; then
   source+=(arm.patch
@@ -124,10 +126,20 @@ ac_add_options --enable-optimize
 END
 fi
 
+  # Remove some pre-installed addons that might be questionable
+  patch -p1 -i ../remove_addons.patch
+
   # Disabling Pocket
   sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
   # this one only to remove an annoying error message:
   sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
+
+  # Remove Internal Plugin Certificates
+  _cert_sed='s#if (aCert.organizationalUnit == "Mozilla [[:alpha:]]\+") {\n'
+  _cert_sed+='[[:blank:]]\+return AddonManager\.SIGNEDSTATE_[[:upper:]]\+;\n'
+  _cert_sed+='[[:blank:]]\+}#'
+  _cert_sed+='// NOTE: removed#g'
+  sed -z "$_cert_sed" -i toolkit/mozapps/extensions/internal/XPIInstall.jsm
 
   # allow SearchEngines option in non-ESR builds
   sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
