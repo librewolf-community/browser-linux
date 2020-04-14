@@ -18,3 +18,7 @@ local builds or setting up your own appropriate runners will be provided again i
 ### Instructions
 * Run build.sh inside this folder.
 * Packages will be saved in the repository root folder.
+
+## Other builds
+* [Gentoo](https://gitlab.com/librewolf-community/browser/gentoo)
+* [macOS](https://gitlab.com/librewolf-community/browser/macos)
