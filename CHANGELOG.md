@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
-## [75.0-2] - Unreleased
+## [76.0-1] - 2020-05-07
 
 ### Added
 
@@ -15,11 +15,19 @@ This project follows the official Firefox releases, but also uses
 
 ### Changed
 
+- New upstream release 76.0
 - DoH disabled by default
 
 ### Fixed
 
 - Some default addons from Mozilla are now removed (#59)
+- Improvements to search engines and DDG Lite added (settings#18)
+- Don't disable the Intersection Observer API (settings#20)
+- Configure manual update URL (settings#1)
+- Set fallback UA to resistFingerprinting's default (settings#10)
+- Temporarily fix Firefox's address bar (settings#23)
+- Update to ghacks-user.js 69 (settings#21)
+- Fix Qwant's name (settings#25)
 
 ## [75.0-1] - 2020-04-08
 

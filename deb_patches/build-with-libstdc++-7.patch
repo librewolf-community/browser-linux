@@ -1,8 +1,10 @@
-diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
-index 627596b..6c3b5b3 100755
+Description: point clang to the toolchain provided by the gcc-mozilla package (version 7 required for C++ 17), and statically link against libstdc++
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+Bug-Ubuntu: https://launchpad.net/bugs/1856861
+
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cflags(c_compiler))
+@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cfla
  set_config('_HOST_DEPEND_CFLAGS', depend_cflags(host_c_compiler))
  
  
@@ -12,20 +14,17 @@ index 627596b..6c3b5b3 100755
  @depends(c_compiler)
  def preprocess_option(compiler):
      # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
-@@ -2116,7 +2119,7 @@ def linker_ldflags(linker, macos_sdk):
-             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
-         else:
+@@ -2118,6 +2121,7 @@ def linker_ldflags(linker, macos_sdk, ho
              flags.append('-Wl,--sysroot=%s' % macos_sdk)
--
+     elif host.cpu == 'arm':
+         flags.append('-Wl,--no-keep-memory')
 +    flags.append('-static-libstdc++')
      return flags
  
  
-diff --git a/servo/components/style/build_gecko.rs b/servo/components/style/build_gecko.rs
-index a502b7d..28370f6 100644
 --- a/servo/components/style/build_gecko.rs
 +++ b/servo/components/style/build_gecko.rs
-@@ -148,6 +148,8 @@ impl BuilderExt for Builder {
+@@ -149,6 +149,8 @@ impl BuilderExt for Builder {
              builder = builder.with_rustfmt(path);
          }
  
@@ -34,3 +33,23 @@ index a502b7d..28370f6 100644
          for dir in SEARCH_PATHS.iter() {
              builder = builder.clang_arg("-I").clang_arg(dir.to_str().unwrap());
          }
+--- a/build/unix/stdc++compat/moz.build
++++ b/build/unix/stdc++compat/moz.build
+@@ -24,4 +24,7 @@ COMPILE_FLAGS['CLANG_PLUGIN'] = []
+ DEFINES['MOZ_LIBSTDCXX_VERSION'] = CONFIG['MOZ_LIBSTDCXX_TARGET_VERSION']
+ HOST_DEFINES['MOZ_LIBSTDCXX_VERSION'] = CONFIG['MOZ_LIBSTDCXX_HOST_VERSION']
+ 
++CXXFLAGS += ['--gcc-toolchain=/usr/lib/gcc-mozilla']
++HOST_CXXFLAGS += ['--gcc-toolchain=/usr/lib/gcc-mozilla']
++
+ OS_LIBS += ['-Wl,--version-script,%s/hide_std.ld' % SRCDIR]
+--- a/layout/style/test/moz.build
++++ b/layout/style/test/moz.build
+@@ -18,6 +18,7 @@ DIRS += ['gtest']
+ HostSimplePrograms([
+     'host_ListCSSProperties',
+ ])
++HOST_CXXFLAGS += ['--gcc-toolchain=/usr/lib/gcc-mozilla']
+ 
+ MOCHITEST_MANIFESTS += [
+     'mochitest.ini',

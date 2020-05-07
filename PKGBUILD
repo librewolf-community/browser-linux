@@ -6,8 +6,8 @@
 pkgname=librewolf
 _pkgname=LibreWolf
 # how to get ci vars instead?
-pkgver=75.0
-pkgrel=2
+pkgver=76.0
+pkgrel=1
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
 license=(MPL GPL LGPL)
@@ -28,8 +28,8 @@ source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-
         "git+https://gitlab.com/${pkgname}-community/browser/common.git"
         "git+https://gitlab.com/${pkgname}-community/settings.git"
         "remove_addons.patch")
-sha256sums=('bbb1054d8f2717c634480556d3753a8483986af7360e023bb6232df80b746b0f'
-            '0471d32366c6f415f7608b438ddeb10e2f998498c389217cdd6cc52e8249996b'
+sha256sums=('3b7b97b0b0625fc6ec23ee28d425988c679d3a56f362d62fd3b225a5d50afdc8'
+            '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
             'SKIP'
             'SKIP'
             '24b75ba55cb4a2c9a088a22279a1f07fd3b8f3ef4f47774c0c12b79f4bfad124')
@@ -71,10 +71,6 @@ ac_add_options --with-distribution-id=io.gitlab.${pkgname}
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
 export MOZ_REQUIRE_SIGNING=0
-
-# System libraries
-ac_add_options --with-system-nspr
-ac_add_options --with-system-nss
 
 # Features
 ac_add_options --enable-alsa
