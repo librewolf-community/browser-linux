@@ -32,7 +32,7 @@ sha256sums=('3b7b97b0b0625fc6ec23ee28d425988c679d3a56f362d62fd3b225a5d50afdc8'
             '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
             'SKIP'
             'SKIP'
-            '24b75ba55cb4a2c9a088a22279a1f07fd3b8f3ef4f47774c0c12b79f4bfad124')
+            '4425388d62cbb7ec3808926ae5e04021b17af8a0b6ba47c08a253ecfdcc264c0')
 
 if [[ $CARCH == 'aarch64' ]]; then
   source+=(arm.patch
@@ -238,7 +238,7 @@ package() {
 pref("spellchecker.dictionary_path", "/usr/share/hunspell");
 
 // Don't disable extensions in the application directory
-// done in librewolf.cf
+// done in librewolf.cfg
 // pref("extensions.autoDisableScopes", 11);
 END
 
