@@ -55,9 +55,7 @@ export MOZ_REQUIRE_SIGNING=0
 # Features
 ac_add_options --enable-alsa
 ac_add_options --enable-jack
-ac_add_options --enable-startup-notification
 ac_add_options --disable-crashreporter
-ac_add_options --disable-gconf
 ac_add_options --disable-updater
 ac_add_options --disable-tests
 
@@ -120,10 +118,13 @@ fi
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-check-glibc-symbols.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-libstdcxx-check.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/add-missing-include-functional.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
+
+# Disable (some) megabar functionality
+# Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
+patch -p1 -i ${CI_PROJECT_DIR}/megabar.patch
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";

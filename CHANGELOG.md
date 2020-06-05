@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
+## [77.0.1-1] - 2020-06-06
+
+### Changed
+
+- New upstream release 77.0.1
+
+### Fixed
+
+- Disable "Megabar" functionality (#23)
+
 ## [76.0.1-1] - 2020-05-08
 
 ### Changed

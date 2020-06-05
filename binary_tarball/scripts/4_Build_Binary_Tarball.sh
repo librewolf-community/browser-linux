@@ -61,7 +61,7 @@ rm -f mozconfig
 # source /root/.cargo/env
 
 # install cbindgen
-cargo install --version 0.13.2 cbindgen
+cargo install --version 0.14.2 cbindgen
 
 if [[ $CARCH == 'aarch64' ]]; then
 

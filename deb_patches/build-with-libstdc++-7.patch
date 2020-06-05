@@ -4,7 +4,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cfla
+@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cflags(c_compiler))
  set_config('_HOST_DEPEND_CFLAGS', depend_cflags(host_c_compiler))
  
  
@@ -14,10 +14,11 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
  @depends(c_compiler)
  def preprocess_option(compiler):
      # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
-@@ -2118,6 +2121,7 @@ def linker_ldflags(linker, macos_sdk, ho
+@@ -2125,7 +2128,7 @@ def linker_ldflags(linker, macos_sdk):
+             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
+         else:
              flags.append('-Wl,--sysroot=%s' % macos_sdk)
-     elif host.cpu == 'arm':
-         flags.append('-Wl,--no-keep-memory')
+-
 +    flags.append('-static-libstdc++')
      return flags
  
