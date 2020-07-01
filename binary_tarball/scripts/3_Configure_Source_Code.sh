@@ -24,11 +24,6 @@ ac_add_options --enable-application=browser
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
 ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
 
-# let's see if this works: make things backwards-compatible as much as possible
-# TODO: check if this would also work when building on something newer to have it run on
-# 16.04/xenial later on as well?
-ac_add_options --enable-stdcxx-compat
-
 # This supposedly speeds up compilation (We test through dogfooding anyway)
 ac_add_options --disable-tests
 ac_add_options --disable-debug

@@ -4,21 +4,29 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1433,6 +1433,9 @@ set_config('_DEPEND_CFLAGS', depend_cflags(c_compiler))
+@@ -1252,6 +1252,7 @@ try_compile(includes=['cstddef'],
+                 '#  endif',
+                 '#endif',
+             ]),
++            flags=['--gcc-toolchain=/usr/lib/gcc-mozilla'],
+             check_msg='for new enough STL headers from libstdc++',
+             when=needs_libstdcxx_newness_check,
+             onerror=die_on_old_libstdcxx)
+@@ -1433,6 +1434,10 @@ set_config('_DEPEND_CFLAGS', depend_cfla
  set_config('_HOST_DEPEND_CFLAGS', depend_cflags(host_c_compiler))
  
  
++add_old_configure_assignment('CFLAGS', ['--gcc-toolchain=/usr/lib/gcc-mozilla'])
 +add_old_configure_assignment('CXXFLAGS', ['--gcc-toolchain=/usr/lib/gcc-mozilla'])
 +
 +
  @depends(c_compiler)
  def preprocess_option(compiler):
      # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
-@@ -2125,7 +2128,7 @@ def linker_ldflags(linker, macos_sdk):
-             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
-         else:
+@@ -2137,6 +2142,7 @@ def linker_ldflags(linker, macos_sdk, ho
              flags.append('-Wl,--sysroot=%s' % macos_sdk)
--
+     elif host.cpu == 'arm':
+         flags.append('-Wl,--no-keep-memory')
 +    flags.append('-static-libstdc++')
      return flags
  
@@ -34,16 +42,6 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
          for dir in SEARCH_PATHS.iter() {
              builder = builder.clang_arg("-I").clang_arg(dir.to_str().unwrap());
          }
---- a/build/unix/stdc++compat/moz.build
-+++ b/build/unix/stdc++compat/moz.build
-@@ -24,4 +24,7 @@ COMPILE_FLAGS['CLANG_PLUGIN'] = []
- DEFINES['MOZ_LIBSTDCXX_VERSION'] = CONFIG['MOZ_LIBSTDCXX_TARGET_VERSION']
- HOST_DEFINES['MOZ_LIBSTDCXX_VERSION'] = CONFIG['MOZ_LIBSTDCXX_HOST_VERSION']
- 
-+CXXFLAGS += ['--gcc-toolchain=/usr/lib/gcc-mozilla']
-+HOST_CXXFLAGS += ['--gcc-toolchain=/usr/lib/gcc-mozilla']
-+
- OS_LIBS += ['-Wl,--version-script,%s/hide_std.ld' % SRCDIR]
 --- a/layout/style/test/moz.build
 +++ b/layout/style/test/moz.build
 @@ -18,6 +18,7 @@ DIRS += ['gtest']
