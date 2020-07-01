@@ -110,9 +110,7 @@ END
 fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-check-glibc-symbols.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/drop-libstdcxx-check.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch

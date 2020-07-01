@@ -41,13 +41,13 @@ sha256sums_x86_64=('291a593151e476e6c4b61e48a3bdd5a11896fbde6261dcad347d5b7df265
                    '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
                    'SKIP'
                    'SKIP'
-                   '305b3ac9b96430eb71035ddff558995268a88646d9b4ead50316b39af9da53c7'
+                   '2bef819c55935f6c72a7aa28273ecddfce0888429a32465feb6c34a16ff1ed9c'
                    '4425388d62cbb7ec3808926ae5e04021b17af8a0b6ba47c08a253ecfdcc264c0')
 sha256sums_aarch64=('291a593151e476e6c4b61e48a3bdd5a11896fbde6261dcad347d5b7df265a058'
                     '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
                     'SKIP'
                     'SKIP'
-                    '305b3ac9b96430eb71035ddff558995268a88646d9b4ead50316b39af9da53c7'
+                    '2bef819c55935f6c72a7aa28273ecddfce0888429a32465feb6c34a16ff1ed9c'
                     '4425388d62cbb7ec3808926ae5e04021b17af8a0b6ba47c08a253ecfdcc264c0'
                     '6ca87d2ac7dc48e6f595ca49ac8151936afced30d268a831c6a064b52037f6b7'
                     '2d4d91f7e35d0860225084e37ec320ca6cae669f6c9c8fe7735cdbd542e3a7c9')
