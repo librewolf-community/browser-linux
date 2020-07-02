@@ -6,7 +6,7 @@
 pkgname=librewolf
 _pkgname=LibreWolf
 # how to get ci vars instead?
-pkgver=78.0
+pkgver=78.0.1
 pkgrel=1
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
@@ -37,13 +37,13 @@ source_aarch64=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/
                 arm.patch
                 https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch)
 
-sha256sums_x86_64=('291a593151e476e6c4b61e48a3bdd5a11896fbde6261dcad347d5b7df265a058'
+sha256sums_x86_64=('494d277b120028e036e2aee3f658d79afc895457dc6aadb1c02f0547ef1d66ca'
                    '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
                    'SKIP'
                    'SKIP'
                    '2bef819c55935f6c72a7aa28273ecddfce0888429a32465feb6c34a16ff1ed9c'
                    '4425388d62cbb7ec3808926ae5e04021b17af8a0b6ba47c08a253ecfdcc264c0')
-sha256sums_aarch64=('291a593151e476e6c4b61e48a3bdd5a11896fbde6261dcad347d5b7df265a058'
+sha256sums_aarch64=('494d277b120028e036e2aee3f658d79afc895457dc6aadb1c02f0547ef1d66ca'
                     '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
                     'SKIP'
                     'SKIP'
