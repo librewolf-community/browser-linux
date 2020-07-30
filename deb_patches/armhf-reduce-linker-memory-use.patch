@@ -1,0 +1,27 @@
+Description: starting with firefox 66, armhf builds on Launchpad frequently
+ fail with "/usr/bin/ld: final link failed: memory exhausted" when linking
+ libxul.so. This is an attempt to reduce the memory used by ld.
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -2056,15 +2056,16 @@ def select_linker(linker, c_compiler, de
+ set_config('LINKER_KIND', select_linker.KIND)
+ 
+ 
+-@depends_if(select_linker, macos_sdk)
+-def linker_ldflags(linker, macos_sdk):
++@depends_if(select_linker, macos_sdk, host)
++def linker_ldflags(linker, macos_sdk, host):
+     flags = list(linker.LINKER_FLAG or [])
+     if macos_sdk:
+         if linker.KIND == 'ld64':
+             flags.append('-Wl,-syslibroot,%s' % macos_sdk)
+         else:
+             flags.append('-Wl,--sysroot=%s' % macos_sdk)
+-
++    elif host.cpu == 'arm':
++        flags.append('-Wl,--no-keep-memory')
+     return flags
+ 
+ 

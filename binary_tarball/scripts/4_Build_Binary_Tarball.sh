@@ -1,6 +1,8 @@
 #!/bin/bash
 printf "\n\n--------------------------------------- BUILD -----------------------------------------------\n";
 
+set -e
+
 # Setup Script Variables
 srcdir=$1;
 OUTPUT_TARBALL=$2;
@@ -37,7 +39,7 @@ if [[ $CARCH == 'aarch64' ]]; then
   export CFLAGS+=" -g0"
   export CXXFLAGS+=" -g0"
   export RUSTFLAGS="-Cdebuginfo=0"
-  export LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+  export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
 fi
 
 # LTO needs more open files

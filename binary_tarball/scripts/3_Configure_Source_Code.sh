@@ -1,6 +1,8 @@
 #!/bin/bash
 printf "\n\n------------------------------ FINAL PREBUILD CONFIGURATION ---------------------------------\n";
 
+set -e
+
 # Setup Script Variables
 srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
@@ -87,7 +89,7 @@ END
   export CXXFLAGS+=" -g0"
   export RUSTFLAGS="-Cdebuginfo=0"
 
-  export LDFLAGS+=" -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
+  export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
   patch -p1 -i ${CI_PROJECT_DIR}/arm.patch
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${CI_PROJECT_DIR}/build-arm-libopus.patch
   patch -p1 -i ${CI_PROJECT_DIR}/build-arm-libopus.patch
@@ -110,7 +112,13 @@ END
 fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
+patch -p1 -i "${CI_PROJECT_DIR}/armhf-reduce-linker-memory-use.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/fix-armhf-webrtc-build.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/webrtc-fix-compiler-flags-for-armhf.patch"
+
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1654465
+patch -p1 -i ${CI_PROJECT_DIR}/bug1654465.diff
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch

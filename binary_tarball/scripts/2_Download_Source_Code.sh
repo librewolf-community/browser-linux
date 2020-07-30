@@ -1,6 +1,8 @@
 #!/bin/bash
 printf "\n\n--------------------------------- SOURCE CODE DOWNLOAD --------------------------------------\n";
 
+set -e
+
 if [[ -z ${pkgver} || -z ${pkgrel} ]]; then
     echo '$pkgrel and/or $pkgver not provided'
     exit 1
