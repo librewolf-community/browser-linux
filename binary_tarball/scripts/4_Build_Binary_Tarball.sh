@@ -39,7 +39,7 @@ if [[ $CARCH == 'aarch64' ]]; then
   export CFLAGS+=" -g0"
   export CXXFLAGS+=" -g0"
   export RUSTFLAGS="-Cdebuginfo=0"
-  export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
+  export LDFLAGS+=" -Wl,--no-keep-memory"
 fi
 
 # LTO needs more open files

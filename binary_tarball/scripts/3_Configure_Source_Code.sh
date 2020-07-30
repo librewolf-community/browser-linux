@@ -81,7 +81,6 @@ export CXX='clang++-8'
 export AR=llvm-ar-8
 export NM=llvm-nm-8
 export RANLIB=llvm-ranlib-8
-
 END
 
   export MOZ_DEBUG_FLAGS=" "
