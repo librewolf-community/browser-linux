@@ -224,7 +224,6 @@ ac_add_options --enable-profile-use
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
 ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
 ac_add_options --enable-linker=lld
-ac_add_options --disable-elf-hack
 END
 
 else
@@ -234,7 +233,8 @@ ac_add_options --enable-lto=cross
 ac_add_options --enable-profile-use=cross
 ac_add_options --with-pgo-profile-path=${PWD@Q}/merged.profdata
 ac_add_options --with-pgo-jarlog=${PWD@Q}/jarlog
-ac_add_options --enable-linker=gold
+ac_add_options --enable-linker=lld
+ac_add_options --disable-elf-hack
 END
 
 fi
