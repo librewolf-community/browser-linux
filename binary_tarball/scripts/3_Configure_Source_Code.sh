@@ -111,6 +111,7 @@ END
 fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/lower-python3-requirement.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
