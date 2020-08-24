@@ -26,6 +26,7 @@
         "--socket=x11",
         "--socket=pulseaudio",
         "--persist=.librewolf",
+        "--persist=.mozilla",
         "--filesystem=xdg-download:rw",
         "--device=all",
         "--talk-name=org.freedesktop.FileManager1",
@@ -35,8 +36,6 @@
         "--talk-name=org.freedesktop.ScreenSaver",
         "--talk-name=org.gtk.vfs.*",
         "--socket=wayland",
-        "--filesystem=~/.librewolf:create",
-        "--filesystem=~/.mozilla:create",
         "--share=network"
     ]
 }
