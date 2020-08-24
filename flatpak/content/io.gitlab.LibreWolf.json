@@ -35,7 +35,8 @@
         "--talk-name=org.freedesktop.ScreenSaver",
         "--talk-name=org.gtk.vfs.*",
         "--socket=wayland",
-        "--filesystem=home:rw",
+        "--filesystem=~/.librewolf:create",
+        "--filesystem=~/.mozilla:create",
         "--share=network"
     ]
 }
