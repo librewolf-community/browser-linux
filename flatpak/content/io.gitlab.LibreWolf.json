@@ -24,6 +24,7 @@
     "finish-args": [
         "--share=ipc",
         "--socket=x11",
+        "--socket=pcsc",
         "--socket=pulseaudio",
         "--persist=.librewolf",
         "--persist=.mozilla",
