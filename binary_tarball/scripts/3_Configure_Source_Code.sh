@@ -21,7 +21,7 @@ cd $srcdir
 
 cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
-mk_add_options MOZ_OBJDIR=${PWD@Q}/obj
+mk_add_options MOZ_OBJDIR=${srcdir}/firefox-${pkgver}/obj
 
 # to build on ubuntu and pick up clang
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
