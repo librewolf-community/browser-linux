@@ -117,6 +117,7 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-variable-annotations.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
