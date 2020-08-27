@@ -21,6 +21,7 @@ cd $srcdir
 
 cat >${CI_PROJECT_DIR}/mozconfig <<END
 ac_add_options --enable-application=browser
+mk_add_options MOZ_OBJDIR=${PWD@Q}/obj
 
 # to build on ubuntu and pick up clang
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
@@ -116,10 +117,6 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
-
-# https://bugzilla.mozilla.org/show_bug.cgi?id=1654465
-wget https://raw.githubusercontent.com/archlinux/svntogit-packages/master/firefox/repos/extra-x86_64/bug1654465.diff -O ${CI_PROJECT_DIR}/bug1654465.diff
-patch -p1 -i ${CI_PROJECT_DIR}/bug1654465.diff
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch

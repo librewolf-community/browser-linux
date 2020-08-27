@@ -13,9 +13,9 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 -def linker_ldflags(linker, macos_sdk):
 +@depends_if(select_linker, macos_sdk, host)
 +def linker_ldflags(linker, macos_sdk, host):
-     flags = list(linker.LINKER_FLAG or [])
+     flags = list((linker and linker.LINKER_FLAG) or [])
      if macos_sdk:
-         if linker.KIND == 'ld64':
+         if linker and linker.KIND == 'ld64':
              flags.append('-Wl,-syslibroot,%s' % macos_sdk)
          else:
              flags.append('-Wl,--sysroot=%s' % macos_sdk)

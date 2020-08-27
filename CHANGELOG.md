@@ -7,6 +7,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
+## [80.0-1] - 2020-07-30
+
+### Changed
+
+- New upstream release 80.0
+- New upstream release of included uBlock Origin (1.29.2)
+
+### Fixed
+
+- Fixed too broad Flatpak access permissions / sandboxing (#122 and #123), thanks to @TheMainOne!
+- Unlocked an important setting required to easily enable WebRTC (macOS/#8)
+- Closing the last tab now closes the browser again (#121)
+
 ## [79.0-1] - 2020-07-30
 
 ### Changed
