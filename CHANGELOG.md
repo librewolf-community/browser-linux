@@ -7,7 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
-## [80.0-1] - 2020-07-30
+## [80.0.1-1] - 2020-09-06
+
+### Changed
+
+- New upstream release 80.0.1
+
+## [80.0-1] - 2020-08-27
 
 ### Changed
 
