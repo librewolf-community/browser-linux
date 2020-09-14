@@ -37,6 +37,7 @@
         "--talk-name=org.freedesktop.ScreenSaver",
         "--talk-name=org.gtk.vfs.*",
         "--socket=wayland",
+        "--env=MOZ_ENABLE_WAYLAND=1",
         "--share=network"
     ]
 }
