@@ -99,17 +99,27 @@ else
 # ubuntu seems to recommend this
 ac_add_options --disable-elf-hack
 
-export CC='clang-9'
-export CXX='clang++-9'
-export AR=llvm-ar-9
-export NM=llvm-nm-9
-export RANLIB=llvm-ranlib-9
+export CC='clang-11'
+export CXX='clang++-11'
+export AR=llvm-ar-11
+export NM=llvm-nm-11
+export RANLIB=llvm-ranlib-11
 
 # probably not needed, enabled by default?
 ac_add_options --enable-optimize
 END
 
 fi
+
+# some patches used by Arch upstream
+# https://bugs.archlinux.org/task/67978
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1660901
+_arch_svn=https://git.archlinux.org/svntogit/packages.git/plain/trunk
+wget "${_arch_svn}/0002-Bug-1660901-Support-the-fstat-like-subset-of-fstatat.patch?h=packages/firefox" -O 0002-Bug-1660901-Support-the-fstat-like-subset-of-fstatat.patch
+wget "${_arch_svn}/0003-Bug-1660901-ignore-AT_NO_AUTOMOUNT-in-fstatat-system.patch?h=packages/firefox" -O 0003-Bug-1660901-ignore-AT_NO_AUTOMOUNT-in-fstatat-system.patch
+
+patch -Np1 -i ./0002-Bug-1660901-Support-the-fstat-like-subset-of-fstatat.patch
+patch -Np1 -i ./0003-Bug-1660901-ignore-AT_NO_AUTOMOUNT-in-fstatat-system.patch
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/lower-python3-requirement.patch"
@@ -118,6 +128,8 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-variable-annotations.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-fstrings.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-pep487.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch

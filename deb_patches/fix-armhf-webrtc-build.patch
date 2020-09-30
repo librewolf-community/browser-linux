@@ -37,9 +37,9 @@ diff -r 53fd96ca5aa4 media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linu
 -    "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
 -]
 -
- if CONFIG["MOZ_DEBUG"] == "1":
+ if not CONFIG["MOZ_DEBUG"]:
  
-     DEFINES["DYNAMIC_ANNOTATIONS_ENABLED"] = "1"
+     DEFINES["DYNAMIC_ANNOTATIONS_ENABLED"] = "0"
 @@ -53,20 +49,36 @@
      DEFINES["WEBRTC_ARCH_ARM64"] = True
      DEFINES["WEBRTC_HAS_NEON"] = True
