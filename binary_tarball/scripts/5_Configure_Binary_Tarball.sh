@@ -11,7 +11,7 @@ LAUNCHER_SCRIPT=$3;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _EXTRACTED_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf;
-_SETTINGS_COMMIT=8697f589a1499598b8af5df11d82b60e8c97d981
+_SETTINGS_COMMIT=2f76ae07f7016034273f1887b7f1bedab997909c
 _SETTINGS_REPO='https://gitlab.com/librewolf-community/settings.git';
 
 # Extracts the binary tarball

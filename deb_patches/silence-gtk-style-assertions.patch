@@ -4,7 +4,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/widget/gtk/nsLookAndFeel.cpp
 +++ b/widget/gtk/nsLookAndFeel.cpp
-@@ -1142,7 +1142,7 @@ void nsLookAndFeel::EnsureInit() {
+@@ -1216,7 +1216,7 @@ void nsLookAndFeel::EnsureInit() {
            &color);
        mTextSelectedText = GDK_RGBA_TO_NS_RGBA(color);
      };
@@ -13,6 +13,14 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
      if (mTextSelectedBackground == mTextSelectedText) {
        // Some old distros/themes don't properly use the .selection style, so
        // fall back to the regular text view style.
+@@ -1413,6 +1413,7 @@ bool nsLookAndFeel::WidgetUsesImage(Widg
+   };
+ 
+   GtkStyleContext* style = GetStyleContext(aNodeType);
++  if (!style) return false;
+ 
+   GValue value = G_VALUE_INIT;
+   for (GtkStateFlags state : sFlagsToCheck) {
 --- a/widget/gtk/WidgetStyleCache.cpp
 +++ b/widget/gtk/WidgetStyleCache.cpp
 @@ -933,7 +933,7 @@ static GtkStyleContext* GetWidgetRootSty

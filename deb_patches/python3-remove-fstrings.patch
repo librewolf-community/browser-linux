@@ -123,7 +123,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
  
  def check_user_lifetime_expiration(
-@@ -263,8 +271,9 @@ class GlinterNit:
+@@ -281,8 +289,9 @@ class GlinterNit:
  
      def format(self):
          return (
@@ -135,18 +135,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
          )
  
  
-@@ -324,8 +333,9 @@ def lint_metrics(
-                                 "SUPERFLUOUS_NO_LINT",
-                                 ".".join([metric.category, metric.name]),
-                                 (
--                                    f"Superfluous no_lint entry '{check_name}'. "
-+                                    "Superfluous no_lint entry '{}'. "
-                                     "Please remove it."
-+                                    .format(check_name)
-                                 ),
-                                 CheckType.warning,
-                             )
-@@ -372,7 +382,7 @@ def lint_yaml_files(input_filepaths: Ite
+@@ -374,7 +383,7 @@ def lint_yaml_files(input_filepaths: Ite
      if len(nits):
          print("Sorry, Glean found some glinter nits:", file=file)
          for (path, p) in nits:
@@ -157,7 +146,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
 --- a/third_party/python/glean_parser/glean_parser/markdown.py
 +++ b/third_party/python/glean_parser/glean_parser/markdown.py
-@@ -70,7 +70,7 @@ def metrics_docs(obj_name: str) -> str:
+@@ -73,7 +73,7 @@ def metrics_docs(obj_name: str) -> str:
      if obj_name.startswith("labeled_"):
          fixedup_name += "s"
  
@@ -166,7 +155,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
  
  def ping_docs(ping_name: str) -> str:
-@@ -81,7 +81,7 @@ def ping_docs(ping_name: str) -> str:
+@@ -84,7 +84,7 @@ def ping_docs(ping_name: str) -> str:
      if ping_name not in pings.RESERVED_PING_NAMES:
          return ""
  
@@ -205,16 +194,16 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
      filetype = FILE_TYPES.get(schema_key)
  
-@@ -115,7 +116,7 @@ def _get_schema(
-     if schema_id not in schemas:
-         raise ValueError(
+@@ -117,7 +118,7 @@ def _get_schema(
              util.format_error(
--                filepath, "", f"$schema key must be one of {', '.join(schemas.keys())}",
-+                filepath, "", "$schema key must be one of {}".format(', '.join(schemas.keys())),
+                 filepath,
+                 "",
+-                f"$schema key must be one of {', '.join(schemas.keys())}",
++                "$schema key must be one of {}".format(', '.join(schemas.keys())),
              )
          )
      return schemas[schema_id]
-@@ -187,7 +188,7 @@ def _instantiate_metrics(
+@@ -189,7 +190,7 @@ def _instantiate_metrics(
          if not config.get("allow_reserved") and category_key.split(".")[0] == "glean":
              yield util.format_error(
                  filepath,
@@ -223,7 +212,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
                  "Categories beginning with 'glean' are reserved for "
                  "Glean internal use.",
              )
-@@ -195,7 +196,7 @@ def _instantiate_metrics(
+@@ -197,7 +198,7 @@ def _instantiate_metrics(
          all_objects.setdefault(category_key, OrderedDict())
  
          if not isinstance(category_val, dict):
@@ -232,16 +221,16 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
          for metric_key, metric_val in category_val.items():
              try:
-@@ -204,7 +205,7 @@ def _instantiate_metrics(
-                 )
+@@ -207,7 +208,7 @@ def _instantiate_metrics(
              except Exception as e:
                  yield util.format_error(
--                    filepath, f"On instance {category_key}.{metric_key}", str(e),
-+                    filepath, "On instance {}.{}".format(category_key, metric_key), str(e),
+                     filepath,
+-                    f"On instance {category_key}.{metric_key}",
++                    "On instance {}.{}".format(category_key, metric_key),
+                     str(e),
                  )
                  metric_obj = None
-             else:
-@@ -214,7 +215,7 @@ def _instantiate_metrics(
+@@ -218,7 +219,7 @@ def _instantiate_metrics(
                  ):
                      yield util.format_error(
                          filepath,
@@ -250,7 +239,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
                          'Only internal metrics may specify "all-pings" '
                          'in "send_in_pings"',
                      )
-@@ -230,8 +231,9 @@ def _instantiate_metrics(
+@@ -234,8 +235,9 @@ def _instantiate_metrics(
                      filepath,
                      "",
                      (
@@ -262,7 +251,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
                      ),
                  )
              else:
-@@ -257,17 +259,17 @@ def _instantiate_pings(
+@@ -261,17 +263,17 @@ def _instantiate_pings(
              if ping_key in RESERVED_PING_NAMES:
                  yield util.format_error(
                      filepath,
@@ -284,7 +273,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
              continue
  
          already_seen = sources.get(ping_key)
-@@ -276,8 +278,9 @@ def _instantiate_pings(
+@@ -280,8 +282,9 @@ def _instantiate_pings(
              yield util.format_error(
                  filepath,
                  "",
@@ -318,18 +307,27 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 +        return "{}:\n{}".format(filepath, _utils.indent(content))
  
  
- def is_expired(expires: str) -> bool:
-@@ -353,8 +353,8 @@ def is_expired(expires: str) -> bool:
-                 date = datetime.date.fromisoformat(expires)
-         except ValueError:
-             raise ValueError(
--                f"Invalid expiration date '{expires}'. "
--                "Must be of the form yyyy-mm-dd in UTC."
-+                "Invalid expiration date '{}'. "
-+                "Must be of the form yyyy-mm-dd in UTC.".format(expires)
-             )
-         return date <= datetime.datetime.utcnow().date()
+ def parse_expires(expires: str) -> datetime.date:
+@@ -351,8 +351,8 @@ def parse_expires(expires: str) -> datet
+             return datetime.date.fromisoformat(expires)
+     except ValueError:
+         raise ValueError(
+-            f"Invalid expiration date '{expires}'. "
+-            "Must be of the form yyyy-mm-dd in UTC."
++            "Invalid expiration date '{}'. "
++            "Must be of the form yyyy-mm-dd in UTC.".format(expires)
+         )
  
+ 
+@@ -382,7 +382,7 @@ def validate_expires(expires: str) -> No
+     max_date = datetime.datetime.now() + datetime.timedelta(days=730)
+     if date > max_date.date():
+         raise ValueError(
+-            f"'{expires}' is more than 730 days (~2 years) in the future.",
++            "'{}' is more than 730 days (~2 years) in the future.".format(expires),
+             "Please make sure this is intentional.",
+             "You can supress this warning by adding EXPIRATION_DATE_TOO_FAR to no_lint",
+             "See: https://mozilla.github.io/glean_parser/metrics-yaml.html#no_lint",
 --- a/third_party/python/glean_parser/tools/extract_data_categories.py
 +++ b/third_party/python/glean_parser/tools/extract_data_categories.py
 @@ -62,7 +62,7 @@ def fetch_url(url: str) -> str:
@@ -381,7 +379,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
          else:
 --- a/third_party/python/glean_parser/glean_parser/metrics.py
 +++ b/third_party/python/glean_parser/glean_parser/metrics.py
-@@ -133,7 +133,7 @@ class Metric:
+@@ -138,7 +138,7 @@ class Metric:
          """
          metric_type = metric_info["type"]
          if not isinstance(metric_type, str):
@@ -390,3 +388,23 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
          return cls.metric_types[metric_type](
              category=category,
              name=name,
+--- a/third_party/python/glean_parser/glean_parser/translate.py
++++ b/third_party/python/glean_parser/glean_parser/translate.py
+@@ -112,7 +112,7 @@ def translate_metrics(
+                 for filepath in output_dir.glob(clear_pattern):
+                     filepath.unlink()
+             if len(list(output_dir.iterdir())):
+-                print(f"Extra contents found in '{output_dir}'.")
++                print("Extra contents found in '{}'.".format(output_dir))
+ 
+         # We can't use shutil.copytree alone if the directory already exists.
+         # However, if it doesn't exist, make sure to create one otherwise
+@@ -146,7 +146,7 @@ def translate(
+     format_desc = OUTPUTTERS.get(output_format, None)
+ 
+     if format_desc is None:
+-        raise ValueError(f"Unknown output format '{output_format}'")
++        raise ValueError("Unknown output format '{}'".format(output_format))
+ 
+     return translate_metrics(
+         input_filepaths,

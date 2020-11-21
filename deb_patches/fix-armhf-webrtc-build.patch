@@ -1,59 +1,30 @@
-diff -r 53fd96ca5aa4 media/webrtc/gn-configs/arm_False_arm_linux.json
---- a/media/webrtc/gn-configs/arm_False_arm_linux.json	Sun Dec 09 23:42:51 2018 +0200
-+++ b/media/webrtc/gn-configs/arm_False_arm_linux.json	Mon Dec 10 10:40:13 2018 +0100
-@@ -15969,9 +15969,7 @@
-                 "/home/jenkins/workspace/Firefox-default/label/armv7/firefox/obj-armv7l-unknown-linux-gnueabihf/media/webrtc/trunk/webrtc/gn-output/gen/"
-             ],
-             "libs": [],
--            "sources": [
--                "//system_wrappers/source/cpu_features_linux.c"
--            ],
-+            "sources": [],
-             "type": "static_library"
-         },
-         "//system_wrappers:field_trial_api": {
-diff -r 53fd96ca5aa4 media/webrtc/gn-configs/arm_True_arm_linux.json
---- a/media/webrtc/gn-configs/arm_True_arm_linux.json	Sun Dec 09 23:42:51 2018 +0200
-+++ b/media/webrtc/gn-configs/arm_True_arm_linux.json	Mon Dec 10 10:40:13 2018 +0100
-@@ -15558,9 +15558,7 @@
-                 "/home/jenkins/workspace/Firefox-default/label/armv7/firefox/obj-armv7l-unknown-linux-gnueabihf/media/webrtc/trunk/webrtc/gn-output/gen/"
-             ],
-             "libs": [],
--            "sources": [
--                "//system_wrappers/source/cpu_features_linux.c"
--            ],
-+            "sources": [],
-             "type": "static_library"
-         },
-         "//system_wrappers:field_trial_api": {
-diff -r 53fd96ca5aa4 media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linux_gn/moz.build
---- a/media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linux_gn/moz.build	Sun Dec 09 23:42:51 2018 +0200
-+++ b/media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linux_gn/moz.build	Mon Dec 10 10:40:13 2018 +0100
-@@ -31,10 +31,6 @@
-     "/media/webrtc/trunk/webrtc/"
+--- a/third_party/libwebrtc/webrtc/system_wrappers/cpu_features_linux_gn/moz.build
++++ b/third_party/libwebrtc/webrtc/system_wrappers/cpu_features_linux_gn/moz.build
+@@ -31,10 +31,6 @@ LOCAL_INCLUDES += [
+     "/third_party/libwebrtc/webrtc/"
  ]
  
 -UNIFIED_SOURCES += [
--    "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
+-    "/third_party/libwebrtc/webrtc/system_wrappers/source/cpu_features_linux.c"
 -]
 -
  if not CONFIG["MOZ_DEBUG"]:
  
      DEFINES["DYNAMIC_ANNOTATIONS_ENABLED"] = "0"
-@@ -53,20 +49,36 @@
+@@ -53,20 +49,36 @@ if CONFIG["CPU_ARCH"] == "aarch64":
      DEFINES["WEBRTC_ARCH_ARM64"] = True
      DEFINES["WEBRTC_HAS_NEON"] = True
  
 -if CONFIG["CPU_ARCH"] == "arm":
-+    UNIFIED_SOURCES += [
-+        "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
-+    ]
- 
+-
 -    CFLAGS += [
 -        "-mfpu=neon"
--    ]
-+if CONFIG["CPU_ARCH"] == "arm":
++    UNIFIED_SOURCES += [
++        "/third_party/libwebrtc/webrtc/system_wrappers/source/cpu_features_linux.c"
+     ]
  
++if CONFIG["CPU_ARCH"] == "arm":
++
      DEFINES["WEBRTC_ARCH_ARM"] = True
      DEFINES["WEBRTC_ARCH_ARM_V7"] = True
      DEFINES["WEBRTC_HAS_NEON"] = True
@@ -61,7 +32,7 @@ diff -r 53fd96ca5aa4 media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linu
 +if CONFIG["CPU_ARCH"] == "ppc64":
 +
 +    UNIFIED_SOURCES += [
-+        "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
++        "/third_party/libwebrtc/webrtc/system_wrappers/source/cpu_features_linux.c"
 +    ]
 +
  if CONFIG["CPU_ARCH"] == "x86":
@@ -71,13 +42,24 @@ diff -r 53fd96ca5aa4 media/webrtc/trunk/webrtc/system_wrappers/cpu_features_linu
      ]
  
 +    UNIFIED_SOURCES += [
-+        "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
++        "/third_party/libwebrtc/webrtc/system_wrappers/source/cpu_features_linux.c"
 +    ]
 +
 +if CONFIG["CPU_ARCH"] == "x86_64":
 +
 +    UNIFIED_SOURCES += [
-+        "/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_features_linux.c"
++        "/third_party/libwebrtc/webrtc/system_wrappers/source/cpu_features_linux.c"
 +    ]
 +
  Library("cpu_features_linux_gn")
+--- a/third_party/libwebrtc/webrtc/system_wrappers/BUILD.gn
++++ b/third_party/libwebrtc/webrtc/system_wrappers/BUILD.gn
+@@ -187,7 +187,7 @@ if (is_android && !build_with_mozilla) {
+   }
+ }
+ 
+-if (is_linux) {
++if (is_linux && target_cpu != "arm") {
+   rtc_static_library("cpu_features_linux") {
+     sources = [
+       "source/cpu_features_linux.c",

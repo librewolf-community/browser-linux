@@ -121,6 +121,7 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-variable-annotations.
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-fstrings.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-pep487.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/silence-gtk-style-assertions.patch"
+patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/sandbox-update-arm-syscall-numbers.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
