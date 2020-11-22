@@ -52,3 +52,97 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
      def __init__(self):
          self.root_node = Node(None, is_root_node=True)
          self.end_node = Node(None, is_end_node=True)
+--- a/third_party/python/glean_parser/glean_parser/lint.py
++++ b/third_party/python/glean_parser/glean_parser/lint.py
+@@ -237,9 +237,7 @@ def check_user_lifetime_expiration(
+ 
+ # The checks that operate on an entire category of metrics:
+ #    {NAME: (function, is_error)}
+-CATEGORY_CHECKS: Dict[
+-    str, Tuple[Callable[[str, Iterable[metrics.Metric]], LintGenerator], CheckType]
+-] = {
++CATEGORY_CHECKS = {
+     "COMMON_PREFIX": (check_common_prefix, CheckType.error),
+     "CATEGORY_GENERIC": (check_category_generic, CheckType.error),
+ }
+@@ -247,9 +245,7 @@ CATEGORY_CHECKS: Dict[
+ 
+ # The checks that operate on individual metrics:
+ #     {NAME: (function, is_error)}
+-INDIVIDUAL_CHECKS: Dict[
+-    str, Tuple[Callable[[metrics.Metric, dict], LintGenerator], CheckType]
+-] = {
++INDIVIDUAL_CHECKS = {
+     "UNIT_IN_NAME": (check_unit_in_name, CheckType.error),
+     "BUG_NUMBER": (check_bug_number, CheckType.error),
+     "BASELINE_PING": (check_valid_in_baseline, CheckType.error),
+@@ -282,7 +278,7 @@ def lint_metrics(
+     :param file: The stream to write errors to.
+     :returns: List of nits.
+     """
+-    nits: List[GlinterNit] = []
++    nits = []
+     for (category_name, category) in sorted(list(objs.items())):
+         if category_name == "pings":
+             continue
+@@ -363,7 +359,7 @@ def lint_yaml_files(input_filepaths: Ite
+ 
+     # Generic type since the actual type comes from yamllint, which we don't
+     # control.
+-    nits: List = []
++    nits = []
+     for path in input_filepaths:
+         # yamllint needs both the file content and the path.
+         file_content = None
+--- a/third_party/python/glean_parser/glean_parser/metrics.py
++++ b/third_party/python/glean_parser/glean_parser/metrics.py
+@@ -33,10 +33,10 @@ class DataSensitivity(enum.Enum):
+ 
+ 
+ class Metric:
+-    typename: str = "ERROR"
+-    glean_internal_metric_cat: str = "glean.internal.metrics"
+-    metric_types: Dict[str, Any] = {}
+-    default_store_names: List[str] = ["metrics"]
++    typename = "ERROR"
++    glean_internal_metric_cat = "glean.internal.metrics"
++    metric_types = {}
++    default_store_names = ["metrics"]
+ 
+     def __init__(
+         self,
+--- a/third_party/python/glean_parser/glean_parser/pings.py
++++ b/third_party/python/glean_parser/glean_parser/pings.py
+@@ -49,7 +49,7 @@ class Ping:
+         # _validated indicates whether this metric has already been jsonschema
+         # validated (but not any of the Python-level validation).
+         if not _validated:
+-            data: Dict[str, util.JSONType] = {
++            data = {
+                 "$schema": parser.PINGS_ID,
+                 self.name: self.serialize(),
+             }
+--- a/third_party/python/glean_parser/glean_parser/util.py
++++ b/third_party/python/glean_parser/glean_parser/util.py
+@@ -269,7 +269,7 @@ def fetch_remote_url(url: str, cache: bo
+             if key in dc:
+                 return dc[key]
+ 
+-    contents: str = urllib.request.urlopen(url).read()
++    contents = urllib.request.urlopen(url).read()
+ 
+     if cache:
+         with diskcache.Cache(cache_dir) as dc:
+--- a/third_party/python/glean_parser/glean_parser/parser.py
++++ b/third_party/python/glean_parser/glean_parser/parser.py
+@@ -339,8 +339,8 @@ def parse_objects(
+           value from the `metrics.yaml`, rather than having it overridden when
+           the metric expires.
+     """
+-    all_objects: ObjectTree = OrderedDict()
+-    sources: Dict[Any, Path] = {}
++    all_objects = OrderedDict()
++    sources = {}
+     filepaths = util.ensure_list(filepaths)
+     for filepath in filepaths:
+         content, filetype = yield from _load_file(filepath)

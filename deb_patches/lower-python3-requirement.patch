@@ -14,8 +14,8 @@ diff -r ede1c973aa85 build/moz.configure/init.configure
 -option(env='PYTHON3', nargs=1, help='Python 3 interpreter (3.6 or later)')
 +option(env='PYTHON3', nargs=1, help='Python 3 interpreter (3.5 or later)')
  
- 
- @depends('PYTHON3', check_build_environment, mozconfig, '--help')
+ option(env='VIRTUALENV_NAME', nargs=1, default='init_py3',
+        help='Name of the in-objdir virtualenv')
 @@ -334,20 +334,20 @@
                                    '(%s): %s' % (python, e))
      else:
