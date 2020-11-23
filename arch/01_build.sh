@@ -9,5 +9,7 @@ usermod -d /home/nobody nobody
 # we need to un-expire the account, otherwise PAM will complain
 usermod -e '' nobody
 chown -R nobody .
+# temporary workaround for rust / packed_simd build issue:
+pacman --noconfirm -U https://archive.archlinux.org/packages/r/rust/rust-1%3A1.47.0-4-x86_64.pkg.tar.zst
 # makepkg will not run as root
 sudo -u nobody -E -H makepkg --noconfirm --nosign --syncdeps --cleanbuild
