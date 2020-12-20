@@ -77,9 +77,9 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
      "BUG_NUMBER": (check_bug_number, CheckType.error),
      "BASELINE_PING": (check_valid_in_baseline, CheckType.error),
 @@ -282,7 +278,7 @@ def lint_metrics(
-     :param file: The stream to write errors to.
-     :returns: List of nits.
-     """
+     if parser_config is None:
+         parser_config = {}
+ 
 -    nits: List[GlinterNit] = []
 +    nits = []
      for (category_name, category) in sorted(list(objs.items())):
@@ -92,8 +92,8 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 -    nits: List = []
 +    nits = []
      for path in input_filepaths:
-         # yamllint needs both the file content and the path.
-         file_content = None
+         if not path.is_file() and parser_config.get("allow_missing_files", False):
+             continue
 --- a/third_party/python/glean_parser/glean_parser/metrics.py
 +++ b/third_party/python/glean_parser/glean_parser/metrics.py
 @@ -33,10 +33,10 @@ class DataSensitivity(enum.Enum):
@@ -136,13 +136,13 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 --- a/third_party/python/glean_parser/glean_parser/parser.py
 +++ b/third_party/python/glean_parser/glean_parser/parser.py
 @@ -339,8 +339,8 @@ def parse_objects(
-           value from the `metrics.yaml`, rather than having it overridden when
-           the metric expires.
-     """
+     if config is None:
+         config = {}
+ 
 -    all_objects: ObjectTree = OrderedDict()
 -    sources: Dict[Any, Path] = {}
 +    all_objects = OrderedDict()
 +    sources = {}
      filepaths = util.ensure_list(filepaths)
      for filepath in filepaths:
-         content, filetype = yield from _load_file(filepath)
+         content, filetype = yield from _load_file(filepath, config)

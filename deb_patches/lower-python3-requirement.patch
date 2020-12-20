@@ -4,65 +4,68 @@ Bug 1622963 - Require python 3.6 for the build system. r=firefox-build-system-re
 
 Differential Revision: https://phabricator.services.mozilla.com/D77754
 
-diff -r ede1c973aa85 build/moz.configure/init.configure
---- a/build/moz.configure/init.configure	Sun Jun 14 02:41:45 2020 +0000
-+++ b/build/moz.configure/init.configure	Sun Jun 14 19:10:48 2020 +0200
-@@ -237,7 +237,7 @@
+diff -r 81f3a9d8e5f4 build/moz.configure/init.configure
+--- a/build/moz.configure/init.configure	Tue Nov 17 21:27:44 2020 +0000
++++ b/build/moz.configure/init.configure	Wed Nov 18 08:22:17 2020 +0100
+@@ -216,7 +216,7 @@
  # Python 3
  # ========
  
--option(env='PYTHON3', nargs=1, help='Python 3 interpreter (3.6 or later)')
-+option(env='PYTHON3', nargs=1, help='Python 3 interpreter (3.5 or later)')
+-option(env="PYTHON3", nargs=1, help="Python 3 interpreter (3.6 or later)")
++option(env="PYTHON3", nargs=1, help="Python 3 interpreter (3.5 or later)")
  
- option(env='VIRTUALENV_NAME', nargs=1, default='init_py3',
-        help='Name of the in-objdir virtualenv')
-@@ -334,20 +334,20 @@
-                                   '(%s): %s' % (python, e))
+ option(
+     env="VIRTUALENV_NAME",
+@@ -327,7 +327,7 @@
+             )
      else:
          # Fall back to the search routine.
--        python, version = find_python3_executable(min_version='3.6.0')
-+        python, version = find_python3_executable(min_version='3.5.0')
+-        python, version = find_python3_executable(min_version="3.6.0")
++        python, version = find_python3_executable(min_version="3.5.0")
  
          # The API returns a bytes whereas everything in configure is unicode.
          if python:
-             python = ensure_text(python)
+@@ -335,15 +335,15 @@
  
      if not python:
--        raise FatalCheckError('Python 3.6 or newer is required to build. '
-+        raise FatalCheckError('Python 3.5 or newer is required to build. '
-                               'Ensure a `python3.x` executable is in your '
-                               'PATH or define PYTHON3 to point to a Python '
--                              '3.6 executable.')
-+                              '3.5 executable.')
+         raise FatalCheckError(
+-            "Python 3.6 or newer is required to build. "
++            "Python 3.5 or newer is required to build. "
+             "Ensure a `python3.x` executable is in your "
+             "PATH or define PYTHON3 to point to a Python "
+-            "3.6 executable."
++            "3.5 executable."
+         )
  
 -    if version < (3, 6, 0):
--        raise FatalCheckError('Python 3.6 or newer is required to build; '
 +    if version < (3, 5, 0):
-+        raise FatalCheckError('Python 3.5 or newer is required to build; '
-                               '%s is Python %d.%d' % (python, version[0],
-                                                       version[1]))
+         raise FatalCheckError(
+-            "Python 3.6 or newer is required to build; "
++            "Python 3.5 or newer is required to build; "
+             "%s is Python %d.%d" % (python, version[0], version[1])
+         )
  
-diff -r ede1c973aa85 python/mozbuild/mozbuild/pythonutil.py
---- a/python/mozbuild/mozbuild/pythonutil.py	Sun Jun 14 02:41:45 2020 +0000
-+++ b/python/mozbuild/mozbuild/pythonutil.py	Sun Jun 14 19:10:48 2020 +0200
-@@ -45,7 +45,7 @@
+diff -r 81f3a9d8e5f4 python/mozbuild/mozbuild/pythonutil.py
+--- a/python/mozbuild/mozbuild/pythonutil.py	Tue Nov 17 21:27:44 2020 +0000
++++ b/python/mozbuild/mozbuild/pythonutil.py	Wed Nov 18 08:22:17 2020 +0100
+@@ -44,7 +44,7 @@
  def _find_python_executable(major):
      if major not in (2, 3):
-         raise ValueError('Expected a Python major version of 2 or 3')
--    min_versions = {2: '2.7.0', 3: '3.6.0'}
-+    min_versions = {2: '2.7.0', 3: '3.5.0'}
+         raise ValueError("Expected a Python major version of 2 or 3")
+-    min_versions = {2: "2.7.0", 3: "3.6.0"}
++    min_versions = {2: "2.7.0", 3: "3.5.0"}
  
      def ret(min_version=min_versions[major]):
          from mozfile import which
-diff -r ede1c973aa85 python/mozbuild/mozbuild/virtualenv.py
---- a/python/mozbuild/mozbuild/virtualenv.py	Sun Jun 14 02:41:45 2020 +0000
-+++ b/python/mozbuild/mozbuild/virtualenv.py	Sun Jun 14 19:10:48 2020 +0200
-@@ -687,7 +687,7 @@
+diff -r 81f3a9d8e5f4 python/mozbuild/mozbuild/virtualenv.py
+--- a/python/mozbuild/mozbuild/virtualenv.py	Tue Nov 17 21:27:44 2020 +0000
++++ b/python/mozbuild/mozbuild/virtualenv.py	Wed Nov 18 08:22:17 2020 +0100
+@@ -691,7 +691,7 @@
      major, minor, micro = sys.version_info[:3]
      minimum_python_versions = {
-         2: LooseVersion('2.7.3'),
--        3: LooseVersion('3.6.0'),
-+        3: LooseVersion('3.5.0'),
+         2: LooseVersion("2.7.3"),
+-        3: LooseVersion("3.6.0"),
++        3: LooseVersion("3.5.0"),
      }
-     our = LooseVersion('%d.%d.%d' % (major, minor, micro))
+     our = LooseVersion("%d.%d.%d" % (major, minor, micro))
  

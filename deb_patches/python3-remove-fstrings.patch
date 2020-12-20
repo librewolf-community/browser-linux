@@ -163,7 +163,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 +    return "https://mozilla.github.io/glean/book/user/pings/{}.html".format(ping_name)
  
  
- def if_empty(ping_name: str, custom_pings_cache: Dict[str, pings.Ping] = {}) -> bool:
+ def if_empty(
 --- a/third_party/python/glean_parser/glean_parser/parser.py
 +++ b/third_party/python/glean_parser/glean_parser/parser.py
 @@ -46,7 +46,8 @@ def _update_validator(validator):
@@ -380,7 +380,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 --- a/third_party/python/glean_parser/glean_parser/metrics.py
 +++ b/third_party/python/glean_parser/glean_parser/metrics.py
 @@ -138,7 +138,7 @@ class Metric:
-         """
+ 
          metric_type = metric_info["type"]
          if not isinstance(metric_type, str):
 -            raise TypeError(f"Unknown metric type {metric_type}")
@@ -408,3 +408,25 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
      return translate_metrics(
          input_filepaths,
+--- a/toolkit/components/glean/build_scripts/glean_parser_ext/js.py	Tue Nov 17 21:27:44 2020 +0000
++++ b/toolkit/components/glean/build_scripts/glean_parser_ext/js.py	Wed Nov 18 10:51:04 2020 +0100
+@@ -57,7 +57,7 @@
+     """
+     The metric's unique identifier, including the category and name
+     """
+-    return f"{category}.{metric_name}"
++    return "{}.{}".format(category, metric_name)
+ 
+ 
+ def type_name(type):
+--- a/toolkit/components/glean/build_scripts/glean_parser_ext/rust.py	Tue Nov 17 21:27:44 2020 +0000
++++ b/toolkit/components/glean/build_scripts/glean_parser_ext/rust.py	Wed Nov 18 10:51:04 2020 +0100
+@@ -175,7 +175,7 @@
+ 
+                 metric_name = util.snake_case(metric.name)
+                 category_name = util.snake_case(category_name)
+-                full_path = f"{category_name}::{metric_name}"
++                full_path = "{}::{}".format(category_name, metric_name)
+                 objs_by_type[key].append((get_metric_id(metric), full_path))
+ 
+     # Now for the modules for each category.
