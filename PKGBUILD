@@ -14,7 +14,7 @@ license=(MPL GPL LGPL)
 url="https://librewolf-community.gitlab.io/"
 depends=(gtk3 libxt mime-types dbus-glib ffmpeg nss ttf-font libpulse)
 makedepends=(unzip zip diffutils yasm mesa imake inetutils xorg-server-xvfb
-             'rust<1:1.48.0' # rust 1.48.0 causes firefox / packed_simd building to fail
+             rust
              autoconf2.13 clang llvm jack gtk2 nodejs cbindgen nasm
              python-setuptools python-psutil python-zstandard git binutils lld)
 optdepends=('networkmanager: Location detection via available WiFi networks'
