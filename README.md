@@ -1,5 +1,13 @@
 This Repository contains all the required material to build the browser on Linux platforms.
 
+### Status
+
+Unfortunately, at the moment we are only barely keeping up with maintenance releases following
+upstream Firefox releases. AppImage and Flatpak-releases are still to be considered experimental.
+Debian builds are already being built by a third party contributer (see !12), and will hopefully soon be
+integrated as well. We are fully aware of the issues and wishes/improvements piling up – rest assured,
+we will get to them as soon as possible!
+
 ### Important
 
 The following instructions are currently outdated. The build scripts are currently meant to be
@@ -16,7 +24,7 @@ local builds or setting up your own appropriate runners will be provided again i
 * The flatpak build is not ready yet.
 
 ### Instructions
-* Run build.sh inside this folder.
+* Run build.sh inside this folder. (*NOTE*: This is currently only semi-functional. A rework of this script is in the making.)
 * Packages will be saved in the repository root folder.
 
 ## Other builds
