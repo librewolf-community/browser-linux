@@ -4,6 +4,9 @@
     "runtime-version": "3.36",
     "sdk": "org.gnome.Sdk",
     "command": "librewolf",
+    "rename-desktop-file": "LibreWolf.desktop",
+    "rename-appdata-file": "LibreWolf.appdata.xml",
+    "rename-icon": "io.gitlab.LibreWolf",
     "modules": [
         "flatpak/content/shared-modules/dbus-glib/dbus-glib-0.110.json",
         {
@@ -11,6 +14,10 @@
             "buildsystem": "simple",
             "build-commands": [
                 "mkdir -p /app/share && mv librewolf -t /app/share",
+                "mv share/appdata /app/share",
+                "mv share/applications /app/share",
+                "mv share/icons /app/share",
+                "mv share/metainfo /app/share",
                 "mkdir -p /app/bin && ln -s /app/share/librewolf/librewolf /app/bin/"
             ],
             "sources": [
@@ -23,20 +30,23 @@
     ],
     "finish-args": [
         "--share=ipc",
-        "--socket=x11",
+        "--socket=wayland",
+        "--socket=fallback-x11",
         "--socket=pcsc",
         "--socket=pulseaudio",
         "--persist=.librewolf",
         "--persist=.mozilla",
         "--filesystem=xdg-download:rw",
-        "--device=all",
+        "--device=dri",
+        "--filesystem=~/.config/dconf:ro",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--talk-name=org.freedesktop.FileManager1",
         "--system-talk-name=org.freedesktop.NetworkManager",
         "--talk-name=org.a11y.Bus",
         "--talk-name=org.gnome.SessionManager",
         "--talk-name=org.freedesktop.ScreenSaver",
         "--talk-name=org.gtk.vfs.*",
-        "--socket=wayland",
+        "--socket=session-bus",
         "--share=network"
     ]
 }

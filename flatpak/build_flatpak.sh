@@ -10,7 +10,7 @@ FLATPAK_REPO=$2;
 FLATPAK_BUNDLE=$3;
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _FLATHUB_REPO="flathub https://flathub.org/repo/flathub.flatpakrepo";
-_FLATHUB_PACKAGES_TO_INSTALL="org.gnome.Platform/${CARCH}/3.36 org.gnome.Sdk/${CARCH}/3.36";
+_FLATHUB_PACKAGES_TO_INSTALL="org.gnome.Platform/${CARCH}/3.36 org.gnome.Sdk/${CARCH}/3.36 org.freedesktop.Platform//19.08 org.freedesktop.Sdk//19.08";
 _EXTRACTED_BINARY_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf
 _FLATPAK_JSON_FILE=$_SCRIPT_FOLDER/content/io.gitlab.LibreWolf.json;
 _FLATPAK_BUILD_SOURCE_FOLDER=$_SCRIPT_FOLDER/source;
@@ -50,16 +50,17 @@ mv $_EXTRACTED_BINARY_TARBALL_FOLDER $_FLATPAK_BUILD_SOURCE_FOLDER;
 # Build Repo
 printf "\nBuilding flatpak repository\n";
 cp "$_FLATPAK_JSON_FILE" ./;
-flatpak-builder --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
 
 # add appstream metadata
-# TODO: firefox uses files/share/appdata/ in their flatpak, but https://docs.flatpak.org/en/latest/conventions.html says otherwise. which is "more" correct?
-install -Dvm644 "$_FLATPAK_BUILD_SOURCE_FOLDER/librewolf/io.gitlab.LibreWolf.appdata.xml" "$_FLATPAK_BUILD_FOLDER/files/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
+# TODO: firefox uses files/share/appdata/ in their flatpak, but https://docs.flatpak.org/en/latest/conventions.html says otherwise. which is "more" correct? => using both for now, just in case...
+install -Dvm644 "$_FLATPAK_BUILD_SOURCE_FOLDER/librewolf/io.gitlab.LibreWolf.appdata.xml" "$_SCRIPT_FOLDER/source/share/metainfo/io.gitlab.LibreWolf.appdata.xml"
+install -Dvm644 "$_FLATPAK_BUILD_SOURCE_FOLDER/librewolf/io.gitlab.LibreWolf.appdata.xml" "$_SCRIPT_FOLDER/source/share/appdata/LibreWolf.appdata.xml"
 
-# add .desktop file
-install -Dvm644 "$_SCRIPT_FOLDER/content/librewolf.desktop" "$_FLATPAK_BUILD_FOLDER/files/share/application/librewolf.desktop"
-# it's not clear if the above is sufficient; follow what mozilla does
-install -Dvm644 "$_SCRIPT_FOLDER/content/librewolf.desktop" "$_FLATPAK_BUILD_FOLDER/export/share/application/librewolf.desktop"
+install -Dvm644 "$_SCRIPT_FOLDER/content/io.gitlab.LibreWolf.desktop" "$_SCRIPT_FOLDER/source/share/applications/LibreWolf.desktop"
+
+install -Dvm644 "$_FLATPAK_BUILD_SOURCE_FOLDER/librewolf/browser/chrome/icons/default/default128.png" "$_SCRIPT_FOLDER/source/share/icons/hicolor/128x128/apps/io.gitlab.LibreWolf.png"
+
+flatpak-builder --disable-rofiles-fuse --repo="$FLATPAK_REPO" "$_FLATPAK_BUILD_FOLDER" io.gitlab.LibreWolf.json;
 
 # Build bundle
 printf "\nBuilding flatpak bundle\n";

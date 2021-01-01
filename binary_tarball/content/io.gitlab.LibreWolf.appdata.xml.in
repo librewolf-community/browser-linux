@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>io.gitlab.LibreWolf</id>
-  <launchable type="desktop-id">io.gitlab.LibreWolf</launchable>
+  <launchable type="desktop-id">io.gitlab.LibreWolf.desktop</launchable>
   <name>LibreWolf</name>
   <summary>LibreWolf Web Browser</summary>
   <metadata_license>CC0-1.0</metadata_license>

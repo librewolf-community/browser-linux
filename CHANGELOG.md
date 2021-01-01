@@ -11,6 +11,7 @@ This project follows the official Firefox releases, but also uses
 
 ### Fixed
 
+- Flatpak now properly provides a .desktop-file (and some other small improvements)
 - Fixed AppImage crashes when `XDG_DATA_DIRS` is unset (fixes #139)
 
 ## [84.0-1] - 2020-12-25
