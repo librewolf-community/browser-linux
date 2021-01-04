@@ -145,3 +145,9 @@ sed -z "$_cert_sed" -i toolkit/mozapps/extensions/internal/XPIInstall.jsm
 
 # allow SearchEngines option in non-ESR builds
 sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
+
+# stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
+sed "$_settings_services_sed" -i browser/components/newtab/data/content/activity-stream.bundle.js
+sed "$_settings_services_sed" -i modules/libpref/init/all.js
+sed "$_settings_services_sed" -i services/settings/Utils.jsm
+sed "$_settings_services_sed" -i toolkit/components/search/SearchUtils.jsm

@@ -153,6 +153,14 @@ fi
   # allow SearchEngines option in non-ESR builds
   sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
 
+  _settings_services_sed='s#firefox.settings.services.mozilla.com#f.s.s.m.c.qjz9zk#g'
+
+  # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
+  sed "$_settings_services_sed" -i browser/components/newtab/data/content/activity-stream.bundle.js
+  sed "$_settings_services_sed" -i modules/libpref/init/all.js
+  sed "$_settings_services_sed" -i services/settings/Utils.jsm
+  sed "$_settings_services_sed" -i toolkit/components/search/SearchUtils.jsm
+
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./
 }
