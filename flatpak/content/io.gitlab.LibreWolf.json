@@ -47,6 +47,7 @@
         "--talk-name=org.freedesktop.ScreenSaver",
         "--talk-name=org.gtk.vfs.*",
         "--socket=session-bus",
+        "--env=MOZ_ENABLE_WAYLAND=1",
         "--share=network"
     ]
 }
