@@ -24,7 +24,7 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'hunspell-en_US: Spell checking, American English')
 options=(!emptydirs !makeflags !strip)
 _arch_svn=https://git.archlinux.org/svntogit/packages.git/plain/trunk
-_settings_commit=2f76ae07f7016034273f1887b7f1bedab997909c
+_settings_commit=25115b211d60876c43f5098ce3e88bcee2a7e521
 source_x86_64=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
                $pkgname.desktop
                "git+https://gitlab.com/${pkgname}-community/browser/common.git"
