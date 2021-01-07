@@ -7,12 +7,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
-## [84.0-2] - Unreleased
+## [84.0.1-1] - 2021-01-07
 
 ### Fixed
 
 - Flatpak now properly provides a .desktop-file (and some other small improvements)
 - Fixed AppImage crashes when `XDG_DATA_DIRS` is unset (fixes #139)
+
+### Changed
+
+- New upstream release 84.0.1
+- New upstream release of included uBlock Origin (1.32.4)
+- More options kept unlocked to remain easier to modify
+- "Wayland first" Flatpak with (hopefully) clean X11-fallback
+
+### Added
+
+- Included Debian patch for global menubar
+- HTTPS only mode enabled by default
 
 ## [84.0-1] - 2020-12-25
 
