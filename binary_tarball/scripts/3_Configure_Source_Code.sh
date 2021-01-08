@@ -130,6 +130,9 @@ patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
 # Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
 patch -p1 -i ${CI_PROJECT_DIR}/megabar.patch
 
+# Debian patch to enable global menubar
+patch -p1 -i ${CI_PROJECT_DIR}/unity-menubar.patch
+
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
 sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
