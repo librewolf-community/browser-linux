@@ -9,9 +9,14 @@ This project follows the official Firefox releases, but also uses
 
 ## [84.0.2-1] - 2021-01-08
 
+### Changed
+
+- New upstream release 84.0.1
+- Flatpak runtime version updated (thanks @TheEvilSkeleton)
+
 ### Fixed
 
-- Patch for global menubar added to AppImage and Flatpak build script as well
+- Use patch for global menubar added to AppImage and Flatpak build script as well
 
 ## [84.0.1-1] - 2021-01-07
 
