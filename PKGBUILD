@@ -86,7 +86,7 @@ ac_add_options --enable-update-channel=release
 ac_add_options --with-app-name=${pkgname}
 ac_add_options --with-app-basename=${_pkgname}
 ac_add_options --with-branding=browser/branding/${pkgname}
-ac_add_options --with-distribution-id=io.gitlab.${pkgname}
+ac_add_options --with-distribution-id=io.gitlab.${pkgname}-community
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
 export MOZ_REQUIRE_SIGNING=0
@@ -281,7 +281,7 @@ END
   local distini="$pkgdir/usr/lib/$pkgname/distribution/distribution.ini"
   install -Dvm644 /dev/stdin "$distini" <<END
 [Global]
-id=io.gitlab.${_pkgname}
+id=io.gitlab.${pkgname}-community
 version=1.0
 about=LibreWolf
 
