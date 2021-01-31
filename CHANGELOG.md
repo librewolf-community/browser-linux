@@ -13,15 +13,11 @@ This project follows the official Firefox releases, but also uses
 
 - New upstream release 85.0
 - Global menubar patch removed from default releases. Separate releases will be made available.
+- `dom.event.contextmenu.enabled` is now an unlocked preference
 
 ### Fixed
 
 - Non-Arch releases should now also have some additional startup requests removed
-
-### Changed
-
-- New upstream release 85.0
-- `dom.event.contextmenu.enabled` is now an unlocked preference
 
 ## [84.0.2-2] - 2021-01-20
 
