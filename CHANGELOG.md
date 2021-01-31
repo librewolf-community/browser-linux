@@ -7,7 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
-## [85.0-1] – Unreleased
+## [85.0-1] – 2021-01-31
+
+### Changed
+
+- New upstream release 85.0
+- Global menubar patch removed from default releases. Separate releases will be made available.
 
 ### Fixed
 
