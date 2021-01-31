@@ -145,7 +145,6 @@ fi
 
   # Debian patch to enable global menubar
   # disabled until it's updated upstream
-  # also disabled for the default build, as it seems to cause issues in some configurations
   # patch -p1 -i ../unity-menubar.patch
 
   # Disabling Pocket

@@ -42,7 +42,7 @@ distini="$_EXTRACTED_TARBALL_FOLDER/distribution/distribution.ini"
 
 install -Dvm644 /dev/stdin "$distini" <<END
 [Global]
-id=io.gitlab.LibreWolf
+id=io.gitlab.librewolf-community
 version=1.0
 about=LibreWolf
 

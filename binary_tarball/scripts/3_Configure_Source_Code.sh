@@ -41,7 +41,7 @@ ac_add_options --enable-update-channel=release
 ac_add_options --with-app-name=librewolf
 ac_add_options --with-app-basename=LibreWolf
 ac_add_options --with-branding=browser/branding/librewolf
-ac_add_options --with-distribution-id=io.gitlab.librewolf
+ac_add_options --with-distribution-id=io.gitlab.librewolf-community
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
 export MOZ_REQUIRE_SIGNING=0
@@ -131,7 +131,9 @@ patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
 patch -p1 -i ${CI_PROJECT_DIR}/megabar.patch
 
 # Debian patch to enable global menubar
-patch -p1 -i ${CI_PROJECT_DIR}/unity-menubar.patch
+if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
+  patch -p1 -i ${CI_PROJECT_DIR}/unity-menubar.patch
+fi
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
