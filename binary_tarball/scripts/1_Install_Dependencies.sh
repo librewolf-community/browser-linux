@@ -37,11 +37,12 @@ _DEPENDENCIES="wget git xvfb \
         unzip \
         dbus-x11 \
         python \
-        # cargo \
-        # rustc \
         nodejs-mozilla \
         nasm-mozilla \
         gcc-mozilla"
+
+        # cargo \
+        # rustc \
 
 export DEBIAN_FRONTEND=noninteractive
 
