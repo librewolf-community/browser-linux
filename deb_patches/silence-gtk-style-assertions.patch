@@ -13,21 +13,6 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
      if (mTextSelectedBackground == mTextSelectedText) {
        // Some old distros/themes don't properly use the .selection style, so
        // fall back to the regular text view style.
-@@ -13,6 +13,14 @@
-      if (mTextSelectedBackground == mTextSelectedText) {
-        // Some old distros/themes don't properly use the .selection style, so
-        // fall back to the regular text view style.
-+@@ -1413,6 +1413,7 @@ bool nsLookAndFeel::WidgetUsesImage(Widg
-+       GTK_STATE_FLAG_BACKDROP, GTK_STATE_FLAG_INSENSITIVE};
-+ 
-+   GtkStyleContext* style = GetStyleContext(aNodeType);
-++  if (!style) return false;
-+ 
-+   GValue value = G_VALUE_INIT;
-+   for (GtkStateFlags state : sFlagsToCheck) {
- --- a/widget/gtk/WidgetStyleCache.cpp
- +++ b/widget/gtk/WidgetStyleCache.cpp
- @@ -933,7 +933,7 @@ static GtkStyleContext* GetWidgetRootSty
 @@ -1413,6 +1413,7 @@ bool nsLookAndFeel::WidgetUsesImage(Widg
    };
  
