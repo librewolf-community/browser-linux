@@ -37,8 +37,8 @@ _DEPENDENCIES="wget git xvfb \
         unzip \
         dbus-x11 \
         python \
-        cargo \
-        rustc \
+        # cargo \
+        # rustc \
         nodejs-mozilla \
         nasm-mozilla \
         gcc-mozilla"
@@ -60,3 +60,7 @@ if [[ $CARCH == 'x86_64' ]];then
 else
     apt-get -y install clang-8 libclang-8-dev
 fi
+
+# we need a more recent rust
+curl https://sh.rustup.rs -o rustup.sh
+bash rustup.sh -y
