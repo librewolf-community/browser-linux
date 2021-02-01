@@ -65,3 +65,4 @@ fi
 # we need a more recent rust
 curl https://sh.rustup.rs -o rustup.sh
 bash rustup.sh -y
+source /root/.cargo/env
