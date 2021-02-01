@@ -1,0 +1,13 @@
+diff -r 08cd64cdbc3b config/external/icu/data/convert_icudata.py
+--- a/config/external/icu/data/convert_icudata.py	Fri Jul 17 11:18:09 2020 +0000
++++ b/config/external/icu/data/convert_icudata.py	Sat Jul 18 14:40:33 2020 +0200
+@@ -11,7 +11,7 @@
+     subprocess.run(
+         [
+-            os.path.join(buildconfig.topobjdir, "dist", "host", "bin", "icupkg"),
++            "icupkg",
+             "-tb",
+             data_file,
+             output.name,
+         ]
+

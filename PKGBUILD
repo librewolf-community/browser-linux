@@ -48,14 +48,14 @@ sha256sums_x86_64=('5f03712642f5e77de4581d2ba3ee3e87cfa44c3d2fdd8fe0fb56ea05a57f
                    'SKIP'
                    '682bf4bf5d79db0080aa132235a95b25745c8ef944d2a2e1fed985489d894df5'
                    'f2f7403c9abd33a7470a5861e247b488693cf8d7d55c506e7e579396b7bf11e6'
-                   '6ca4d5a50a6645ff35da0bd2e9b606172f55123ddaec3ed1f87416c18f9800ff')
+                   'ee302586f5291f809759f5eae3e5bad60b13007d9a9d37ac7f397597eb1d8665')
 sha256sums_aarch64=('5f03712642f5e77de4581d2ba3ee3e87cfa44c3d2fdd8fe0fb56ea05a57f7b50'
                     '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
                     'SKIP'
                     'SKIP'
                     '682bf4bf5d79db0080aa132235a95b25745c8ef944d2a2e1fed985489d894df5'
                     'f2f7403c9abd33a7470a5861e247b488693cf8d7d55c506e7e579396b7bf11e6'
-                    '6ca4d5a50a6645ff35da0bd2e9b606172f55123ddaec3ed1f87416c18f9800ff'
+                    'ee302586f5291f809759f5eae3e5bad60b13007d9a9d37ac7f397597eb1d8665'
                     '6ca87d2ac7dc48e6f595ca49ac8151936afced30d268a831c6a064b52037f6b7'
                     '2d4d91f7e35d0860225084e37ec320ca6cae669f6c9c8fe7735cdbd542e3a7c9')
 
