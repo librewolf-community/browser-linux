@@ -14,7 +14,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
        // Some old distros/themes don't properly use the .selection style, so
        // fall back to the regular text view style.
 @@ -1413,6 +1413,7 @@ bool nsLookAndFeel::WidgetUsesImage(Widg
-   };
+       GTK_STATE_FLAG_BACKDROP, GTK_STATE_FLAG_INSENSITIVE};
  
    GtkStyleContext* style = GetStyleContext(aNodeType);
 +  if (!style) return false;
