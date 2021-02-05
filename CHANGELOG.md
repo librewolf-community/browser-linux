@@ -7,6 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
+## [85.0.1-1] – 2021-02-05
+
+### Changed
+
+- New upstream release 85.0.1
+- New upstream release of included uBlock Origin (1.33.2)
+
 ## [85.0-1] – 2021-01-31
 
 ### Changed
