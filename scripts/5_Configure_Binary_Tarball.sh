@@ -8,7 +8,7 @@ set -e;
 BINARY_TARBALL=$1;
 TOGGLE_SETTINGS_SCRIPT=$2;
 LAUNCHER_SCRIPT=$3;
-CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
+CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _EXTRACTED_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf;
 _SETTINGS_COMMIT=3feb12464aa81df2f4ff162fce69890614c0ac8f

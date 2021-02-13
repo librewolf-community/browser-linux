@@ -6,7 +6,7 @@ set -e
 # Setup Script Variables
 srcdir=$1;
 OUTPUT_TARBALL=$2;
-CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
+CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _SOURCE_CODE_BINARY_TARBALL_LOCATION="${srcdir}/firefox-${pkgver}/obj/dist/librewolf*.tar.bz2";
 _MOZBUILD=$srcdir/../mozbuild
 export DEB_BUILD_HARDENING=1

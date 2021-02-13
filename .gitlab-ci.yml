@@ -1,22 +1,13 @@
 stages:
   - build
-  - paks
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 # variables:
-  # TARBALL: $TARBALL
-  # ARCH: $ARCH
-  # FLATPAK: $FLATPAK
-  # APPIMAGE: $FLATPAK
   # pkgver: $PKGVER
   # pkgrel: $PKGREL
   # AARCH64: $AARCH64
   # X86_64: $X86_64
-  # download tarball if none available as artifact,
-  # ie. not built in the same pipeline run
-  # TARBALL_URL: $TARBALL_URL
-  # $RELEASE, to trigger deploy, maybe?
 
 .carch_aarch64: &carch_aarch64
   variables:
@@ -35,52 +26,6 @@ variables:
     paths:
       - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
 
-.arch_build_config: &arch_build_config
-  stage: build
-  script:
-    - ./arch/01_build.sh
-  artifacts:
-    name: "Librewolf-Arch-${pkgver}-${pkgrel}-${CARCH}"
-    paths:
-      - "librewolf-${pkgver}-${pkgrel}-${CARCH}.pkg.tar*"
-
-.flatpak_config: &flatpak_config
-  stage: paks
-  artifacts:
-    name: "Librewolf-${pkgver}-${pkgrel}-Flatpak-${CARCH}"
-    paths:
-      - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.flatpak"
-      - "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}.${CARCH}.flatpak-repo"
-  script:
-    - ./flatpak/build_flatpak.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/librewolf-${pkgver}-${pkgrel}.${CARCH}.flatpak-repo" "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.flatpak"
-
-.appimage_config: &appimage_config
-  stage: paks
-  artifacts:
-    name: "Librewolf-${pkgver}-${pkgrel}-AppImage-${CARCH}"
-    paths:
-      - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.AppImage"
-  script:
-    - ./appimage/build_appimage.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2" "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.AppImage"
-
-arch_x86_64:
-  image: archlinux/base
-  tags: [x86_64b]
-  <<: *carch_x86_64
-  <<: *arch_build_config
-  only:
-    variables:
-      - $ARCH && $X86_64
-
-arch_aarch64:
-  image: registry.gitlab.com/ohfp/manjaro-arm-docker
-  tags: [aarch64b]
-  <<: *carch_aarch64
-  <<: *arch_build_config
-  only:
-    variables:
-      - $ARCH && $AARCH64
-
 tarball_x86_64:
   image: ubuntu:16.04
   tags: [x86_64b]
@@ -88,7 +33,7 @@ tarball_x86_64:
   <<: *tarball_build_config
   only:
     variables:
-      - $TARBALL && $X86_64
+      - $X86_64
 
 tarball_aarch64:
   image: arm64v8/ubuntu:16.04
@@ -97,49 +42,4 @@ tarball_aarch64:
   <<: *tarball_build_config
   only:
     variables:
-      - $TARBALL && $AARCH64
-
-flatpak_x86_64:
-  image: ubuntu:16.04
-  tags: [flat_runner]
-  cache:
-    paths:
-      - .flatpak-builder
-    key: flatpak_x86_64
-  <<: *carch_x86_64
-  <<: *flatpak_config
-  only:
-    variables:
-      - $FLATPAK && $X86_64
-
-flatpak_aarch64:
-  image: arm64v8/ubuntu:16.04
-  tags: [flat_runner_aarch64]
-  cache:
-    paths:
-      - .flatpak-builder
-    key: flatpak_aarch64
-  <<: *carch_aarch64
-  <<: *flatpak_config
-  only:
-    variables:
-      - $FLATPAK && $AARCH64
-
-appimage_x86_64:
-  image: ubuntu:16.04
-  tags: [x86_64b]
-  <<: *carch_x86_64
-  <<: *appimage_config
-  only:
-    variables:
-      - $APPIMAGE && $X86_64
-
-appimage_aarch64:
-  image: arm64v8/ubuntu:16.04
-  tags:
-    - arm64
-  <<: *carch_aarch64
-  <<: *appimage_config
-  only:
-    variables:
-      - $APPIMAGE && $AARCH64
+      - $AARCH64

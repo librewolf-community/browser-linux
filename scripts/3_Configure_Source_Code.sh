@@ -5,7 +5,7 @@ set -e
 
 # Setup Script Variables
 srcdir=$1;
-CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../../)}
+CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
 _MOZBUILD=$srcdir/../mozbuild
 
