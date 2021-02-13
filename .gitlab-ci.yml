@@ -3,7 +3,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-# variables:
+  # variables:
   # pkgver: $PKGVER
   # pkgrel: $PKGREL
   # AARCH64: $AARCH64
@@ -20,7 +20,7 @@ variables:
 .tarball_build_config: &tarball_build_config
   stage: build
   script:
-    - ./binary_tarball/build_tarball.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
+    - ./build_tarball.sh "${CI_PROJECT_DIR}/LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
   artifacts:
     name: "Librewolf-Tarball-${pkgver}-${pkgrel}-${CARCH}"
     paths:
