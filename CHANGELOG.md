@@ -11,6 +11,12 @@ This project follows the official Firefox releases, but also uses
 
 ### Changed
 
+- New upstream release 85.0.2
+
+## [85.0.1-1] – 2021-02-05
+
+### Changed
+
 - New upstream release 85.0.1
 - New upstream release of included uBlock Origin (1.33.2)
 
