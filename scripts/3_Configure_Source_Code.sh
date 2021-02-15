@@ -144,6 +144,9 @@ fi
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
 sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
+
+patch -Np1 -i "${CI_PROJECT_DIR}/context-menu.patch"
+
 # this one only to remove an annoying error message:
 sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
 
