@@ -126,10 +126,8 @@ patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-pep487.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/silence-gtk-style-assertions.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/sandbox-update-arm-syscall-numbers.patch"
 
-if [[ $CARCH != 'aarch64' ]]; then
-  # https://bugzilla.mozilla.org/show_bug.cgi?id=1684261
-  patch -Np1 -i "${CI_PROJECT_DIR}/rust_build_fix.patch"
-fi
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1684261
+patch -Np1 -i "${CI_PROJECT_DIR}/rust_build_fix.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
