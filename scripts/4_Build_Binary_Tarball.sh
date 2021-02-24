@@ -66,7 +66,9 @@ rm -f mozconfig
 # source /root/.cargo/env
 
 # install cbindgen
-cargo install --version 0.16.0 cbindgen
+cargo install --version 0.17.0 cbindgen
+# install dump_syms
+cargo install dump_syms
 
 if [[ $CARCH == 'aarch64' ]]; then
 
