@@ -33,6 +33,7 @@ _DEPENDENCIES="wget git xvfb \
         libnotify-dev \
         libxrender-dev \
         libpulse-dev \
+        libssl-dev \
         yasm \
         unzip \
         dbus-x11 \
