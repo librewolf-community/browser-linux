@@ -24,13 +24,13 @@ Bug-Ubuntu: https://launchpad.net/bugs/1856861
  def preprocess_option(compiler):
      # The uses of PREPROCESS_OPTION depend on the spacing for -o/-Fi.
 @@ -2137,6 +2142,7 @@ def linker_ldflags(linker, macos_sdk, ho
-             flags.append("-Wl,--sysroot=%s" % macos_sdk)
-     elif host.cpu == "arm":
+     if host.cpu == "arm":
          flags.append("-Wl,--no-keep-memory")
+ 
 +    flags.append("-static-libstdc++")
-     return flags
- 
- 
+     if sysroot_path and multiarch_dir:
+         # Non-Debian-patched binutils linkers (both BFD and gold) don't lookup
+         # in multi-arch directories.
 --- a/servo/components/style/build_gecko.rs
 +++ b/servo/components/style/build_gecko.rs
 @@ -149,6 +149,8 @@ impl BuilderExt for Builder {

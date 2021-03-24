@@ -133,6 +133,9 @@ patch -p1 -i ${CI_PROJECT_DIR}/remove_addons.patch
 # Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
 patch -p1 -i ${CI_PROJECT_DIR}/megabar.patch
 
+# remove mozilla vpn ads
+patch -p1 -i ${CI_PROJECT_DIR}/mozilla-vpn-ad.patch
+
 # Debian patch to enable global menubar
 if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
   patch -p1 -i ${CI_PROJECT_DIR}/unity-menubar.patch

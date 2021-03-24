@@ -418,7 +418,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 +    return "{}.{}".format(category, util.camelize(metric_name))
  
  
- def type_name(type):
+ def type_name(obj):
 --- a/toolkit/components/glean/build_scripts/glean_parser_ext/rust.py	Tue Nov 17 21:27:44 2020 +0000
 +++ b/toolkit/components/glean/build_scripts/glean_parser_ext/rust.py	Wed Nov 18 10:51:04 2020 +0100
 @@ -175,7 +175,7 @@
