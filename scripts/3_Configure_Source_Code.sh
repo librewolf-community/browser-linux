@@ -73,15 +73,11 @@ if [[ $CARCH == 'aarch64' ]]; then
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
 
-# from ALARM
-# should only fail on armv7x
-# ac_add_options --disable-webrtc
-
-export CC='clang-8'
-export CXX='clang++-8'
-export AR=llvm-ar-8
-export NM=llvm-nm-8
-export RANLIB=llvm-ranlib-8
+export CC='clang-10'
+export CXX='clang++-10'
+export AR=llvm-ar-10
+export NM=llvm-nm-10
+export RANLIB=llvm-ranlib-10
 END
 
   export MOZ_DEBUG_FLAGS=" "
@@ -112,18 +108,12 @@ END
 fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/lower-python3-requirement.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/build-with-libstdc++-7.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/relax-cargo-dep.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-variable-annotations.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-fstrings.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/python3-remove-pep487.patch"
-patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/silence-gtk-style-assertions.patch"
 patch -p1 -i "${CI_PROJECT_DIR}/deb_patches/sandbox-update-arm-syscall-numbers.patch"
 
 # Remove some pre-installed addons that might be questionable
@@ -143,7 +133,7 @@ fi
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
-sed -i "s/'pocket'/#'pocket'/g" browser/components/moz.build
+sed -i 's/"pocket"/# "pocket"/g' browser/components/moz.build
 
 patch -Np1 -i "${CI_PROJECT_DIR}/context-menu.patch"
 

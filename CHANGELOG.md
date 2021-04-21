@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project follows the official Firefox releases, but also uses
 [Arch Linux Package Versioning](https://wiki.archlinux.org/index.php/Arch_package_guidelines#Package_versioning) to mark individual releases in between versions.
 
+## [88.0-1] - TBD
+
+### Changed
+
+- New upstream release 88.0-1
+- Several yet-to-be documented changes from previous updates that are not yet added to the changelog (tbd)
+- Switched to building on Ubuntu Bionic (18.04) from Xenial (16.04) as the latter is now EOL/EOS
+- Releases can from now on be found in the specific subprojects (debian, windows, flatpak, appimage, arch, macos) for consistency; this project will only hold the tarball used for the flatpak and appimage releases
+
+
 ## [85.0.2-2] – 2021-02-15
 
 ### Changed

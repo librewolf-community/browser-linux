@@ -26,7 +26,6 @@ _DEPENDENCIES="wget git xvfb \
         libasound2-dev \
         libcurl4-openssl-dev \
         libdbus-glib-1-dev \
-        hardening-wrapper \
         lsb-release \
         libiw-dev \
         mesa-common-dev \
@@ -38,9 +37,9 @@ _DEPENDENCIES="wget git xvfb \
         unzip \
         dbus-x11 \
         python \
+        libffi-dev \
         nodejs-mozilla \
-        nasm-mozilla \
-        gcc-mozilla"
+        nasm-mozilla"
 
         # cargo \
         # rustc \
@@ -55,12 +54,16 @@ apt-get -y -qq install $_DEPENDENCIES;
 if [[ $CARCH == 'x86_64' ]];then
     # Installs (non-ancient) clang
     apt install -y software-properties-common apt-transport-https ca-certificates
-    apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-11 main"
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
     apt-get update
     apt-get -y install clang-11 libclang-11-dev
 else
-    apt-get -y install clang-8 libclang-8-dev
+    apt install -y software-properties-common apt-transport-https ca-certificates
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
+    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
+    apt-get update
+    apt-get -y install clang-10 libclang-10-dev
 fi
 
 # we need a more recent rust

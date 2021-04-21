@@ -27,7 +27,7 @@ variables:
       - "LibreWolf-${pkgver}-${pkgrel}.${CARCH}.tar.bz2"
 
 tarball_x86_64:
-  image: ubuntu:16.04
+  image: ubuntu:18.04
   tags: [x86_64b]
   <<: *carch_x86_64
   <<: *tarball_build_config
@@ -36,7 +36,7 @@ tarball_x86_64:
       - $X86_64
 
 tarball_aarch64:
-  image: arm64v8/ubuntu:16.04
+  image: arm64v8/ubuntu:18.04
   tags: [aarch64b]
   <<: *carch_aarch64
   <<: *tarball_build_config
