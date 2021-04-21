@@ -54,14 +54,14 @@ apt-get -y -qq install $_DEPENDENCIES;
 if [[ $CARCH == 'x86_64' ]];then
     # Installs (non-ancient) clang
     apt install -y software-properties-common apt-transport-https ca-certificates
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
     apt-get update
     apt-get -y install clang-11 libclang-11-dev
 else
     apt install -y software-properties-common apt-transport-https ca-certificates
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
     apt-get update
     apt-get -y install clang-10 libclang-10-dev
 fi
