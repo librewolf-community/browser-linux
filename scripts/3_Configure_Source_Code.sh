@@ -25,7 +25,6 @@ mk_add_options MOZ_OBJDIR=${srcdir}/firefox-${pkgver}/obj
 
 # to build on ubuntu and pick up clang
 ac_add_options NODEJS=/usr/lib/nodejs-mozilla/bin/node
-ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
 
 # This supposedly speeds up compilation (We test through dogfooding anyway)
 ac_add_options --disable-tests
@@ -103,6 +102,9 @@ export RANLIB=llvm-ranlib-11
 
 # probably not needed, enabled by default?
 ac_add_options --enable-optimize
+
+# unavailable option when (on ubuntu at least(?)) building on aarch64
+ac_add_options NASM=/usr/lib/nasm-mozilla/bin/nasm
 END
 
 fi
