@@ -142,7 +142,7 @@ fi
 printf "\nDisabling Pocket\n";
 # sed -i 's/"pocket"/# "pocket"/g' browser/components/moz.build
 # this one only to remove an annoying error message:
-sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
+# sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/disable-pocket.patch"
 
 # More patches
