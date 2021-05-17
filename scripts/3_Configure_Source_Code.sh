@@ -72,6 +72,12 @@ mk_add_options MOZ_TELEMETRY_REPORTING=0
 # ac_add_options --enable-linker=gold
 END
 
+# allow setting limited resource usage via ENV / CI:
+
+if [[ ! -z ${CORES_TO_USE} ]]; then
+  echo "mk_add_options MOZ_MAKE_FLAGS=\"-j${CORES_TO_USE}\"" >> ${CI_PROJECT_DIR}/mozconfig
+fi
+
 if [[ $CARCH == 'aarch64' ]]; then
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # taken from manjaro build:
