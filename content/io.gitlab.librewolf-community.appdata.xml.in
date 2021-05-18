@@ -7,6 +7,11 @@
   <summary>LibreWolf Web Browser</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MPL-2.0</project_license>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source" width="1920" height="1143">https://librewolf-community.gitlab.io/images/screenshot.png</image>
+    </screenshot>
+  </screenshots>
   <description>
     <p><strong>LibreWolf</strong></p>
     <p>This project is an independent fork of Firefox, with the primary goals of privacy security and user freedom. It is the community run successor to LibreFox.</p>
@@ -16,7 +21,6 @@
     <ul>
       <li>Latest Version of Firefox: LibreWolf is compiled directly from the latest build of Firefox Stable. You will have the the latest features, and security updates.</li>
       <li>Completely Independent Build: LibreWolf uses a completely independent build from Firefox and has its own settings, profile folder and installation path. As a result, it can be installed alongside Firefox or any other browser.</li>
-      <li>IJWY (I Just Want You To Shut Up): embedded server links and other calling home functions are removed. In other words, zero unauthorized or background connections by default.</li>
       <li>Settings protection: important settings are enforced/locked within librewolf.cfg and policies.json, those settings cannot be changed by addons/updates/LibreWolf itself or unwanted/accidental manipulation; To change those settings you can easily do it by editing librewolf.cfg and policies.json.</li>
       <li>LibreWolf-addons: set of optional LibreWolf extensions</li>
       <li>Statistics disabled: telemetry and similar functions are disabled</li>
