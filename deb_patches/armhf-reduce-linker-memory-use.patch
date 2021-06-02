@@ -5,24 +5,23 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -2418,8 +2418,8 @@
+@@ -2349,15 +2349,17 @@
  set_config("LINKER_KIND", select_linker.KIND)
  
  
--@depends_if(select_linker, macos_sdk, sysroot_path, multiarch_dir)
--def linker_ldflags(linker, macos_sdk, sysroot_path, multiarch_dir):
-+@depends_if(select_linker, macos_sdk, sysroot_path, multiarch_dir, host)
-+def linker_ldflags(linker, macos_sdk, sysroot_path, multiarch_dir, host):
+-@depends_if(select_linker, target, macos_sdk, sysroot_path, multiarch_dir)
++@depends_if(select_linker, target, macos_sdk, sysroot_path, multiarch_dir, host)
+ @imports("os")
+-def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir):
++def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir, host):
      flags = list((linker and linker.LINKER_FLAG) or [])
-     if macos_sdk:
+     if target.kernel == "Darwin":
          if linker and linker.KIND == "ld64":
-@@ -2427,6 +2427,9 @@
+             flags.append("-Wl,-syslibroot,%s" % macos_sdk)
          else:
              flags.append("-Wl,--sysroot=%s" % macos_sdk)
- 
 +    if host.cpu == "arm":
 +        flags.append("-Wl,--no-keep-memory")
-+
+ 
      if sysroot_path and multiarch_dir:
-         # Non-Debian-patched binutils linkers (both BFD and gold) don't lookup
-         # in multi-arch directories.
+         for d in ("lib", "usr/lib"):

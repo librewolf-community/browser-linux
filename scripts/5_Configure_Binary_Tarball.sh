@@ -11,7 +11,7 @@ LAUNCHER_SCRIPT=$3;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _SCRIPT_FOLDER=$(realpath $(dirname $0));
 _EXTRACTED_TARBALL_FOLDER=$_SCRIPT_FOLDER/librewolf;
-_SETTINGS_COMMIT='c78c50fbefe2fcf830611e21dcc0fe79180d1e01'
+_SETTINGS_TAG='1.0'
 _SETTINGS_REPO='https://gitlab.com/librewolf-community/settings.git';
 
 # Extracts the binary tarball
@@ -24,7 +24,7 @@ printf "\nCopying librewolf settings to extracted binary tarball\n";
 
 git clone $_SETTINGS_REPO $_EXTRACTED_TARBALL_FOLDER/settings;
 cd $_EXTRACTED_TARBALL_FOLDER/settings
-git checkout $_SETTINGS_COMMIT
+git checkout $_SETTINGS_TAG
 cd -
 # no need to keep that in there:
 rm -rf "${_EXTRACTED_TARBALL_FOLDER}/settings/.git";

@@ -7,7 +7,7 @@ set -e
 srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
-_COMMON_COMMIT='5bce5285fa7046e6987ec3e5a8931ac17ca6c7c0'
+_COMMON_TAG='v89.0-1'
 _COMMON_DIR="${CI_PROJECT_DIR}"/common
 _PATCHES_DIR="${_COMMON_DIR}"/patches
 _MOZBUILD=$srcdir/../mozbuild
@@ -18,7 +18,7 @@ mkdir -p ${_MOZBUILD}
 printf "\nCopying branding and source code changes to firefox source code\n";
 git clone $_COMMON_REPO ${_COMMON_DIR}
 cd ${_COMMON_DIR}
-git checkout ${_COMMON_COMMIT}
+git checkout ${_COMMON_TAG}
 cd ..
 cp -r ${_COMMON_DIR}/source_files/* $srcdir/;
 
@@ -168,6 +168,9 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/remove-internal-plugin-certs.patch"
 # allow SearchEngines option in non-ESR builds
 # sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
+
+# remove search extensions (experimental)
+patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
 # _settings_services_sed='s#firefox.settings.services.mozilla.com#f.s.s.m.c.qjz9zk#g'
