@@ -13,10 +13,10 @@
     </screenshot>
   </screenshots>
   <description>
-    <p><strong>LibreWolf</strong></p>
+    <p>LibreWolf</p>
     <p>This project is an independent fork of Firefox, with the primary goals of privacy security and user freedom. It is the community run successor to LibreFox.</p>
     <p>LibreWolf uses more than 500 privacy/security/performance settings, patches, LibreWolf-Addons (optional) and is designed to minimize data collection and telemetry as much as possible (updater, crashreporter and Firefox’s integrated addons that don’t respect privacy are removed).</p>
-    <p><strong>LibreWolf is NOT associated with Mozilla or its products.</strong></p>
+    <p>LibreWolf is NOT associated with Mozilla or its products.</p>
     <p>Features:</p>
     <ul>
       <li>Latest Version of Firefox: LibreWolf is compiled directly from the latest build of Firefox Stable. You will have the the latest features, and security updates.</li>
