@@ -39,6 +39,8 @@ _DEPENDENCIES="wget git xvfb \
         python \
         libffi-dev \
         nodejs-mozilla \
+        cargo \
+        rustc \
         nasm-mozilla"
 
         # cargo \
@@ -55,18 +57,18 @@ if [[ $CARCH == 'x86_64' ]];then
     # Installs (non-ancient) clang
     apt install -y software-properties-common apt-transport-https ca-certificates
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-12 main"
     apt-get update
-    apt-get -y install clang-11 libclang-11-dev
+    apt-get -y install clang-12 libclang-12-dev
 else
     apt install -y software-properties-common apt-transport-https ca-certificates
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main"
     apt-get update
     apt-get -y install clang-10 libclang-10-dev
 fi
 
 # we need a more recent rust
-curl https://sh.rustup.rs -o rustup.sh
-bash rustup.sh -y
-source /root/.cargo/env
+# curl https://sh.rustup.rs -o rustup.sh
+# bash rustup.sh -y
+# source /root/.cargo/env

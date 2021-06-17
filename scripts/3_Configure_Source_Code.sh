@@ -7,7 +7,7 @@ set -e
 srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
-_COMMON_TAG='v89.0-1'
+_COMMON_TAG='v89.0.1-1'
 _COMMON_DIR="${CI_PROJECT_DIR}"/common
 _PATCHES_DIR="${_COMMON_DIR}"/patches
 _MOZBUILD=$srcdir/../mozbuild
@@ -127,7 +127,6 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/relax-cargo-dep.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/sandbox-update-arm-syscall-numbers.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
@@ -146,9 +145,6 @@ fi
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
-# sed -i 's/"pocket"/# "pocket"/g' browser/components/moz.build
-# this one only to remove an annoying error message:
-# sed -i 's#SaveToPocket.init();#// SaveToPocket.init();#g' browser/components/BrowserGlue.jsm
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/disable-pocket.patch"
 
 # More patches
@@ -158,26 +154,21 @@ patch -Np1 -i "${_PATCHES_DIR}/browser-confvars.patch"
 patch -Np1 -i "${_PATCHES_DIR}/urlbarprovider-interventions.patch"
 
 # Remove Internal Plugin Certificates
-# _cert_sed='s#if (aCert.organizationalUnit == "Mozilla [[:alpha:]]\+") {\n'
-# _cert_sed+='[[:blank:]]\+return AddonManager\.SIGNEDSTATE_[[:upper:]]\+;\n'
-# _cert_sed+='[[:blank:]]\+}#'
-# _cert_sed+='// NOTE: removed#g'
-# sed -z "$_cert_sed" -i toolkit/mozapps/extensions/internal/XPIInstall.jsm
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/remove-internal-plugin-certs.patch"
 
 # allow SearchEngines option in non-ESR builds
-# sed -i 's#"enterprise_only": true,#"enterprise_only": false,#g' browser/components/enterprisepolicies/schemas/policies-schema.json
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 
 # remove search extensions (experimental)
 patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
-# _settings_services_sed='s#firefox.settings.services.mozilla.com#f.s.s.m.c.qjz9zk#g'
-# sed "$_settings_services_sed" -i browser/components/newtab/data/content/activity-stream.bundle.js
-# sed "$_settings_services_sed" -i modules/libpref/init/all.js
-# sed "$_settings_services_sed" -i services/settings/Utils.jsm
-# sed "$_settings_services_sed" -i toolkit/components/search/SearchUtils.jsm
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
+
+# allow overriding the color scheme light/dark preference with RFP
+patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
+
+# fix an URL in 'about' dialog
+patch -Np1 -i ${_PATCHES_DIR}/about-dialog.patch
 
 rm -rf common
