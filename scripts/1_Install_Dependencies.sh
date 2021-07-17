@@ -16,7 +16,6 @@ _DEPENDENCIES="wget git xvfb \
         libx11-xcb-dev \
         libxt-dev \
         libxext-dev \
-        libgtk2.0-dev  \
         libgtk-3-dev  \
         libglib2.0-dev  \
         libpango1.0-dev  \
