@@ -7,7 +7,8 @@ set -e
 srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
 _COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
-_COMMON_TAG="v${pkgver}-${pkgrel}"
+_PKGVER_TAG="v${pkgver}-${pkgrel}"
+_COMMON_TAG=${COMMON_TAG:-${_PKGVER_TAG}}
 _COMMON_DIR="${CI_PROJECT_DIR}"/common
 _PATCHES_DIR="${_COMMON_DIR}"/patches
 _MOZBUILD=$srcdir/../mozbuild
