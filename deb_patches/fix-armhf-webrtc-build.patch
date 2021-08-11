@@ -1,7 +1,7 @@
 --- a/third_party/libwebrtc/webrtc/system_wrappers/cpu_features_linux_gn/moz.build
 +++ b/third_party/libwebrtc/webrtc/system_wrappers/cpu_features_linux_gn/moz.build
 @@ -31,10 +31,6 @@ LOCAL_INCLUDES += [
-     "/third_party/libwebrtc/webrtc/"
+     "/tools/profiler/public"
  ]
  
 -UNIFIED_SOURCES += [
