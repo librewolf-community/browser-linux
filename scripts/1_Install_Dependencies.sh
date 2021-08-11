@@ -38,8 +38,6 @@ _DEPENDENCIES="wget git xvfb \
         python \
         libffi-dev \
         nodejs-mozilla \
-        cargo \
-        rustc \
         nasm-mozilla"
 
         # cargo \
@@ -67,7 +65,7 @@ else
     apt-get -y install clang-10 libclang-10-dev
 fi
 
-# we need a more recent rust
-# curl https://sh.rustup.rs -o rustup.sh
-# bash rustup.sh -y
-# source /root/.cargo/env
+we need a more recent rust
+curl https://sh.rustup.rs -o rustup.sh
+bash rustup.sh -y
+source /root/.cargo/env
