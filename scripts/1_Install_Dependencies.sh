@@ -38,6 +38,8 @@ _DEPENDENCIES="wget git xvfb \
         python \
         libffi-dev \
         nodejs-mozilla \
+        cargo \
+        rustc \
         nasm-mozilla"
 
         # cargo \
@@ -66,6 +68,6 @@ else
 fi
 
 # we need a more recent rust
-curl https://sh.rustup.rs -o rustup.sh
-bash rustup.sh -y
-source /root/.cargo/env
+# curl https://sh.rustup.rs -o rustup.sh
+# bash rustup.sh -y
+# source /root/.cargo/env

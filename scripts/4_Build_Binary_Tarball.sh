@@ -17,7 +17,7 @@ export DEB_BUILD_HARDENING_PIE=1
 # export PATH=/usr/lib/nasm-mozilla/bin:$PATH
 
 # add cargo binary to path
-source /root/.cargo/env
+# source /root/.cargo/env
 
 # we do change / unset some of them later, but setting them as set by Arch
 # might make it easier to maintain changes in build scripts on both sides
