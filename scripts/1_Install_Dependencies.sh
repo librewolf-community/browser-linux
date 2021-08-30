@@ -3,12 +3,6 @@ printf "\n\n-------------------------------------- DEPENDENCY INSTALLATION -----
 
 set -e
 
-# debuggery
-
-printf '----- dbg: env'
-env
-printf '----- /dbg: env'
-
 # Setup Script Variables
 _DEPENDENCIES="wget git xvfb \
  xz-utils \
