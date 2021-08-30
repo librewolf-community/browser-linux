@@ -125,9 +125,7 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patc
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/relax-cargo-dep.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/sandbox-update-arm-syscall-numbers.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
@@ -171,5 +169,9 @@ patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
 
 # fix an URL in 'about' dialog
 patch -Np1 -i ${_PATCHES_DIR}/about-dialog.patch
+
+# change some hardcoded directory strings that could lead to unnecessarily
+# created directories
+patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 
 rm -rf common
