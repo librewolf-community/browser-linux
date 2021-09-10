@@ -9,8 +9,8 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  set_config("LINKER_KIND", select_linker.KIND)
  
  
--@depends_if(select_linker, target, macos_sdk, sysroot_path, multiarch_dir)
-+@depends_if(select_linker, target, macos_sdk, sysroot_path, multiarch_dir, host)
+-@depends_if(select_linker, target, macos_sdk, target_sysroot_path, multiarch_dir)
++@depends_if(select_linker, target, macos_sdk, target_sysroot_path, multiarch_dir, host)
  @imports("os")
 -def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir):
 +def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir, host):

@@ -96,7 +96,7 @@ END
   export RUSTFLAGS="-Cdebuginfo=0"
 
   export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
-  patch -Np1 -i ${_PATCHES_DIR}/arm.patch
+  # patch -Np1 -i ${_PATCHES_DIR}/arm.patch # not required anymore?
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${_PATCHES_DIR}/build-arm-libopus.patch
   patch -Np1 -i ${_PATCHES_DIR}/build-arm-libopus.patch
 
