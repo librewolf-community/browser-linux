@@ -105,11 +105,11 @@ else
 # ubuntu seems to recommend this
 ac_add_options --disable-elf-hack
 
-export CC='clang-12'
-export CXX='clang++-12'
-export AR=llvm-ar-12
-export NM=llvm-nm-12
-export RANLIB=llvm-ranlib-12
+export CC='clang-13'
+export CXX='clang++-13'
+export AR=llvm-ar-13
+export NM=llvm-nm-13
+export RANLIB=llvm-ranlib-13
 
 # probably not needed, enabled by default?
 ac_add_options --enable-optimize

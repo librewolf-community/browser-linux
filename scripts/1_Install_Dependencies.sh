@@ -58,7 +58,7 @@ if [[ $CARCH == 'x86_64' ]];then
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
     apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-12 main"
     apt-get update
-    apt-get -y install clang-12 libclang-12-dev
+    apt-get -y install clang-13 libclang-13-dev
 else
     apt install -y software-properties-common apt-transport-https ca-certificates
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add

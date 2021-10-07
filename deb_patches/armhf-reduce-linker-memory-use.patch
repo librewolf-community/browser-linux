@@ -5,24 +5,18 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -2349,15 +2349,17 @@
+@@ -2287,10 +2287,12 @@
  set_config("LINKER_KIND", select_linker.KIND)
  
  
--@depends_if(select_linker, target, macos_sdk, target_sysroot_path, multiarch_dir)
-+@depends_if(select_linker, target, macos_sdk, target_sysroot_path, multiarch_dir, host)
+-@depends_if(select_linker, target, target_sysroot, target_multiarch_dir, c_compiler)
++@depends_if(select_linker, target, target_sysroot, target_multiarch_dir, c_compiler, host)
  @imports("os")
--def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir):
-+def linker_ldflags(linker, target, macos_sdk, sysroot_path, multiarch_dir, host):
+-def linker_ldflags(linker, target, sysroot, multiarch_dir, c_compiler):
++def linker_ldflags(linker, target, sysroot, multiarch_dir, c_compiler, host):
      flags = list((linker and linker.LINKER_FLAG) or [])
-     if target.kernel == "Darwin":
-         if linker and linker.KIND == "ld64":
-             flags.append("-Wl,-syslibroot,%s" % macos_sdk)
-         else:
-             flags.append("-Wl,--sysroot=%s" % macos_sdk)
 +    if host.cpu == "arm":
 +        flags.append("-Wl,--no-keep-memory")
- 
      # rpath-link is irrelevant to wasm, see for more info https://github.com/emscripten-core/emscripten/issues/11076.
-     if sysroot_path and multiarch_dir and target.os != "WASI":
-
+     if sysroot.path and multiarch_dir and target.os != "WASI":
+         for d in ("lib", "usr/lib"):
