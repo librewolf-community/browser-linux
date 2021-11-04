@@ -126,6 +126,7 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
+patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/relax-cargo-dep.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
@@ -173,5 +174,33 @@ patch -Np1 -i ${_PATCHES_DIR}/about-dialog.patch
 # change some hardcoded directory strings that could lead to unnecessarily
 # created directories
 patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
+
+# allow uBlockOrigin to run in private mode by default, without user intervention.
+patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
+
+# ui patches
+
+# show a warning saying that changing language is not allowed through the UI,
+# and that it requires to visit our FAQ, instead of telling the user to check his connection.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/add-language-warning.patch
+
+# remove references to firefox from the settings UI, change text in some of the links,
+# explain that we force en-US and suggest enabling history near the session restore checkbox.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
+
+# remove firefox references in the urlbar, when suggesting opened tabs.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-branding-urlbar.patch
+
+# remove cfr UI elements, as they are disabled and locked already.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-cfrprefs.patch
+
+# do not display your browser is being managed by your organization in the settings.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-organization-policy-banner.patch
+
+# hide "snippets" section from the home page settings, as it was already locked.
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-snippets-from-home.patch
+
+# add warning that sanitizing exceptions are bypassed by the options in History > Clear History when LibreWolf closes > Settings
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
 
 rm -rf common

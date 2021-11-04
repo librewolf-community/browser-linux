@@ -42,9 +42,6 @@ _DEPENDENCIES="wget git xvfb \
         rustc \
         nasm-mozilla"
 
-        # cargo \
-        # rustc \
-
 export DEBIAN_FRONTEND=noninteractive
 
 # Installs Dependencies
