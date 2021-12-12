@@ -70,6 +70,9 @@ mk_add_options MOZ_TELEMETRY_REPORTING=0
 # options for ci / weaker build systems
 # mk_add_options MOZ_MAKE_FLAGS="-j4"
 # ac_add_options --enable-linker=gold
+
+# required for 95.0 for now, it seems
+ac_add_options --without-wasm-sandboxed-libraries
 END
 
 # allow setting limited resource usage via ENV / CI:
@@ -83,11 +86,11 @@ if [[ $CARCH == 'aarch64' ]]; then
 # taken from manjaro build:
 ac_add_options --enable-optimize="-g0 -O2"
 
-export CC='clang-10'
-export CXX='clang++-10'
-export AR=llvm-ar-10
-export NM=llvm-nm-10
-export RANLIB=llvm-ranlib-10
+export CC='clang-13'
+export CXX='clang++-13'
+export AR=llvm-ar-13
+export NM=llvm-nm-13
+export RANLIB=llvm-ranlib-13
 END
 
   export MOZ_DEBUG_FLAGS=" "
@@ -166,7 +169,8 @@ patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
 
 # allow overriding the color scheme light/dark preference with RFP
-patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
+# deprecated / will be dropped soon
+# patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
 
 # fix an URL in 'about' dialog
 patch -Np1 -i ${_PATCHES_DIR}/about-dialog.patch

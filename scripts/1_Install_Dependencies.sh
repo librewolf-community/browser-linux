@@ -57,11 +57,12 @@ if [[ $CARCH == 'x86_64' ]];then
     apt-get update
     apt-get -y install clang-13 libclang-13-dev
 else
+    # seems like we can use 13 here as well, finally?
     apt install -y software-properties-common apt-transport-https ca-certificates
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add
-    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main"
+    apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-13 main"
     apt-get update
-    apt-get -y install clang-10 libclang-10-dev
+    apt-get -y install clang-13 libclang-13-dev
 fi
 
 # we need a more recent rust
