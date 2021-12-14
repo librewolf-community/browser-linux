@@ -38,9 +38,10 @@ _DEPENDENCIES="wget git xvfb \
         python \
         libffi-dev \
         nodejs-mozilla \
-        cargo \
-        rustc \
         nasm-mozilla"
+
+        # cargo \
+        # rustc \
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -66,6 +67,7 @@ else
 fi
 
 # we need a more recent rust
-# curl https://sh.rustup.rs -o rustup.sh
-# bash rustup.sh -y
-# source /root/.cargo/env
+# …to test if a fix in 1.57 magically fixes aarch64 hanging
+curl https://sh.rustup.rs -o rustup.sh
+bash rustup.sh -y
+source /root/.cargo/env
