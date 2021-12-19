@@ -21,7 +21,7 @@ git clone $_COMMON_REPO ${_COMMON_DIR}
 cd ${_COMMON_DIR}
 git checkout ${_COMMON_TAG}
 cd ..
-cp -r ${_COMMON_DIR}/source_files/* $srcdir/;
+cp -r ${_COMMON_DIR}/source_files/browser $srcdir/;
 
 cd $srcdir
 
@@ -164,7 +164,7 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 
 # remove search extensions (experimental)
 # patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
-cp "${_COMMON_DIR}/search-config.json" services/settings/dumps/main/search-config.json
+cp "${_COMMON_DIR}/source_files/search-config.json" services/settings/dumps/main/search-config.json
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
