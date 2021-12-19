@@ -163,7 +163,8 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/remove-internal-plugin-certs.patch"
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 
 # remove search extensions (experimental)
-patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
+# patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
+cp "${_COMMON_DIR}/search-config.json" services/settings/dumps/main/search-config.json
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
