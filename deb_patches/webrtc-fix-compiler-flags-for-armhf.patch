@@ -23,8 +23,8 @@
      # For libyuv
      gyp_vars['arm_version'] = int(CONFIG['ARM_ARCH'])
  
---- a/third_party/libwebrtc/webrtc/build/config/compiler/BUILD.gn
-+++ b/third_party/libwebrtc/webrtc/build/config/compiler/BUILD.gn
+--- a/third_party/libwebrtc/build/config/compiler/BUILD.gn
++++ b/third_party/libwebrtc/build/config/compiler/BUILD.gn
 @@ -590,7 +590,6 @@ config("compiler_cpu_abi") {
        if (!is_nacl) {
          cflags += [

@@ -125,18 +125,16 @@ fi
 
 # hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-armhf-webrtc-build.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/relax-cargo-dep.patch"
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
 # Disable (some) megabar functionality
 # Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
-patch -Np1 -i ${_PATCHES_DIR}/megabar.patch
+patch -Np1 -i ${_PATCHES_DIR}/deprecated/megabar.patch
 
 # remove mozilla vpn ads
 patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad.patch
@@ -153,7 +151,6 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/disable-pocket.patch"
 # More patches
 patch -Np1 -i "${_PATCHES_DIR}/context-menu.patch"
 
-patch -Np1 -i "${_PATCHES_DIR}/browser-confvars.patch"
 patch -Np1 -i "${_PATCHES_DIR}/urlbarprovider-interventions.patch"
 
 # Remove Internal Plugin Certificates
@@ -173,9 +170,6 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
 # deprecated / will be dropped soon
 # patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
 
-# fix an URL in 'about' dialog
-patch -Np1 -i ${_PATCHES_DIR}/about-dialog.patch
-
 # change some hardcoded directory strings that could lead to unnecessarily
 # created directories
 patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
@@ -184,10 +178,6 @@ patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
 
 # ui patches
-
-# show a warning saying that changing language is not allowed through the UI,
-# and that it requires to visit our FAQ, instead of telling the user to check his connection.
-patch -Np1 -i ${_PATCHES_DIR}/ui-patches/add-language-warning.patch
 
 # remove references to firefox from the settings UI, change text in some of the links,
 # explain that we force en-US and suggest enabling history near the session restore checkbox.
@@ -207,5 +197,8 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-snippets-from-home.patch
 
 # add warning that sanitizing exceptions are bypassed by the options in History > Clear History when LibreWolf closes > Settings
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
+
+# pref pane
+patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/pref_pane.patch"
 
 rm -rf common
