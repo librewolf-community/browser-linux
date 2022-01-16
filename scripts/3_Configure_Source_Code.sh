@@ -41,6 +41,9 @@ ac_add_options --enable-release
 ac_add_options --enable-hardening
 ac_add_options --enable-rust-simd
 
+# attempt to address flatpak dbus issues
+ac_add_options --enable-dbus
+
 # Branding
 ac_add_options --enable-update-channel=release
 ac_add_options --with-app-name=librewolf
@@ -182,6 +185,9 @@ patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
 # remove references to firefox from the settings UI, change text in some of the links,
 # explain that we force en-US and suggest enabling history near the session restore checkbox.
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
+
+#
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/hide-safe-browsing.patch
 
 # remove firefox references in the urlbar, when suggesting opened tabs.
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-branding-urlbar.patch
