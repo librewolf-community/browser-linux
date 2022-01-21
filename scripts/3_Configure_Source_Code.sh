@@ -137,15 +137,19 @@ patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
 # Disable (some) megabar functionality
 # Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
-patch -Np1 -i ${_PATCHES_DIR}/deprecated/megabar.patch
+patch -Np1 -i ${_PATCHES_DIR}/removed-patches/megabar.patch
 
 # remove mozilla vpn ads
 patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad.patch
 
 # Debian patch to enable global menubar
-if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
-  patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
-fi
+# if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
+  # patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
+# fi
+
+# experimentally re-included
+patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
+patch -Np1 -i ${CI_PROJECT_DIR}/deb_patches/mozilla-kde_after_unity.patch
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
@@ -205,6 +209,6 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-snippets-from-home.patch
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
 
 # pref pane
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/pref_pane.patch"
+patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch
 
 rm -rf common
