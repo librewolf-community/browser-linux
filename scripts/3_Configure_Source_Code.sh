@@ -149,7 +149,7 @@ patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad.patch
 
 # experimentally re-included
 patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
-patch -Np1 -i ${CI_PROJECT_DIR}/deb_patches/mozilla-kde_after_unity.patch
+patch -Np1 -i ${_PATCHES_DIR}/mozilla-kde_after_unity.patch
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
@@ -181,8 +181,15 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
 # created directories
 patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 
+# somewhat experimental patch to fix bus/dbus/remoting names to io.gitlab.librewolf
+# should not break things, buuuuuuuuuut we'll see.
+patch -Np1 -i ${_PATCHES_DIR}/dbus_name.patch
+
 # allow uBlockOrigin to run in private mode by default, without user intervention.
 patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
+
+# add custom uBO assets (on first launch only)
+patch -Np1 -i ${_PATCHES_DIR}/custom-ubo-assets-bootstrap-location.patch
 
 # ui patches
 
