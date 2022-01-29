@@ -64,11 +64,8 @@ ac_add_options --disable-crashreporter
 ac_add_options --disable-updater
 ac_add_options --disable-tests
 
-# Disables crash reporting, telemetry and other data gathering tools
-mk_add_options MOZ_CRASHREPORTER=0
-mk_add_options MOZ_DATA_REPORTING=0
-mk_add_options MOZ_SERVICES_HEALTHREPORT=0
-mk_add_options MOZ_TELEMETRY_REPORTING=0
+# obsoleted?
+# mk_add_options MOZ_CRASHREPORTER=0
 
 # options for ci / weaker build systems
 # mk_add_options MOZ_MAKE_FLAGS="-j4"
@@ -217,5 +214,8 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
 
 # pref pane
 patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch
+
+# fix telemetry removal, see https://gitlab.com/librewolf-community/browser/linux/-/merge_requests/17, for example
+patch -Np1 -i ${_PATCHES_DIR}/disable-data-reporting-at-compile-time.patch
 
 rm -rf common
