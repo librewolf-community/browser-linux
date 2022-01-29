@@ -183,8 +183,7 @@ patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 
 # somewhat experimental patch to fix bus/dbus/remoting names to io.gitlab.librewolf
 # should not break things, buuuuuuuuuut we'll see.
-# patch -Np1 -i ${_PATCHES_DIR}/dbus_name.patch
-# narrator: it broke things.
+patch -Np1 -i ${_PATCHES_DIR}/dbus_name.patch
 
 # allow uBlockOrigin to run in private mode by default, without user intervention.
 patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
