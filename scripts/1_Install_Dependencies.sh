@@ -9,6 +9,7 @@ _DEPENDENCIES="wget git xvfb \
  gettext-base \
  curl python3 libjack-dev \
  python3-psutil python-psutil python3-dev python-dev \
+        gnupg \
         autotools-dev \
         autoconf2.13 \
         zip \
