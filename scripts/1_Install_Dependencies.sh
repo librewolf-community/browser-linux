@@ -39,7 +39,8 @@ _DEPENDENCIES="wget git xvfb \
         python \
         libffi-dev \
         nodejs-mozilla \
-        nasm-mozilla"
+        nasm-mozilla \
+        locales"
 
         # cargo \
         # rustc \
@@ -66,6 +67,9 @@ else
     apt-get update
     apt-get -y install clang-13 libclang-13-dev
 fi
+
+# avoid python parsing files as ascii instead of utf8 and complaining
+locale-gen en_US.UTF-8
 
 # we need a more recent rust
 # …to test if a fix in 1.57 magically fixes aarch64 hanging

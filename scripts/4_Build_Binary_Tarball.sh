@@ -16,6 +16,12 @@ export DEB_BUILD_HARDENING_FORMAT=1
 export DEB_BUILD_HARDENING_PIE=1
 # export PATH=/usr/lib/nasm-mozilla/bin:$PATH
 
+# avoid python parsing files as ascii instead of utf8 and complaining
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US:en'
+export LC_ALL='en_US.UTF-8'
+
+
 # add cargo binary to path
 source /root/.cargo/env
 
