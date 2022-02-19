@@ -10,7 +10,7 @@ _SOURCE_REPO='https://gitlab.com/librewolf-community/browser/source.git';
 _PKGVER_TAG="v${pkgver}-${pkgrel}"
 _SOURCE_TAG=${SOURCE_TAG:-${_PKGVER_TAG}}
 _SOURCE_REPO_DIR="${CI_PROJECT_DIR}"/source
-_PATCHES_DIR="${_SOURCE_DIR}"/patches
+_PATCHES_DIR="${_SOURCE_REPO_DIR}"/patches
 _MOZBUILD=$srcdir/../mozbuild
 
 mkdir -p ${_MOZBUILD}
