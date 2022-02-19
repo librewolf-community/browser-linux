@@ -6,22 +6,22 @@ set -e
 # Setup Script Variables
 srcdir=$1;
 CI_PROJECT_DIR=${CI_PROJECT_DIR:-$(realpath $(dirname $0)/../)}
-_COMMON_REPO='https://gitlab.com/librewolf-community/browser/common.git';
+_SOURCE_REPO='https://gitlab.com/librewolf-community/browser/source.git';
 _PKGVER_TAG="v${pkgver}-${pkgrel}"
-_COMMON_TAG=${COMMON_TAG:-${_PKGVER_TAG}}
-_COMMON_DIR="${CI_PROJECT_DIR}"/common
-_PATCHES_DIR="${_COMMON_DIR}"/patches
+_SOURCE_TAG=${SOURCE_TAG:-${_PKGVER_TAG}}
+_SOURCE_REPO_DIR="${CI_PROJECT_DIR}"/source
+_PATCHES_DIR="${_SOURCE_DIR}"/patches
 _MOZBUILD=$srcdir/../mozbuild
 
 mkdir -p ${_MOZBUILD}
 
 # Copy Source Code Changes to Source Code
 printf "\nCopying branding and source code changes to firefox source code\n";
-git clone $_COMMON_REPO ${_COMMON_DIR}
-cd ${_COMMON_DIR}
-git checkout ${_COMMON_TAG}
+git clone $_SOURCE_REPO ${_SOURCE_REPO_DIR}
+cd ${_SOURCE_REPO_DIR}
+git checkout ${_SOURCE_TAG}
 cd ..
-cp -r ${_COMMON_DIR}/source_files/browser $srcdir/;
+cp -r ${_SOURCE_REPO_DIR}/themes/browser $srcdir/;
 
 cd $srcdir
 
@@ -165,7 +165,7 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 
 # remove search extensions (experimental)
 # patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
-cp "${_COMMON_DIR}/source_files/search-config.json" services/settings/dumps/main/search-config.json
+cp "${_SOURCE_REPO_DIR}/assets/search-config.json" services/settings/dumps/main/search-config.json
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
@@ -218,4 +218,4 @@ patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch
 # fix telemetry removal, see https://gitlab.com/librewolf-community/browser/linux/-/merge_requests/17, for example
 patch -Np1 -i ${_PATCHES_DIR}/disable-data-reporting-at-compile-time.patch
 
-rm -rf common
+rm -rf source
