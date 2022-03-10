@@ -5,15 +5,17 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -2287,10 +2287,12 @@
- set_config("LINKER_KIND", select_linker.KIND)
- 
- 
--@depends_if(select_linker, target, target_sysroot, target_multiarch_dir, c_compiler)
-+@depends_if(select_linker, target, target_sysroot, target_multiarch_dir, c_compiler, host)
+@@ -1631,12 +1631,15 @@ set_config("LINKER_KIND", select_linker.KIND)
+     target_multiarch_dir,
+     android_platform,
+     c_compiler,
++    host,
+ )
  @imports("os")
--def linker_ldflags(linker, target, sysroot, multiarch_dir, c_compiler):
-+def linker_ldflags(linker, target, sysroot, multiarch_dir, c_compiler, host):
+ def linker_ldflags(
+-    linker, target, sysroot, multiarch_dir, android_platform, c_compiler
++    linker, target, sysroot, multiarch_dir, android_platform, c_compiler, host
+ ):
      flags = list((linker and linker.LINKER_FLAG) or [])
 +    if host.cpu == "arm":
 +        flags.append("-Wl,--no-keep-memory")
