@@ -132,12 +132,8 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
-# Disable (some) megabar functionality
-# Adapted from https://github.com/WesleyBranton/userChrome.css-Customizations
-patch -Np1 -i ${_PATCHES_DIR}/removed-patches/megabar.patch
-
 # remove mozilla vpn ads
-patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad.patch
+patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad2.patch
 
 # Debian patch to enable global menubar
 # if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
@@ -195,7 +191,7 @@ patch -Np1 -i ${_PATCHES_DIR}/custom-ubo-assets-bootstrap-location.patch
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
 
 #
-patch -Np1 -i ${_PATCHES_DIR}/ui-patches/hide-safe-browsing.patch
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/privacy-preferences.patch
 
 # remove firefox references in the urlbar, when suggesting opened tabs.
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-branding-urlbar.patch
