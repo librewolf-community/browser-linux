@@ -103,6 +103,11 @@ END
   wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${_PATCHES_DIR}/build-arm-libopus.patch
   patch -Np1 -i ${_PATCHES_DIR}/build-arm-libopus.patch
 
+  # Revert the upgrade of crossbeam-* crates that happened in Firefox 98.0,
+  # which resulted in a regression on arm64 where the browser wouldn't start
+  # (https://bugzilla.mozilla.org/show_bug.cgi?id=1757571)
+  patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/revert-crossbeam-crates-upgrade.patch"
+
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # ubuntu seems to recommend this
