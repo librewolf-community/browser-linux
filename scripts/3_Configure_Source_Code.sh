@@ -47,7 +47,18 @@ ac_add_options --enable-dbus
 # Branding
 ac_add_options --enable-update-channel=release
 ac_add_options --with-app-name=librewolf
-ac_add_options --with-app-basename=LibreWolf
+# ac_add_options --with-app-basename=LibreWolf
+
+# switch to env vars like in librewolf source repo
+# this is in browser/branding/librewolf/configure.sh as well
+# so it _should_ already be applied, buuuuut just in case?
+
+export MOZ_APP_NAME=librewolf
+export MOZ_APP_BASENAME=LibreWolf
+export MOZ_APP_PROFILE=librewolf
+export MOZ_APP_VENDOR=LibreWolf
+export MOZ_APP_DISPLAYNAME=LibreWolf
+
 ac_add_options --with-branding=browser/branding/librewolf
 ac_add_options --with-distribution-id=io.gitlab.librewolf-community
 ac_add_options --with-unsigned-addon-scopes=app,system
@@ -65,7 +76,11 @@ ac_add_options --disable-updater
 ac_add_options --disable-tests
 
 # obsoleted?
-# mk_add_options MOZ_CRASHREPORTER=0
+# TODO: use source/assets/moczonfig in the future
+mk_add_options MOZ_CRASHREPORTER=0
+mk_add_options MOZ_DATA_REPORTING=0
+mk_add_options MOZ_SERVICES_HEALTHREPORT=0
+mk_add_options MOZ_TELEMETRY_REPORTING=0
 
 # options for ci / weaker build systems
 # mk_add_options MOZ_MAKE_FLAGS="-j4"
@@ -100,13 +115,8 @@ END
 
   export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
   # patch -Np1 -i ${_PATCHES_DIR}/arm.patch # not required anymore?
-  wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${_PATCHES_DIR}/build-arm-libopus.patch
-  patch -Np1 -i ${_PATCHES_DIR}/build-arm-libopus.patch
-
-  # Revert the upgrade of crossbeam-* crates that happened in Firefox 98.0,
-  # which resulted in a regression on arm64 where the browser wouldn't start
-  # (https://bugzilla.mozilla.org/show_bug.cgi?id=1757571)
-  patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/revert-crossbeam-crates-upgrade.patch"
+  # wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${_PATCHES_DIR}/build-arm-libopus.patch
+  # patch -Np1 -i ${_PATCHES_DIR}/build-arm-libopus.patch
 
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
@@ -128,17 +138,17 @@ END
 
 fi
 
-# hopefully the magic sauce that makes things build on 16.04 and later on work "everywhere":
+# hopefully the magic sauce that makes things build on 18.04 and later on work "everywhere":
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/armhf-reduce-linker-memory-use.patch"
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/webrtc-fix-compiler-flags-for-armhf.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/reduce-rust-debuginfo.patch"
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 
+# might make the build just a tiny bit cleaner, not really required though
+patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
+
+
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
-
-# remove mozilla vpn ads
-patch -Np1 -i ${_PATCHES_DIR}/mozilla-vpn-ad2.patch
 
 # Debian patch to enable global menubar
 # if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
@@ -169,7 +179,7 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 cp "${_SOURCE_REPO_DIR}/assets/search-config.json" services/settings/dumps/main/search-config.json
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
-patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
+patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests2.patch"
 
 # allow overriding the color scheme light/dark preference with RFP
 # deprecated / will be dropped soon
@@ -194,6 +204,12 @@ patch -Np1 -i ${_PATCHES_DIR}/custom-ubo-assets-bootstrap-location.patch
 # remove references to firefox from the settings UI, change text in some of the links,
 # explain that we force en-US and suggest enabling history near the session restore checkbox.
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
+
+#
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remap-links.patch
+
+#
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/hide-default-browser.patch
 
 #
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/privacy-preferences.patch
