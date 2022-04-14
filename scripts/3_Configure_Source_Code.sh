@@ -206,6 +206,9 @@ patch -Np1 -i ${_PATCHES_DIR}/custom-ubo-assets-bootstrap-location.patch
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
 
 #
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/handlers.patch
+
+#
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remap-links.patch
 
 #
