@@ -60,7 +60,7 @@ export MOZ_APP_VENDOR=LibreWolf
 export MOZ_APP_DISPLAYNAME=LibreWolf
 
 ac_add_options --with-branding=browser/branding/librewolf
-ac_add_options --with-distribution-id=io.gitlab.librewolf-community
+# ac_add_options --with-distribution-id=io.gitlab.librewolf-community
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
 
@@ -214,6 +214,9 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remap-links.patch
 #
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/hide-default-browser.patch
 
+# Add LibreWolf logo to Debugging Page
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/lw-logo-devtools.patch
+
 #
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/privacy-preferences.patch
 
@@ -237,5 +240,8 @@ patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch
 
 # fix telemetry removal, see https://gitlab.com/librewolf-community/browser/linux/-/merge_requests/17, for example
 patch -Np1 -i ${_PATCHES_DIR}/disable-data-reporting-at-compile-time.patch
+
+# allows hiding the password manager (from the lw pref pane) / via a pref
+patch -Np1 -i ${_PATCHES_DIR}/hide-passwordmgr.patch
 
 rm -rf source
