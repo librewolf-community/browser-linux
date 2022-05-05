@@ -114,9 +114,6 @@ END
   export RUSTFLAGS="-Cdebuginfo=0"
 
   export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
-  # patch -Np1 -i ${_PATCHES_DIR}/arm.patch # not required anymore?
-  # wget https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch -O ${_PATCHES_DIR}/build-arm-libopus.patch
-  # patch -Np1 -i ${_PATCHES_DIR}/build-arm-libopus.patch
 
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
@@ -181,10 +178,6 @@ cp "${_SOURCE_REPO_DIR}/assets/search-config.json" services/settings/dumps/main/
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests2.patch"
 
-# allow overriding the color scheme light/dark preference with RFP
-# deprecated / will be dropped soon
-# patch -Np1 -i ${_PATCHES_DIR}/allow_dark_preference_with_rfp.patch
-
 # change some hardcoded directory strings that could lead to unnecessarily
 # created directories
 patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
@@ -192,6 +185,9 @@ patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 # somewhat experimental patch to fix bus/dbus/remoting names to io.gitlab.librewolf
 # should not break things, buuuuuuuuuut we'll see.
 patch -Np1 -i ${_PATCHES_DIR}/dbus_name.patch
+
+# add v100 about dialog
+patch -Np1 -i ${_PATCHES_DIR}/aboutLogos.patch
 
 # allow uBlockOrigin to run in private mode by default, without user intervention.
 patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
@@ -234,6 +230,9 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-snippets-from-home.patch
 
 # add warning that sanitizing exceptions are bypassed by the options in History > Clear History when LibreWolf closes > Settings
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
+
+# add patch to hide website appearance settings
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/website-appearance-ui-rfp.patch
 
 # pref pane
 patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch

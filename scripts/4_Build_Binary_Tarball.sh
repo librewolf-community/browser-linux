@@ -42,7 +42,7 @@ fi
 
 export MOZ_NOSPAM=1
 export MOZBUILD_STATE_PATH="${_MOZBUILD}"
-export MACH_USE_SYSTEM_PYTHON=1
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 
 if [[ $CARCH == 'aarch64' ]]; then
   export MOZ_DEBUG_FLAGS=" "
@@ -70,7 +70,7 @@ cd $srcdir;
 rm -f mozconfig
 
 # install cbindgen
-cargo install --version 0.20.0 cbindgen
+cargo install --version 0.21.0 cbindgen
 
 if [[ $CARCH == 'aarch64' ]]; then
 
