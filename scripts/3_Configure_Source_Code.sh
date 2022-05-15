@@ -176,7 +176,7 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 cp "${_SOURCE_REPO_DIR}/assets/search-config.json" services/settings/dumps/main/search-config.json
 
 # stop some undesired requests (https://gitlab.com/librewolf-community/browser/common/-/issues/10)
-patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests2.patch"
+patch -Np1 -i "${_PATCHES_DIR}/sed-patches/stop-undesired-requests.patch"
 
 # change some hardcoded directory strings that could lead to unnecessarily
 # created directories
