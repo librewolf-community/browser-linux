@@ -70,7 +70,7 @@ cd $srcdir;
 rm -f mozconfig
 
 # install cbindgen
-cargo install --version 0.21.0 cbindgen
+cargo install --version 0.23.0 cbindgen
 
 if [[ $CARCH == 'aarch64' ]]; then
 

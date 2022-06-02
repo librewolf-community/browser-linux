@@ -155,6 +155,7 @@ patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
 # experimentally re-included
 patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
+# currently broken
 patch -Np1 -i ${_PATCHES_DIR}/mozilla-kde_after_unity.patch
 
 # Disabling Pocket
