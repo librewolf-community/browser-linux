@@ -155,8 +155,7 @@ patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
 # experimentally re-included
 patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
-# currently broken
-# patch -Np1 -i ${_PATCHES_DIR}/mozilla-kde_after_unity.patch
+patch -Np1 -i ${_PATCHES_DIR}/mozilla-kde_after_unity.patch
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";
@@ -196,6 +195,9 @@ patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
 
 # add custom uBO assets (on first launch only)
 patch -Np1 -i ${_PATCHES_DIR}/custom-ubo-assets-bootstrap-location.patch
+
+#
+patch -Np1 -i ${_PATCHES_DIR}/faster-package-multi-locale.patch
 
 # ui patches
 
