@@ -144,6 +144,10 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 # might make the build just a tiny bit cleaner, not really required though
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
 
+# cbindgen >= 24 patch
+
+patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-ftbfs-newer-cbindgen.patch"
+
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
