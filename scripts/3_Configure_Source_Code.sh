@@ -144,11 +144,6 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 # might make the build just a tiny bit cleaner, not really required though
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
 
-# cbindgen >= 24 patch
-
-patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-ftbfs-newer-cbindgen.patch"
-
-
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
@@ -191,9 +186,6 @@ patch -Np1 -i ${_PATCHES_DIR}/mozilla_dirs.patch
 # should not break things, buuuuuuuuuut we'll see.
 patch -Np1 -i ${_PATCHES_DIR}/dbus_name.patch
 
-# add v100 about dialog
-patch -Np1 -i ${_PATCHES_DIR}/aboutLogos.patch
-
 # allow uBlockOrigin to run in private mode by default, without user intervention.
 patch -Np1 -i ${_PATCHES_DIR}/allow-ubo-private-mode.patch
 
@@ -235,9 +227,6 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-organization-policy-banner.patch
 
 # hide "snippets" section from the home page settings, as it was already locked.
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remove-snippets-from-home.patch
-
-# add warning that sanitizing exceptions are bypassed by the options in History > Clear History when LibreWolf closes > Settings
-patch -Np1 -i ${_PATCHES_DIR}/ui-patches/sanitizing-description.patch
 
 # add patch to hide website appearance settings
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/website-appearance-ui-rfp.patch
