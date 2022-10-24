@@ -116,6 +116,9 @@ END
 
   export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
 
+  # libav related aarch64 build failure
+  wget https://github.com/mozilla/gecko-dev/commit/60858bce4bb1b426c07ec0e9e7f627f59b8aca45.patch -O "${_PATCHES_DIR}/aarch64_libav.patch"
+  patch -Np1 -i "${_PATCHES_DIR}/aarch64_libav.patch"
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # ubuntu seems to recommend this
@@ -233,6 +236,12 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/website-appearance-ui-rfp.patch
 
 # pref pane
 patch -Np1 -i ${_PATCHES_DIR}/librewolf-pref-pane.patch
+
+# firefox view
+patch -Np1 -i ${_PATCHES_DIR}/ui-patches/firefox-view.patch
+
+# new prefs (view, ubo)
+patch -Np1 -i ${_PATCHES_DIR}/librewolf-prefs.patch
 
 # fix telemetry removal, see https://gitlab.com/librewolf-community/browser/linux/-/merge_requests/17, for example
 patch -Np1 -i ${_PATCHES_DIR}/disable-data-reporting-at-compile-time.patch
