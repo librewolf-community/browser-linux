@@ -89,6 +89,9 @@ mk_add_options MOZ_TELEMETRY_REPORTING=0
 
 # required for 95.0 for now, it seems
 ac_add_options --without-wasm-sandboxed-libraries
+
+# experimental JXL support
+ac_add_options --enable-jxl
 END
 
 # allow setting limited resource usage via ENV / CI:
@@ -116,9 +119,6 @@ END
 
   export LDFLAGS+=" -Wl,--no-keep-memory -Wl"
 
-  # libav related aarch64 build failure
-  wget https://github.com/mozilla/gecko-dev/commit/60858bce4bb1b426c07ec0e9e7f627f59b8aca45.patch -O "${_PATCHES_DIR}/aarch64_libav.patch"
-  patch -Np1 -i "${_PATCHES_DIR}/aarch64_libav.patch"
 else
     cat >>${CI_PROJECT_DIR}/mozconfig <<END
 # ubuntu seems to recommend this
@@ -146,6 +146,9 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 
 # might make the build just a tiny bit cleaner, not really required though
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
+
+# experimental: allow enabling JPEG XL in non-nightly browser
+patch -Np1 -i ${CI_PROJECT_DIR}/0001-allow-JXL-in-non-nightly-browser.patch
 
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
