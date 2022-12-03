@@ -147,9 +147,6 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 # might make the build just a tiny bit cleaner, not really required though
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
 
-# experimental: allow enabling JPEG XL in non-nightly browser
-patch -Np1 -i ${CI_PROJECT_DIR}/0001-allow-JXL-in-non-nightly-browser.patch
-
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
