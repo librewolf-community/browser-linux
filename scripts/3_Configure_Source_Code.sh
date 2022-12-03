@@ -147,6 +147,9 @@ patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/use-system-icupkg.patch"
 # might make the build just a tiny bit cleaner, not really required though
 patch -Np1 -i "${CI_PROJECT_DIR}/deb_patches/fix-wayland-build.patch"
 
+# allow enabling JPEG XL in non-nightly browser
+patch -Np1 -i ${_PATCHES_DIR}/allow-JXL-in-non-nightly-browser.patch
+
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
@@ -167,9 +170,6 @@ patch -Np1 -i "${_PATCHES_DIR}/sed-patches/disable-pocket.patch"
 patch -Np1 -i "${_PATCHES_DIR}/context-menu.patch"
 
 patch -Np1 -i "${_PATCHES_DIR}/urlbarprovider-interventions.patch"
-
-# Remove Internal Plugin Certificates
-patch -Np1 -i "${_PATCHES_DIR}/sed-patches/remove-internal-plugin-certs.patch"
 
 # allow SearchEngines option in non-ESR builds
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
