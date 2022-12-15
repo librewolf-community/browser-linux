@@ -5,16 +5,19 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1631,12 +1631,15 @@ set_config("LINKER_KIND", select_linker.KIND)
-     target_multiarch_dir,
+@@ -1674,6 +1674,7 @@
      android_platform,
      c_compiler,
+     developer_options,
 +    host,
  )
  @imports("os")
  def linker_ldflags(
--    linker, target, sysroot, multiarch_dir, android_platform, c_compiler
-+    linker, target, sysroot, multiarch_dir, android_platform, c_compiler, host
+@@ -1684,8 +1685,11 @@
+     android_platform,
+     c_compiler,
+     developer_options,
++    host,
  ):
      flags = list((linker and linker.LINKER_FLAG) or [])
 +    if host.cpu == "arm":
