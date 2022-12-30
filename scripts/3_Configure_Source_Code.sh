@@ -174,6 +174,9 @@ patch -Np1 -i "${_PATCHES_DIR}/urlbarprovider-interventions.patch"
 # allow SearchEngines option in non-ESR builds
 patch -Np1 -i "${_PATCHES_DIR}/sed-patches/allow-searchengines-non-esr.patch"
 
+# experimental: allow enabling JPEG XL in non-nightly browser
+patch -Np1 -i "${CI_PROJECT_DIR}/experimental_autoconf_flatpak.patch"
+
 # remove search extensions (experimental)
 # patch -Np1 -i "${_PATCHES_DIR}/search-config.patch"
 cp "${_SOURCE_REPO_DIR}/assets/search-config.json" services/settings/dumps/main/search-config.json
