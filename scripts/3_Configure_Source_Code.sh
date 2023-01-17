@@ -153,14 +153,11 @@ patch -Np1 -i ${_PATCHES_DIR}/allow-JXL-in-non-nightly-browser.patch
 # Remove some pre-installed addons that might be questionable
 patch -Np1 -i ${_PATCHES_DIR}/remove_addons.patch
 
-# Debian patch to enable global menubar
-# if [[ ! -z "${GLOBAL_MENUBAR}" ]];then
-  # patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
-# fi
 
-# experimentally re-included
-patch -Np1 -i ${_PATCHES_DIR}/unity-menubar.patch
-patch -Np1 -i ${_PATCHES_DIR}/mozilla-kde_after_unity.patch
+# KDE menu and unity menubar. patch order matters.
+patch -Np1 -i ${_PATCHES_DIR}/unity_kde/mozilla-kde.patch
+patch -Np1 -i ${_PATCHES_DIR}/unity_kde/firefox-kde.patch
+patch -Np1 -i ${_PATCHES_DIR}/unity_kde/unity-menubar.patch
 
 # Disabling Pocket
 printf "\nDisabling Pocket\n";

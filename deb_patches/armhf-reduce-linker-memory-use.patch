@@ -5,23 +5,31 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/build/moz.configure/toolchain.configure
 +++ b/build/moz.configure/toolchain.configure
-@@ -1674,6 +1674,7 @@
-     android_platform,
-     c_compiler,
-     developer_options,
-+    host,
- )
- @imports("os")
- def linker_ldflags(
-@@ -1684,8 +1685,11 @@
-     android_platform,
-     c_compiler,
-     developer_options,
-+    host,
- ):
-     flags = list((linker and linker.LINKER_FLAG) or [])
-+    if host.cpu == "arm":
-+        flags.append("-Wl,--no-keep-memory")
-     # rpath-link is irrelevant to wasm, see for more info https://github.com/emscripten-core/emscripten/issues/11076.
-     if sysroot.path and multiarch_dir and target.os != "WASI":
-         for d in ("lib", "usr/lib"):
+@@ -1699,6 +1699,7 @@
+             android_platform,
+             c_compiler,
+             developer_options,
++            host,
+         )
+     else:
+         deps = depends_if(
+@@ -1709,6 +1710,7 @@
+             dependable(None),
+             host_c_compiler,
+             developer_options,
++            host,
+         )
+ 
+     @deps
+@@ -1721,8 +1723,11 @@
+         android_platform,
+         c_compiler,
+         developer_options,
++        host,
+     ):
+         flags = list((linker and linker.LINKER_FLAG) or [])
++        if host.cpu == "arm":
++            flags.append("-Wl,--no-keep-memory")
+         # rpath-link is irrelevant to wasm, see for more info https://github.com/emscripten-core/emscripten/issues/11076.
+         if sysroot.path and multiarch_dir and target.os != "WASI":
+             for d in ("lib", "usr/lib"):
