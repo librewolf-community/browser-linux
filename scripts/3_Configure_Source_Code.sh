@@ -168,7 +168,6 @@ patch -Np1 -i "${_PATCHES_DIR}/context-menu.patch"
 
 patch -Np1 -i "${_PATCHES_DIR}/urlbarprovider-interventions.patch"
 
-patch -Np1 -i "${_PATCHES_DIR}/rfp-performance-api.patch"
 patch -Np1 -i "${_PATCHES_DIR}/unified-extensions-dont-show-recommendations.patch"
 
 # allow SearchEngines option in non-ESR builds
@@ -209,9 +208,6 @@ patch -Np1 -i ${_PATCHES_DIR}/ui-patches/pref-naming.patch
 
 #
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/handlers.patch
-
-#
-patch -Np1 -i ${_PATCHES_DIR}/ui-patches/remap-links.patch
 
 #
 patch -Np1 -i ${_PATCHES_DIR}/ui-patches/hide-default-browser.patch
